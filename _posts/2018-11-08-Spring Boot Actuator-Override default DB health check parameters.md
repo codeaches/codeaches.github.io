@@ -5,7 +5,7 @@ comments: true
 image: /img/health.jpg
 share-img: /img/health.jpg
 gh-badge: [star, fork, follow]
-tags: [spring-framework, spring-boot, spring-actuator,actuator,git,h2,tutorial]
+tags: [spring-boot,spring-actuator,actuator,git,h2,tutorial]
 lang: en
 ---
 
