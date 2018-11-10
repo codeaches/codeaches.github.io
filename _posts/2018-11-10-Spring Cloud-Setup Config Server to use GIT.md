@@ -17,7 +17,7 @@ In this tutorial, let's see how a config server can be setup to use properties s
 
 ### Prerequisites
 
-### Let's start
+### Let's start now
 
 ### Summary
 Congratulations! You just created a spring boot application and updated the health check query to your project needs.
