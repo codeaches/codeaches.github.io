@@ -26,7 +26,7 @@ In this tutorial, let's see how a config server can be setup to use properties s
   - IDE you love (I will use [STS](https://spring.io/tools3/sts/all){:target="_blank"})
   - [Maven 3.0+](https://maven.apache.org/download.cgi){:target="_blank"} to build the code
 
-### Let's start
+### Let's start  
 
 Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches.demo", Artifact to "configsvr" and put the focus in the Dependencies field on the right hand side. If you type "Actuator", you will see a list of matching choices with that simple criteria. Use the mouse or the arrow keys and Enter to select the "Actuator" starter. Similarly select "Web" and "Config Server".
 
@@ -46,6 +46,35 @@ curl https://start.spring.io/starter.zip  \
 		   -d bootVersion=2.1.0.RELEASE \
 		   -o configsvr.zip
 ````
+
+### Import the code straight into STS and start the application as spring boot application.
+
+Let's update `application.properties` file of config server application with below entries.
+
+`src/main/resources/application.properties`
+
+````properties
+server.port=8888
+spring.cloud.config.server.git.uri=https://github.com/codeaches/cloud-config-files.git
+
+spring.cloud.config.server.git.default-label=development
+````
+
+Let's enable Spring Config Server by annotating `ConfigsvrApplication.java` with `@EnableConfigServer`
+
+````java
+@SpringBootApplication
+@EnableConfigServer
+public class ConfigsvrApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ConfigsvrApplication.class, args);
+	}
+}
+
+````
+
+Restart the application
 
 ### Summary
 Congratulations! You just created a config server config server and used to to retrieve properties stored in GIT repository.
