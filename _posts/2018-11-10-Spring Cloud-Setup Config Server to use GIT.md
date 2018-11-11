@@ -9,6 +9,8 @@ tags: [spring-boot,spring-cloud,spring-cloud-config,externalized-configuration,g
 lang: en
 ---
 
+####Under Construction...
+
 Spring Cloud Config Server can be used to externalize the configuration files. With the help of Config Server we have a central place to manage external properties for applications across all environments. 
 
 In this tutorial, let's see how a config server can be setup to use properties stored in GIT repository.
