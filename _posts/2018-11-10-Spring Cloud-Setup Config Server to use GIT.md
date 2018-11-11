@@ -79,14 +79,6 @@ Restart the application
 ### Summary
 Congratulations! You just created a config server config server and used to to retrieve properties stored in GIT repository.
 
-**If you liked my tutorial, please consider [supporting me](https://www.paypal.me/codeaches/10){:target="_blank"} for maintaining and uploading new tutorials on this website.**
-
-<p align="center">
-  <a href="https://www.paypal.me/codeaches/10">
-    <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" />
-  </a>
-</p>
-
 #### Footnote
  - This tutorial was created based in the following link: [Spring Cloud Config Server](https://cloud.spring.io/spring-cloud-config/single/spring-cloud-config.html){:target="_blank"}
  - The code used for this tutorial can be found on [github](https://github.com/codeaches/configsvr	){:target="_blank"}
