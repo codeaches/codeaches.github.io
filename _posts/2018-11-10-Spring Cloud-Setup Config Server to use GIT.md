@@ -9,8 +9,6 @@ tags: [spring-boot,spring-cloud,spring-cloud-config,externalized-configuration,g
 lang: en
 ---
 
-####Under Construction...
-
 Spring Cloud Config Server can be used to externalize the configuration files. With the help of Config Server we have a central place to manage external properties for applications across all environments. 
 
 In this tutorial, let's see how a config server can be setup to use properties stored in GIT repository.
@@ -51,7 +49,7 @@ curl https://start.spring.io/starter.zip  \
 
 ### Import the code straight into STS and start the application as spring boot application.
 
-Let's update `application.properties` file of config server application with below entries.
+Update `application.properties` file of config server application with below entries.
 
 `src/main/resources/application.properties`
 
@@ -62,7 +60,7 @@ spring.cloud.config.server.git.uri=https://github.com/codeaches/cloud-config-fil
 spring.cloud.config.server.git.default-label=development
 ````
 
-Let's enable Spring Config Server by annotating `ConfigsvrApplication.java` with `@EnableConfigServer`
+Enable Spring Config Server by annotating `ConfigsvrApplication.java` with `@EnableConfigServer`
 
 ````java
 @SpringBootApplication
