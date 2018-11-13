@@ -190,7 +190,7 @@ curl http://localhost:8080/actuator/health
 ```
 
 ### Change the default URL of actuator endpoint
-Change the default url of health check from "/actuator/health" to "/myapphealth" by overriding the default values in `application.properties`
+Change the default url of health check from `http://localhost:8080/actuator/health` to `http://localhost:8080/myapphealth` by overriding management end points in `application.properties`
 
 `src/main/resources/application.properties`
 
