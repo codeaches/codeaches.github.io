@@ -47,7 +47,7 @@ curl https://start.spring.io/starter.zip  \
 		   -d artifactId=configsvr \
 		   -d bootVersion=2.1.0.RELEASE \
 		   -o configsvr.zip
-````
+```
 
 ### Extract the project(`winzip` may be) and import in STS as `Existing Maven project`. Once import is completed, right click on the `configsvr project` and build using Maven.
 
@@ -57,12 +57,12 @@ curl https://start.spring.io/starter.zip  \
 
 `src/main/resources/application.properties`
 
-````properties
+```properties
 server.port=8888
 spring.cloud.config.server.git.uri=https://github.com/codeaches/cloud-config-files.git
 
 spring.cloud.config.server.git.default-label=development
-````
+```
 
 where `https://github.com/codeaches/cloud-config-files.git` is my git repository containing YAML and properties files for both prodcution and development environments.
 
@@ -70,7 +70,7 @@ where `https://github.com/codeaches/cloud-config-files.git` is my git repository
 
 ### Enable Spring Config Server by annotating `ConfigsvrApplication.java` with `@EnableConfigServer`
 
-````java
+```java
 @SpringBootApplication
 @EnableConfigServer
 public class ConfigsvrApplication {
@@ -80,7 +80,7 @@ public class ConfigsvrApplication {
 	}
 }
 
-````
+```
 
 ### Restart the `configsvr project` as `Spring Boot App`
 

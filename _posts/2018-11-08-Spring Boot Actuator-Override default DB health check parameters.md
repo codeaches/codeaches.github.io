@@ -41,7 +41,7 @@ Click on `Generate Project`. You will see that the project will be downloaded as
 
 Alternatively, you can also generate the project in a shell using cURL. Let’s generate a "healthcheck.zip" project based on Spring Boot 2.1.0.RELEASE, using the Actuator, H2 and Lombok dependencies.
 
-````sh
+```sh
 curl https://start.spring.io/starter.zip  \
            -d dependencies=web,h2,jpa,actuator \
 		   -d language=java \
@@ -50,7 +50,7 @@ curl https://start.spring.io/starter.zip  \
 		   -d artifactId=healthcheck \
 		   -d bootVersion=2.1.0.RELEASE \
 		   -o healthcheck.zip
-````
+```
 
 ### Extract and Build using Maven
 Extract the project(`winzip` may be) and import in STS as `Existing Maven project`. Once import is completed, right click on the `healthcheck project` and build using Maven.
@@ -62,15 +62,15 @@ Run the `healthcheck project` as `Spring Boot App` and you will notice that the 
 
 You can use [Actuator health URL](http://localhost:8080/actuator/health){:target="_blank"} to check the status of your application
 
-````sh
+```sh
 curl http://localhost:8080/actuator/health
-````
+```
 
-````json
+```json
 {  
    "status":"up"
 }
-````
+```
 
 ### Additional details in health end point
 Update `application.properties` with management.endpoint.health.show-details to always. This will enable health status display in-memory H2 DB status.
@@ -84,11 +84,11 @@ management.endpoint.health.show-details=always
 ### Restart the application
 The [Actuator health URL](http://localhost:8080/actuator/health){:target="_blank"} will give more health details, including in-memory H2 DB status.
 
-````sh
+```sh
 curl http://localhost:8080/actuator/health
-````
+```
 
-````json
+```json
 {  
    "status":"UP",
    "details":{  
@@ -109,7 +109,7 @@ curl http://localhost:8080/actuator/health
       }
    }
 }
-````
+```
 
 ### Update the default health check query
 
@@ -120,12 +120,12 @@ Begin by creating a table TBL_HEALTH_CHECK by adding the DDL in `schema.sql`.
 
 `src/main/resources/schema.sql`
 
-````sql
+```sql
 CREATE TABLE TBL_HEALTH_CHECK ( 
    KEY INT NOT NULL, 
    VALUE VARCHAR(20) NOT NULL
 );
-````
+```
 
 {: .box-note}
 schema.sql will be executed by spring boot while it boots up. Once the server starts, TBL_HEALTH_CHECK will be created in H2-Inmemory DB.
@@ -134,18 +134,18 @@ Add records to TBL_HEALTH_CHECK table, by adding the DML in `data.sql`.
 
 `src/main/resources/data.sql`
 
-````sql
+```sql
 INSERT INTO TBL_HEALTH_CHECK (KEY, VALUE) values (1, 'Value 1');
 INSERT INTO TBL_HEALTH_CHECK (KEY, VALUE) values (2, 'Value 2');
 INSERT INTO TBL_HEALTH_CHECK (KEY, VALUE) values (3, 'Value 3');
-````
+```
 
 {: .box-note}
 data.sql will be executed by spring boot while it boots up. Once the server starts, TBL_HEALTH_CHECK will be populated with data.
 
 Update `HealthcheckApplication.java` file and by adding a custom DBHealthQuery component which updates our health check query
 
-````java
+```java
 @Component
 class DBHealthQuery {
 
@@ -157,16 +157,16 @@ class DBHealthQuery {
 		return indicator;
 	}
 }
-````
+```
 
 ### Restart the application
 The [Actuator health URL](http://localhost:8080/actuator/health){:target="_blank"} will give you more health details, including in-memory H2 DB status, about your application
 
-````sh
+```sh
 curl http://localhost:8080/actuator/health
-````
+```
 
-````json
+```json
 {  
    "status":"UP",
    "details":{  
@@ -187,7 +187,7 @@ curl http://localhost:8080/actuator/health
       }
    }
 }
-````
+```
 
 ### Change the default URL of actuator endpoint
 Change the default url of health check from "/actuator/health" to "/myapphealth" by overriding the default values in `application.properties`
@@ -204,11 +204,11 @@ management.endpoints.web.path-mapping.health=myapphealth
 ### Restart the application
 The [Updated actuator health URL http://localhost:8080/myapphealth](http://localhost:8080/myapphealth){:target="_blank"} will give you more health details, including in-memory H2 DB status, about your application
 
-````sh
+```sh
 curl http://localhost:8080/myapphealth
-````
+```
 
-````json
+```json
 {  
    "status":"UP",
    "details":{  
@@ -229,7 +229,7 @@ curl http://localhost:8080/myapphealth
       }
    }
 }
-````
+```
 
 ## Writing Custom HealthIndicators 
 
@@ -237,7 +237,7 @@ curl http://localhost:8080/myapphealth
 To provide custom health information, you can register Spring beans that implement the HealthIndicator interface. 
 Below component shows an example where a custom health indicator is written to motitor the REST endpoint of a URL `https://api.iextrading.com/1.0/stock/GOOG/quote` which gives the stock proce of google.
 
-````java
+```java
 @Component
 class StockPriceAPIHealthIndicator implements HealthIndicator {
 
@@ -256,16 +256,16 @@ class StockPriceAPIHealthIndicator implements HealthIndicator {
 		}
 		return builder.build();
 	}
-```` 
+``` 
 
 ### Restart the application
 The [Health URL http://localhost:8080/myapphealth](http://localhost:8080/myapphealth){:target="_blank"} will give you health details which now includes `stockPriceAPI` status.
 
-````sh
+```sh
 curl http://localhost:8080/myapphealth
-````
+```
 
-````json
+```json
 {  
    "status":"UP",
    "details":{  
@@ -292,7 +292,7 @@ curl http://localhost:8080/myapphealth
       }
    }
 }
-````
+```
 
 ## Summary
 Congratulations! You just created a spring boot application, updated the health check query and created your own custom health check component.
