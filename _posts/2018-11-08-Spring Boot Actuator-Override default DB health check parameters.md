@@ -19,6 +19,7 @@ In this tutorial, let's create a spring boot application and update the health e
  - Create a basic table on startup
  - Update health DB URL to query the table
  - Modify the default health URL (Re-map URL from /actuator/health to /myapphealth)
+ - Write a custom Health Indicator 
 
 ## Prerequisites
 
@@ -230,8 +231,71 @@ curl http://localhost:8080/myapphealth
 }
 ````
 
+## Writing Custom HealthIndicators 
+
+{: .box-note}
+To provide custom health information, you can register Spring beans that implement the HealthIndicator interface. 
+Below component shows an example where a custom health indicator is written to motitor the REST endpoint of a URL `https://api.iextrading.com/1.0/stock/GOOG/quote` which gives the stock proce of google.
+
+````java
+@Component
+class StockPriceAPIHealthIndicator implements HealthIndicator {
+
+	@Override
+	public Health health() {
+
+		Builder builder = new Health.Builder();
+		try {
+			ResponseEntity<String> response = new RestTemplate()
+					.getForEntity("https://api.iextrading.com/1.0/stock/GOOG/quote", String.class);
+			builder = response.getStatusCode().equals(HttpStatus.OK) ? builder = builder.up() : builder.down();
+			builder.withDetail("HTTP Status Code", response.getStatusCode());
+
+		} catch (Exception e) {
+			builder = builder.down(e);
+		}
+		return builder.build();
+	}
+```` 
+
+### Restart the application
+The [Health URL http://localhost:8080/myapphealth](http://localhost:8080/myapphealth){:target="_blank"} will give you health details which now includes `stockPriceAPI` status.
+
+````sh
+curl http://localhost:8080/myapphealth
+````
+
+````json
+{  
+   "status":"UP",
+   "details":{  
+      "stockPriceAPI":{  
+         "status":"UP",
+         "details":{  
+            "HTTP Status Code":"OK"
+         }
+      },
+      "db":{  
+         "status":"UP",
+         "details":{  
+            "database":"H2",
+            "hello":3
+         }
+      },
+      "diskSpace":{  
+         "status":"UP",
+         "details":{  
+            "total":255073447936,
+            "free":89545814016,
+            "threshold":10485760
+         }
+      }
+   }
+}
+````
+
 ## Summary
-Congratulations! You just created a spring boot application and updated the health check query to your project needs.
+Congratulations! You just created a spring boot application, updated the health check query and created your own custom health check component.
 
 **If you liked my tutorial, please consider [supporting me](https://www.paypal.me/codeaches/10){:target="_blank"} for maintaining and uploading new tutorials on this website.**
 
