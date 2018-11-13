@@ -11,10 +11,10 @@ lang: en
 
 Spring Cloud Config Server can be used to externalize the configuration files. With the help of Config Server we have a central place to manage external properties for applications across all environments. 
 
-In this tutorial, let's see how a config server can be setup to use properties stored in GIT repository.
+In this tutorial, let's setup a Spring Cloud Config Server render properties stored in GIT repository.
 
 ### Objective
- - Create properties file for development and production environments in GIT 
+ - Create properties files for development and production environments in GIT 
  - Use [Spring Initializr](https://start.spring.io/){:target="_blank"} to generate spring boot config server application
  - Configure config server to point to GIT to render the configuration 
  - Use [Spring Initializr](https://start.spring.io/){:target="_blank"} to generate spring boot Web application
@@ -23,7 +23,7 @@ In this tutorial, let's see how a config server can be setup to use properties s
 ### Prerequisites
 
   - [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html){:target="_blank"}
-  - IDE you love (I will use [STS](https://spring.io/tools3/sts/all){:target="_blank"})
+  - [Spring Tool Suite IDE](https://spring.io/tools3/sts/all){:target="_blank"})
   - [Maven 3.0+](https://maven.apache.org/download.cgi){:target="_blank"} to build the code
 
 ### Let's start  
@@ -34,7 +34,9 @@ Your browser should now be in this state:
 
 ![Spring Initializer web tool](/img/configsvr-initializer.png){:target="_blank"}
 
-Alternatively, you can also generate the project in a shell using cURL. Let’s generate a "healthcheck.zip" project based on Spring Boot 2.1.0.RELEASE, using the Actuator, H2 and Lombok dependencies.
+### Click on `Generate Project`. You will see that the project will be downloaded as configsvr.zip file on your hard drive.
+
+Alternatively, you can also generate the project in a shell using cURL. Let’s generate a "configsvr.zip" project based on Spring Boot 2.1.0.RELEASE, using the Actuator, H2 and Lombok dependencies.
 
 ```curl
 curl https://start.spring.io/starter.zip  \
@@ -47,9 +49,11 @@ curl https://start.spring.io/starter.zip  \
 		   -o configsvr.zip
 ````
 
-### Import the code straight into STS and start the application as spring boot application.
+### Extract the project(`winzip` may be) and import in STS as `Existing Maven project`. Once import is completed, right click on the `configsvr project` and build using Maven.
 
-Update `application.properties` file of config server application with below entries.
+### Run the `configsvr project` as `Spring Boot App` and you will notice that the embedded tomcat server has started at port 8080.
+
+### Update `application.properties` file of config server application with below entries.
 
 `src/main/resources/application.properties`
 
@@ -60,7 +64,11 @@ spring.cloud.config.server.git.uri=https://github.com/codeaches/cloud-config-fil
 spring.cloud.config.server.git.default-label=development
 ````
 
-Enable Spring Config Server by annotating `ConfigsvrApplication.java` with `@EnableConfigServer`
+where `https://github.com/codeaches/cloud-config-files.git` is my git repository containing YAML and properties files for both prodcution and development environments.
+
+![Spring Initializer web tool](/img/configsvr-initializer.png){:target="_blank"}
+
+### Enable Spring Config Server by annotating `ConfigsvrApplication.java` with `@EnableConfigServer`
 
 ````java
 @SpringBootApplication
@@ -74,7 +82,7 @@ public class ConfigsvrApplication {
 
 ````
 
-Restart the application
+### Restart the `configsvr project` as `Spring Boot App`
 
 ### Summary
 Congratulations! You just created a config server config server and used to to retrieve properties stored in GIT repository.
