@@ -13,7 +13,7 @@ Actuator endpoints can be used to monitor our application. Spring Boot includes 
 
 In this tutorial, let's create a spring boot application, update it's health endpoint to use a custom DB health check query for DB health monitoring. We shall also create a custom health check to monitor an external URL which provides stock price.
 
-## Objective
+#### Objective
 
  - Use [Spring Initializr](https://start.spring.io/){:target="_blank"} to generate the spring boot Web application
  - Use an in-memory H2 database
@@ -22,21 +22,21 @@ In this tutorial, let's create a spring boot application, update it's health end
  - Modify the default health URL (Re-map URL from /actuator/health to /myapphealth)
  - Write a custom Health Indicator 
 
-## Prerequisites
+#### Prerequisites
 
   - [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/index.html){:target="_blank"}
   - IDE you love (I will use [STS](https://spring.io/tools3/sts/all){:target="_blank"})
   - [Maven 3.0+](https://maven.apache.org/download.cgi){:target="_blank"} to build the code
 
-## Let's start
+#### Let's start
 
 Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches.demo", Artifact to "healthcheck" and put the focus in the Dependencies field on the right hand side. If you type "Actuator", you will see a list of matching choices with that simple criteria. Use the mouse or the arrow keys and Enter to select the "Actuator" starter. Similarly select "web", "H2" and "JPA".
 
-### Your browser should now be in this state:
+##### Your browser should now be in this state:
 
 ![Spring Initializer web tool](/img/healthcheck-initializer.png){:target="_blank"}
 
-### Download the project
+##### Download the project
 
 Click on `Generate Project`. You will see that the project will be downloaded as healthcheck.zip file on your hard drive.
 
@@ -53,11 +53,11 @@ curl https://start.spring.io/starter.zip  \
 		   -o healthcheck.zip
 ```
 
-### Extract, import and build
+##### Extract, import and build
 
 Extract and import the project in STS as `Existing Maven project`. Once import is completed. Build the project using `Maven`.
 
-### Run the application
+##### Run the application
 
 Run the `healthcheck project` as `Spring Boot App` and you will notice that the embedded tomcat server has started on port 8080.
 
@@ -71,7 +71,7 @@ Check the health of your app using [Actuator health URL](http://localhost:8080/a
 }
 ```
 
-### Additional details in actuator health end point
+##### Additional details in actuator health end point
 
 Enable health details of in-memory H2 DB by updating `application.properties` with management.endpoint.health.show-details to always.
 
@@ -80,7 +80,7 @@ Enable health details of in-memory H2 DB by updating `application.properties` wi
 management.endpoint.health.show-details=always
 ```
 
-### Restart the application
+##### Restart the application
 
 The [Actuator health URL](http://localhost:8080/actuator/health){:target="_blank"} will now include health of in-memory H2 DB.
 
@@ -107,7 +107,7 @@ The [Actuator health URL](http://localhost:8080/actuator/health){:target="_blank
 }
 ```
 
-### Update the default health check query
+##### Update the default health check query
 
 The default query executed by spring to validate the DB is `SELECT 1`. Let's create a new table TBL_HEALTH_CHECK and add records to it, update the default query to `select count(1) from TBL_HEALTH_CHECK` by overriding the DataSourceHealthIndicator bean.
 
@@ -152,7 +152,7 @@ class DBHealthQuery {
 }
 ```
 
-### Restart the application
+##### Restart the application
 
 The [Actuator health URL](http://localhost:8080/actuator/health){:target="_blank"} will show db.details.hello=3 indicating 3 records pulled by the health query.
 
@@ -179,7 +179,7 @@ The [Actuator health URL](http://localhost:8080/actuator/health){:target="_blank
 }
 ```
 
-### Change the default URL of actuator health endpoint
+##### Change the default URL of actuator health endpoint
 
 Change the default url of health endpoint from `http://localhost:8080/actuator/health` to `http://localhost:8080/myapphealth` by overriding management end points in `application.properties`
 
@@ -196,7 +196,7 @@ Remove `diskSpace` health check details from JSON by overriding management end p
 management.health.diskspace.enabled=false
 ```
 
-### Restart the application
+##### Restart the application
 
 The diskSpace details are no longer shown in the health URL [http://localhost:8080/myapphealth](http://localhost:8080/myapphealth){:target="_blank"}
 
@@ -242,7 +242,7 @@ class StockPriceAPIHealthIndicator implements HealthIndicator {
 	}
 ``` 
 
-### Restart the application
+##### Restart the application
 
 The [Health URL](http://localhost:8080/myapphealth){:target="_blank"} now includes `stockPriceAPI` status.
 
@@ -267,7 +267,7 @@ The [Health URL](http://localhost:8080/myapphealth){:target="_blank"} now includ
 }
 ```
 
-## Summary
+#### Summary
 
 Congratulations! You just created a spring boot application, updated the health check query and created your own custom health check component.
 
@@ -279,7 +279,7 @@ Congratulations! You just created a spring boot application, updated the health 
   </a>
 </p>
 
-## Footnote
+#### Footnote
 
  - This tutorial was created based in the following link: [Spring Boot Actuator: Production-ready features](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html){:target="_blank"}
  - The code used for this tutorial can be found on [github](https://github.com/codeaches/healthcheck){:target="_blank"}
