@@ -28,7 +28,6 @@ In this tutorial, let's create a spring boot application, update it's health end
   - [Spring Tool Suite IDE](https://spring.io/tools3/sts/all){:target="_blank"})
   - [Maven 3.0+](https://maven.apache.org/download.cgi){:target="_blank"} to build the code
 
-	
 #### Let's start 
 
 Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches.demo", Artifact to "healthcheck" and put the focus in the Dependencies field on the right hand side. If you type "Actuator", you will see a list of matching choices with that simple criteria. Use the mouse or the arrow keys and Enter to select the "Actuator" starter. Similarly select "web", "H2" and "JPA".
@@ -44,14 +43,14 @@ Click on `Generate Project`. You will see that the project will be downloaded as
 Alternatively, you can also generate the project in a shell using cURL.
 
 ```sh
-	curl https://start.spring.io/starter.zip  \
-			   -d dependencies=web,h2,jpa,actuator \
-			   -d language=java \
-			   -d type=maven-project \
-			   -d groupId=com.codeaches.demo \
-			   -d artifactId=healthcheck \
-			   -d bootVersion=2.1.0.RELEASE \
-			   -o healthcheck.zip
+curl https://start.spring.io/starter.zip  \
+	   -d dependencies=web,h2,jpa,actuator \
+	   -d language=java \
+	   -d type=maven-project \
+	   -d groupId=com.codeaches.demo \
+	   -d artifactId=healthcheck \
+	   -d bootVersion=2.1.0.RELEASE \
+	   -o healthcheck.zip
 ```
 
 ##### Extract, import and build
@@ -63,16 +62,16 @@ Extract and import the project in STS as `Existing Maven project`. Once import i
 Run the `healthcheck project` as `Spring Boot App` and you will notice that the embedded tomcat server has started on port 8080.
 
 ````java
-	o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-	c.c.d.h.HealthcheckApplication           : Started HealthcheckApplication in 11.354 seconds (JVM running for 13.469)
+o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+c.c.d.h.HealthcheckApplication           : Started HealthcheckApplication in 11.354 seconds (JVM running for 13.469)
 ````
 
 Check the health of your app using [Actuator health URL](http://localhost:8080/actuator/health){:target="_blank"}
 
 ```json
-	{  
-	   "status":"up"
-	}
+{  
+   "status":"up"
+}
 ```
 
 ##### Additional details in actuator health end point
@@ -81,7 +80,7 @@ Enable health details of in-memory H2 DB by updating `application.properties` wi
 
 `src/main/resources/application.properties`
 ```properties
-	management.endpoint.health.show-details=always
+management.endpoint.health.show-details=always
 ```
 
 ##### Restart the application
@@ -89,26 +88,26 @@ Enable health details of in-memory H2 DB by updating `application.properties` wi
 The [Actuator health URL](http://localhost:8080/actuator/health){:target="_blank"} will now include health of in-memory H2 DB.
 
 ```json
-	{  
-	   "status":"UP",
-	   "details":{  
-		  "db":{  
-			 "status":"UP",
-			 "details":{  
-				"database":"H2",
-				"hello":1
-			 }
-		  },
-		  "diskSpace":{  
-			 "status":"UP",
-			 "details":{  
-				"total":255073447936,
-				"free":88404889600,
-				"threshold":10485760
-			 }
-		  }
-	   }
-	}
+{
+  "status": "UP",
+  "details": {
+    "db": {
+      "status": "UP",
+      "details": {
+        "database": "H2",
+        "hello": 1
+      }
+    },
+    "diskSpace": {
+      "status": "UP",
+      "details": {
+        "total": 255073447936,
+        "free": 88404889600,
+        "threshold": 10485760
+      }
+    }
+  }
+}
 ```
 
 ##### Update the default health check query
@@ -119,10 +118,10 @@ Begin by creating a table TBL_HEALTH_CHECK by adding the DDL in `schema.sql`.
 
 `src/main/resources/schema.sql`
 ```sql
-	CREATE TABLE TBL_HEALTH_CHECK ( 
-	   KEY INT NOT NULL, 
-	   VALUE VARCHAR(20) NOT NULL
-	);
+CREATE TABLE TBL_HEALTH_CHECK ( 
+   KEY INT NOT NULL, 
+   VALUE VARCHAR(20) NOT NULL
+);
 ```
 
 {: .box-note}
@@ -132,9 +131,9 @@ Add records to TBL_HEALTH_CHECK table, by adding the DML in `data.sql`.
 
 `src/main/resources/data.sql`
 ```sql
-	INSERT INTO TBL_HEALTH_CHECK (KEY, VALUE) values (1, 'Value 1');
-	INSERT INTO TBL_HEALTH_CHECK (KEY, VALUE) values (2, 'Value 2');
-	INSERT INTO TBL_HEALTH_CHECK (KEY, VALUE) values (3, 'Value 3');
+INSERT INTO TBL_HEALTH_CHECK (KEY, VALUE) values (1, 'Value 1');
+INSERT INTO TBL_HEALTH_CHECK (KEY, VALUE) values (2, 'Value 2');
+INSERT INTO TBL_HEALTH_CHECK (KEY, VALUE) values (3, 'Value 3');
 ```
 
 {: .box-note}
@@ -143,17 +142,17 @@ data.sql will be executed by spring boot while it boots up. Once the server star
 Update `HealthcheckApplication.java` file and by adding a custom DBHealthQuery component which updates our health check query
 
 ```java
-	@Component
-	class DBHealthQuery {
+@Component
+class DBHealthQuery {
 
-		@Bean
-		public HealthIndicator dbHealthIndicator(@Autowired DataSource dataSource) {
+	@Bean
+	public HealthIndicator dbHealthIndicator(@Autowired DataSource dataSource) {
 
-			DataSourceHealthIndicator indicator = new DataSourceHealthIndicator(dataSource);
-			indicator.setQuery("SELECT COUNT(1) FROM TBL_HEALTH_CHECK");
-			return indicator;
-		}
+		DataSourceHealthIndicator indicator = new DataSourceHealthIndicator(dataSource);
+		indicator.setQuery("SELECT COUNT(1) FROM TBL_HEALTH_CHECK");
+		return indicator;
 	}
+}
 ```
 
 ##### Restart the application
@@ -161,26 +160,26 @@ Update `HealthcheckApplication.java` file and by adding a custom DBHealthQuery c
 The [Actuator health URL](http://localhost:8080/actuator/health){:target="_blank"} will show db.details.hello=3 indicating 3 records pulled by the health query.
 
 ```json
-	{  
-	   "status":"UP",
-	   "details":{  
-		  "db":{  
-			 "status":"UP",
-			 "details":{  
-				"database":"H2",
-				"hello":3
-			 }
-		  },
-		  "diskSpace":{  
-			 "status":"UP",
-			 "details":{  
-				"total":255073447936,
-				"free":88294080512,
-				"threshold":10485760
-			 }
-		  }
-	   }
-	}
+{
+  "status": "UP",
+  "details": {
+    "db": {
+      "status": "UP",
+      "details": {
+        "database": "H2",
+        "hello": 3
+      }
+    },
+    "diskSpace": {
+      "status": "UP",
+      "details": {
+        "total": 255073447936,
+        "free": 88294080512,
+        "threshold": 10485760
+      }
+    }
+  }
+}
 ```
 
 ##### Change the default URL of actuator health endpoint
@@ -189,15 +188,15 @@ Change the default url of health endpoint from `http://localhost:8080/actuator/h
 
 `src/main/resources/application.properties`
 ```properties
-	management.endpoints.web.base-path=/
-	management.endpoints.web.path-mapping.health=myapphealth
+management.endpoints.web.base-path=/
+management.endpoints.web.path-mapping.health=myapphealth
 ```
 
 Remove `diskSpace` health check details from JSON by overriding management end points in `application.properties`
 
 `src/main/resources/application.properties`
 ```properties
-	management.health.diskspace.enabled=false
+management.health.diskspace.enabled=false
 ```
 
 ##### Restart the application
@@ -205,18 +204,18 @@ Remove `diskSpace` health check details from JSON by overriding management end p
 The diskSpace details are no longer shown in the [health URL](http://localhost:8080/myapphealth){:target="_blank"}
 
 ```json
-	{  
-	   "status":"UP",
-	   "details":{  
-		  "db":{  
-			 "status":"UP",
-			 "details":{  
-				"database":"H2",
-				"hello":3
-			 }
-		  }
-	   }
-	}
+{
+  "status": "UP",
+  "details": {
+    "db": {
+      "status": "UP",
+      "details": {
+        "database": "H2",
+        "hello": 3
+      }
+    }
+  }
+}
 ```
 
 ## Writing Custom HealthIndicators 
@@ -229,37 +228,55 @@ Below component shows an example where a custom health indicator is written to m
 Connection and read timeouts are set to 2 seconds.
 
 ```java
-	@Component
-	class StockPriceAPIHealthIndicator implements HealthIndicator {
+@SpringBootApplication
+public class HealthcheckApplication {
 
-		@Autowired
-		RestTemplateBuilder restTemplateBuilder;
-
-		@Bean
-		public RestTemplate restTemplate() {
-
-			return restTemplateBuilder
-				.setConnectTimeout(Duration.ofSeconds(2))
-				.setReadTimeout(Duration.ofSeconds(2))
-				.build();
-		}
-
-		@Override
-		public Health health() {
-
-			Builder builder = new Health.Builder();
-			try {
-				ResponseEntity<String> response = restTemplate()
-						.getForEntity("https://api.iextrading.com/1.0/stock/GOOG/quote", String.class);
-				builder = response.getStatusCode().equals(HttpStatus.OK) ? builder = builder.up() : builder.down();
-				builder.withDetail("HTTP Status Code", response.getStatusCode());
-
-			} catch (Exception e) {
-				builder = builder.down(e);
-			}
-			return builder.build();
-		}
+	public static void main(String[] args) {
+		SpringApplication.run(HealthcheckApplication.class, args);
 	}
+}
+
+@Component
+class DBHealthQuery {
+
+	@Bean
+	public HealthIndicator dbHealthIndicator(@Autowired DataSource dataSource) {
+
+		DataSourceHealthIndicator indicator = new DataSourceHealthIndicator(dataSource);
+		indicator.setQuery("SELECT COUNT(1) FROM TBL_HEALTH_CHECK");
+		return indicator;
+	}
+}
+
+@Component
+class StockPriceAPIHealthIndicator implements HealthIndicator {
+
+	@Autowired
+	RestTemplateBuilder restTemplateBuilder;
+
+	@Bean
+	public RestTemplate restTemplate() {
+
+		return restTemplateBuilder.setConnectTimeout(Duration.ofSeconds(2)).setReadTimeout(Duration.ofSeconds(2))
+				.build();
+	}
+
+	@Override
+	public Health health() {
+
+		Builder builder = new Health.Builder();
+		try {
+			ResponseEntity<String> response = restTemplate()
+					.getForEntity("https://api.iextrading.com/1.0/stock/GOOG/quote", String.class);
+			builder = response.getStatusCode().equals(HttpStatus.OK) ? builder = builder.up() : builder.down();
+			builder.withDetail("HTTP Status Code", response.getStatusCode());
+
+		} catch (Exception e) {
+			builder = builder.down(e);
+		}
+		return builder.build();
+	}
+}
 ``` 
 
 ##### Restart the application
@@ -267,24 +284,24 @@ Connection and read timeouts are set to 2 seconds.
 The [Health URL](http://localhost:8080/myapphealth){:target="_blank"} now includes `stockPriceAPI` status.
 
 ```json
-	{  
-	   "status":"UP",
-	   "details":{  
-		  "stockPriceAPI":{  
-			 "status":"UP",
-			 "details":{  
-				"HTTP Status Code":"OK"
-			 }
-		  },
-		  "db":{  
-			 "status":"UP",
-			 "details":{  
-				"database":"H2",
-				"hello":3
-			 }
-		  }
-	   }
-	}
+{
+  "status": "UP",
+  "details": {
+    "stockPriceAPI": {
+      "status": "UP",
+      "details": {
+        "HTTP Status Code": "OK"
+      }
+    },
+    "db": {
+      "status": "UP",
+      "details": {
+        "database": "H2",
+        "hello": 3
+      }
+    }
+  }
+}
 ```
 
 #### Summary

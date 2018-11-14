@@ -42,14 +42,14 @@ Click on `Generate Project`. You will see that the project will be downloaded as
 Alternatively, you can also generate the project in a shell using cURL.
 
 ```sh
-	curl https://start.spring.io/starter.zip  \
-			   -d dependencies=web,config server,jpa,actuator \
-			   -d language=java \
-			   -d type=maven-project \
-			   -d groupId=com.codeaches.demo \
-			   -d artifactId=configsvr \
-			   -d bootVersion=2.1.0.RELEASE \
-			   -o configsvr.zip
+curl https://start.spring.io/starter.zip  \
+	   -d dependencies=web,config server,jpa,actuator \
+	   -d language=java \
+	   -d type=maven-project \
+	   -d groupId=com.codeaches.demo \
+	   -d artifactId=configsvr \
+	   -d bootVersion=2.1.0.RELEASE \
+	   -o configsvr.zip
 ```
 
 ##### Extract, import and build
@@ -61,15 +61,15 @@ Extract and import the project in STS as `Existing Maven project`. Once import i
 Run the `configsvr project` as `Spring Boot App` and you will notice that the embedded tomcat server has started on port 8080.
 
 ````java
-	o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-	c.c.demo.configsvr.ConfigsvrApplication  : Started ConfigsvrApplication in 12.233 seconds (JVM running for 14.419)
+o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+c.c.demo.configsvr.ConfigsvrApplication  : Started ConfigsvrApplication in 12.233 seconds (JVM running for 14.419)
 ````
 
 ##### Configure `configsvr project` to run on port 8888
 
 `src/main/resources/application.properties`
 ```properties
-	server.port=8888
+server.port=8888
 ```
 
 ##### Configure `configsvr project` to use GIT to pull the properties files
@@ -79,8 +79,8 @@ Update `application.properties` file of config server application with below ent
 
 `src/main/resources/application.properties`
 ```properties
-	spring.cloud.config.server.git.uri=https://github.com/codeaches/cloud-config-files.git
-	spring.cloud.config.server.git.default-label=development
+spring.cloud.config.server.git.uri=https://github.com/codeaches/cloud-config-files.git
+spring.cloud.config.server.git.default-label=development
 ```
 
 Now, add few properties files to `https://github.com/codeaches/cloud-config-files.git`. In this GIT repo, I have created 2 properties files for each of the environments. The folder structure in GIT looks like the one shown below.
@@ -88,14 +88,14 @@ Now, add few properties files to `https://github.com/codeaches/cloud-config-file
 ##### Enable Spring Config Server by annotating `ConfigsvrApplication.java` with `@EnableConfigServer`
 
 ```java
-	@SpringBootApplication
-	@EnableConfigServer
-	public class ConfigsvrApplication {
+@SpringBootApplication
+@EnableConfigServer
+public class ConfigsvrApplication {
 
-		public static void main(String[] args) {
-			SpringApplication.run(ConfigsvrApplication.class, args);
-		}
+	public static void main(String[] args) {
+		SpringApplication.run(ConfigsvrApplication.class, args);
 	}
+}
 ```
 
 ##### Restart the `configsvr project` as `Spring Boot App`
@@ -105,4 +105,4 @@ Congratulations! You just created a config server config server and used to to r
 
 ### Footnote
  - This tutorial was created based in the following link: [Spring Cloud Config Server](https://cloud.spring.io/spring-cloud-config/single/spring-cloud-config.html){:target="_blank"}
- - The code used for this tutorial can be found on [github](https://github.com/codeaches/configsvr	){:target="_blank"}
+ - The code used for this tutorial can be found on [github](https://github.com/codeaches/configsvr){:target="_blank"}
