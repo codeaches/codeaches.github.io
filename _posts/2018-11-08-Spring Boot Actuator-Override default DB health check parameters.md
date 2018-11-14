@@ -195,10 +195,16 @@ Change the default url of health check from `http://localhost:8080/actuator/heal
 `src/main/resources/application.properties`
 
 ```properties
-management.endpoint.health.show-details=always
-
 management.endpoints.web.base-path=/
 management.endpoints.web.path-mapping.health=myapphealth
+```
+
+Remove `diskSpace` health check details from JSON by overriding management end points in `application.properties`
+
+`src/main/resources/application.properties`
+
+```properties
+management.health.diskspace.enabled=false
 ```
 
 ### Restart the application
@@ -217,14 +223,6 @@ curl http://localhost:8080/myapphealth
          "details":{  
             "database":"H2",
             "hello":1
-         }
-      },
-      "diskSpace":{  
-         "status":"UP",
-         "details":{  
-            "total":255073447936,
-            "free":88404889600,
-            "threshold":10485760
          }
       }
    }
@@ -280,14 +278,6 @@ curl http://localhost:8080/myapphealth
          "details":{  
             "database":"H2",
             "hello":3
-         }
-      },
-      "diskSpace":{  
-         "status":"UP",
-         "details":{  
-            "total":255073447936,
-            "free":89545814016,
-            "threshold":10485760
          }
       }
    }
