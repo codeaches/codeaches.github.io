@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring Boot Actuator-Override default DB health check parameters
-comments: true
+comments: false
 image: /img/health.jpg
 share-img: /img/health.jpg
 gh-badge: [star, fork, follow]
