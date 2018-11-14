@@ -28,6 +28,7 @@ In this tutorial, let's create a spring boot application, update it's health end
   - IDE you love (I will use [STS](https://spring.io/tools3/sts/all){:target="_blank"})
   - [Maven 3.0+](https://maven.apache.org/download.cgi){:target="_blank"} to build the code
 
+
 #### Let's start
 
 Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches.demo", Artifact to "healthcheck" and put the focus in the Dependencies field on the right hand side. If you type "Actuator", you will see a list of matching choices with that simple criteria. Use the mouse or the arrow keys and Enter to select the "Actuator" starter. Similarly select "web", "H2" and "JPA".
