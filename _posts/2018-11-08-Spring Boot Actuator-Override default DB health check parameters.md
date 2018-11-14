@@ -198,7 +198,7 @@ management.health.diskspace.enabled=false
 
 ##### Restart the application
 
-The diskSpace details are no longer shown in the health URL [http://localhost:8080/myapphealth](http://localhost:8080/myapphealth){:target="_blank"}
+The diskSpace details are no longer shown in the [health URL](http://localhost:8080/myapphealth){:target="_blank"}
 
 ```json
 {  
