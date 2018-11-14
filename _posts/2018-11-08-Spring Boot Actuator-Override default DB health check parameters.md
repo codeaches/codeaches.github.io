@@ -9,9 +9,9 @@ tags: [spring-boot,spring-actuator,actuator,git,h2,tutorial]
 lang: en
 ---
 
-Actuator endpoints can be used to monitor our application. Spring Boot includes a number of built-in endpoints and one of them is health. Health endpoint shows application health information. Each individual endpoint can be enabled or disabled. Health endpoint is enabled by default when we add the actuator dependency to our project.
+Actuator endpoints can be used to monitor our application. Spring Boot includes a number of built-in endpoints and one of them is health.
 
-In this tutorial, let's create a spring boot application and update the health endpoint to use a custom DB health check query for health monitoring.
+In this tutorial, let's create a spring boot application, update it's health endpoint to use a custom DB health check query for DB health monitoring. We shall also create a custom health check to monitor an external URL which provides stock price.
 
 ## Objective
  - Use [Spring Initializr](https://start.spring.io/){:target="_blank"} to generate the spring boot Web application
