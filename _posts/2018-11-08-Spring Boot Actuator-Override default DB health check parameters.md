@@ -20,7 +20,7 @@ In this tutorial, let's create a spring boot application, update it's health end
  - Create a basic table on startup
  - Update health DB URL to query the table
  - Modify the default health URL (Re-map URL from /actuator/health to /myapphealth)
- - Write a custom Health Indicator 
+ - Write a custom Health Indicator
 
 #### Prerequisites
 
