@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot-Setup OAuth2 Authorization Server (Jdbc Token Store and BCrypt Password Encoder) and Resource Service
+title: Spring Boot-Authorization Server using Jdbc Token Store, BCrypt Password Encoder, and Resource Service
 comments: false
 image: /img/config-server.jpg
 share-img: /img/config-server.png
@@ -15,24 +15,22 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 
 ### Objective
 
- - Create Authorization Server using @EnableAuthorizationServer
- - Create DDLs and DMLs
- - Test Authorization Server REST calls (/oauth/token with grant_type=password, /oauth/check_token, /oauth/token with grant_type=refresh_token)
- - Create a REST webservice (petstore service) with 2 endpoints and configure this webservice to be a Resource Server using @EnableResourceServer
- - Test petstore service (Resource Server) REST calls
+ - Create `Authorization Server` using `@EnableAuthorizationServer`
+ - Configure clients, users, groups in H2 DB
+ - Test `Authorization Server` REST calls (`/oauth/token` with `grant_type=password`, `/oauth/check_token`, `/oauth/token` with `grant_type=refresh_token`)
+ - Create a `REST webservice` (`petstore service`) with 2 endpoints and configure this webservice to be a` Resource Server` using `@EnableResourceServer`
+ - Test `petstore service` REST calls
 
 ### Prerequisites
 
   - [Open JDK 11](http://www.oracle.com/technetwork/java/javase/downloads/index.html){:target="_blank"}
-  - [Spring Tool Suite IDE](https://spring.io/tools3/sts/all){:target="_blank"})
+  - [Spring Tool Suite IDE](https://spring.io/tools3/sts/all){:target="_blank"}
 
 ### Let's start
 
-Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches", Artifact to "oauth2server" and put the focus in the Dependencies field on the right hand side. If you type "Actuator", you will see a list of matching choices with that simple criteria. Use the mouse or the arrow keys and Enter to select the "Actuator" starter. Similarly select "Web", "jpa" and "Config Server".
+Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches", Artifact to "oauth2server" and select `Web`,`Security`,`Cloud OAuth2`,`H2` and `JPA` dependencies.
 
-Your browser should now be in this state:
-
-![Spring Initializer web tool](/img/configsvr-initializer.png){:target="_blank"}
+![Spring Initializer web tool](/img/oauth2server-initializer.gif){:target="_blank"}
 
 ##### Download the project
 
