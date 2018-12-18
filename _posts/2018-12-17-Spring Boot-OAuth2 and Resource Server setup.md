@@ -2,8 +2,8 @@
 layout: post
 title: Spring Boot-Authorization Server using Jdbc Token Store, BCrypt Password Encoder, and Resource Service
 comments: false
-image: /img/config-server.jpg
-share-img: /img/config-server.png
+image: /img/oauth2server.png
+share-img: /img/oauth2server.png
 gh-badge: [star, fork, follow]
 tags: [spring-boot,spring-cloud,spring-security,oauth2-servier,resource-service,tutorial]
 lang: en
