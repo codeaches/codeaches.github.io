@@ -295,7 +295,7 @@ o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9040 (http
 c.c.demo.oauth2server.ConfigsvrApplication  : Started ConfigsvrApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
-##### Test `/oauth/token` URL
+##### Test `/oauth/token` URL with grant_type=grant_type
 
 ![POSTMAN Console](/img/oauth2server-token_1.gif){:target="_blank"}
 
@@ -307,6 +307,32 @@ curl -X POST http://localhost:8080/oauth/token \
 	   -d "grant_type=password" \
 	   -d "username=kelly" \
 	   -d "password=kelly@123"
+```
+
+##### Test `/oauth/check_token`
+
+![POSTMAN Console](/img/oauth2server-token_2.gif){:target="_blank"}
+
+Alternatively, you can also test in a shell using cURL.
+
+```sh
+curl -X POST http://localhost:8080/oauth/check_token \
+	   --header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
+	   -d "grant_type=password" \
+	   -d "username=kelly" \
+```	
+	
+##### Test `/oauth/token` URL URL with grant_type=refresh_token
+
+![POSTMAN Console](/img/oauth2server-token_3.gif){:target="_blank"}
+
+Alternatively, you can also test in a shell using cURL.
+
+```sh
+curl -X POST http://localhost:8080/oauth/token \
+	   --header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
+	   -d "grant_type=refresh_token" \
+	   -d "username=kelly" \
 ```
 
 ### Footnote
