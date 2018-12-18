@@ -23,7 +23,7 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 
 ### Prerequisites
 
-  - [Open JDK 11](http://www.oracle.com/technetwork/java/javase/downloads/index.html){:target="_blank"}
+  - [Open JDK 11](https://jdk.java.net/11){:target="_blank"}
   - [Spring Tool Suite IDE](https://spring.io/tools3/sts/all){:target="_blank"}
 
 ### Let's start
