@@ -30,11 +30,9 @@ Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the 
 ![Spring Initializer web tool](/img/oauth2server-initializer.gif){:target="_blank"}
 
 ##### Download the project
-
 Click on `Generate Project`. You will see that the project will be downloaded as oauth2server.zip file on your hard drive.
 
 Alternatively, you can also generate the project in a shell using cURL.
-
 ```sh
 curl https://start.spring.io/starter.zip  \
 	   -d dependencies=web,config server,jpa,actuator \
