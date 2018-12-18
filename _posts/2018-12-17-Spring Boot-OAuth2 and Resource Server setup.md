@@ -310,4 +310,4 @@ curl -X POST http://localhost:8080/oauth/token \
 ```
 
 ### Footnote
- - The code used for this tutorial can be found on [github(Authorization Server)](https://github.com/codeaches/oauth2server){:target="_blank"} and [github(Resource Service)](https://github.com/codeaches/petstore){:target="_blank"}
+ - The code used for this tutorial can be found on [github (Authorization Server)](https://github.com/codeaches/oauth2server){:target="_blank"} and [github (Resource Server)](https://github.com/codeaches/petstore){:target="_blank"}
