@@ -216,8 +216,6 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer cfg) throws Exception {
-
-		cfg.tokenKeyAccess("permitAll()");
 		cfg.checkTokenAccess("permitAll()");
 	}
 
