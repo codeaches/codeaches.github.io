@@ -238,6 +238,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
 `com.codeaches.oauth2server.UserSecurityConfig.java`
 ```java
+
 @Configuration
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -268,13 +269,18 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.antMatcher("/**").authorizeRequests().antMatchers("/", "/login**").permitAll().anyRequest()
-				.authenticated();
+		http.antMatcher("/**")
+			.authorizeRequests()
+			.antMatchers("/", "/login**")
+			.permitAll()
+			.anyRequest()
+			.authenticated();
 
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 	}
 }
+
 ```
 
 ##### Restart the `oauth2server project` as `Spring Boot App`
