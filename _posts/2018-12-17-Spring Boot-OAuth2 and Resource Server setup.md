@@ -64,10 +64,10 @@ server.port=9040
 
 Run the `oauth2server project` as `Spring Boot App` and you will notice that the embedded tomcat server has started on port 9040.
 
-````java
+```log
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9040 (http) with context path ''
 c.c.demo.oauth2server.ConfigsvrApplication  : Started ConfigsvrApplication in 12.233 seconds (JVM running for 14.419)
-````
+```
 
 ##### Create OAuth client, access token and refresh token tables
 
@@ -290,9 +290,24 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
 ##### Restart the `oauth2server project` as `Spring Boot App`
 
-### Summary
-Congratulations! You just created a config server config server and used to to retrieve properties stored in GIT repository.
+```log
+o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9040 (http) with context path ''
+c.c.demo.oauth2server.ConfigsvrApplication  : Started ConfigsvrApplication in 12.233 seconds (JVM running for 14.419)
+```
+
+##### Test `/oauth/token` URL
+
+![POSTMAN Console](/img/oauth2server-token_1.gif){:target="_blank"}
+
+Alternatively, you can also test in a shell using cURL.
+
+```sh
+curl -X POST http://localhost:8080/oauth/token \
+	   --header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
+	   -d "grant_type=password" \
+	   -d "username=kelly" \
+	   -d "password=kelly@123"
+```
 
 ### Footnote
- - This tutorial was created based in the following link: [Spring Cloud Config Server](https://cloud.spring.io/spring-cloud-config/single/spring-cloud-config.html){:target="_blank"}
- - The code used for this tutorial can be found on [github](https://github.com/codeaches/oauth2server){:target="_blank"}
+ - The code used for this tutorial can be found on [github(Authorization Server)](https://github.com/codeaches/oauth2server){:target="_blank"} and [github(Resource Service)](https://github.com/codeaches/petstore){:target="_blank"}
