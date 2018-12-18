@@ -8,7 +8,6 @@ gh-badge: [star, fork, follow]
 tags: [spring-boot,spring-cloud,spring-security,oauth2-servier,resource-service,tutorial]
 lang: en
 ---
-
 OAuth 2 is an authorization framework that enables applications to obtain limited access to user accounts. 
 
 In this tutorial, let's setup a spring boot authorization server and resource server
@@ -27,9 +26,7 @@ In this tutorial, let's setup a spring boot authorization server and resource se
   - [Spring Tool Suite IDE](https://spring.io/tools3/sts/all){:target="_blank"}
 
 ### Let's start
-
 Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches", Artifact to "oauth2server" and select `Web`,`Security`,`Cloud OAuth2`,`H2` and `JPA` dependencies.
-
 ![Spring Initializer web tool](/img/oauth2server-initializer.gif){:target="_blank"}
 
 ##### Download the project
