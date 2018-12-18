@@ -45,20 +45,16 @@ curl https://start.spring.io/starter.zip  \
 ```
 
 ##### Extract, import and build
-
 Extract and import the project in STS as `Existing Maven project`. Once import is completed. Build the project using `Maven`.
 
 ##### Configure `oauth2server project` to run on port 8888
-
 `src/main/resources/application.properties`
 ```properties
 server.port=9040
 ```
 
 ##### Run the application
-
 Run the `oauth2server project` as `Spring Boot App` and you will notice that the embedded tomcat server has started on port 9040.
-
 ```log
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9040 (http) with context path ''
 c.c.demo.oauth2server.ConfigsvrApplication  : Started ConfigsvrApplication in 12.233 seconds (JVM running for 14.419)
