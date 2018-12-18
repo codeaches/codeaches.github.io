@@ -663,10 +663,10 @@ table tr td :last-child {
 }
 
 /* --- Code blocks --- */
-/* --- pre.font-size changed from 16px to 10px;--- */
+/* --- pre.font-size changed from 16px to 12px;--- */
 
 pre {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5em;
 }
 pre code {
