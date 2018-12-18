@@ -17,9 +17,9 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 
  - Create `Authorization Server` using `@EnableAuthorizationServer`
  - Configure clients, users, groups in H2 DB
- - Test `Authorization Server` REST calls (`/oauth/token` with `grant_type=password`, `/oauth/check_token`, `/oauth/token` with `grant_type=refresh_token`)
- - Create a `REST webservice` (`petstore service`) with 2 endpoints and configure this webservice to be a` Resource Server` using `@EnableResourceServer`
- - Test `petstore service` REST calls
+ - Test `Authorization Server` REST calls (`/oauth/token` with `grant_type=password`, `/oauth/check_token`, `/oauth/token` with `grant_type=refresh_token`) using POSTMAN
+ - Create a `REST webservice` (`petstore service`) with REST endpoints and configure this webservice to be a` Resource Server` using `@EnableResourceServer`
+ - Test `petstore service` REST calls using POSTMAN
 
 ### Prerequisites
 
