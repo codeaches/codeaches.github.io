@@ -6,9 +6,16 @@ layout: null
 
 /* --- General --- */
 
+/*
+Changed 
+from 
+'Lora', 'Times New Roman', serif;
+to
+'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+*/
 body {
-  font-family: 'Lora', 'Times New Roman', serif;
-  font-size: 5px; /* changed from 18 to 5 */
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px; /* changed from 18 to 14 */
   color: #404040;
   position: relative;
   background-color: {{ site.page-col }};
