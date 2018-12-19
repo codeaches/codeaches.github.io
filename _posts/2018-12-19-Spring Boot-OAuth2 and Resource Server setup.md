@@ -3,8 +3,8 @@ layout: post
 title: "Spring Boot Authorization and Resource servers with JdbcTokenStore and BCryptPasswordEncoder"
 tags: [codeaches,java,openjdk,spring,spring boot,spring cloud,oauth2,professional,rstats,r-bloggers,tutorial, popular]
 date: 2018-12-19 9:00:00 -0700
-share-img: /img/oauth2server.jpg
-permalink: /blog/oauth2/
+share-img: /img/oauth2server/oauth2server.jpg
+permalink: /blog/oauth2server-resourceserver-jdbctokenstore-bcryptpasswordencoder/
 layout: post
 comments: true
 show-share: true
@@ -32,7 +32,7 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 
 ### Let's start
 Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches", Artifact to "oauth2server" and select `Web`,`Security`,`Cloud OAuth2`,`H2` and `JPA` dependencies.
-![Spring Initializer web tool](/img/oauth2server-initializer.gif){:target="_blank"}
+![Spring Initializer web tool](/img/oauth2server/oauth2server-initializer.gif){:target="_blank"}
 
 ##### Download the project
 Click on `Generate Project`. You will see that the project will be downloaded as oauth2server.zip file on your hard drive.
@@ -298,7 +298,7 @@ c.c.demo.oauth2server.ConfigsvrApplication  : Started ConfigsvrApplication in 12
 
 ##### Test `/oauth/token` URL with grant_type=grant_type
 
-![POSTMAN Console](/img/oauth2server-token_1.gif){:target="_blank"}
+![POSTMAN Console](/img/oauth2server/oauth2server-token_1.gif){:target="_blank"}
 
 Alternatively, you can also test in a shell using cURL.
 
@@ -312,7 +312,7 @@ curl -X POST http://localhost:8080/oauth/token \
 
 ##### Test `/oauth/check_token`
 
-![POSTMAN Console](/img/oauth2server-token_2.gif){:target="_blank"}
+![POSTMAN Console](/img/oauth2server/oauth2server-token_2.gif){:target="_blank"}
 
 Alternatively, you can also test in a shell using cURL.
 
@@ -325,7 +325,7 @@ curl -X POST http://localhost:8080/oauth/check_token \
 	
 ##### Test `/oauth/token` URL URL with grant_type=refresh_token
 
-![POSTMAN Console](/img/oauth2server-token_3.gif){:target="_blank"}
+![POSTMAN Console](/img/oauth2server/oauth2server-token_3.gif){:target="_blank"}
 
 Alternatively, you can also test in a shell using cURL.
 
