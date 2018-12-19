@@ -1,3 +1,4 @@
+<!--
 {% if page.show-share or page.show-subscribe %}
   <div class="share-section">
     <h1 class="share-title">Liked what you read?</h1>
@@ -6,14 +7,11 @@
       <div class="share-buttons">
         {% capture urlmessage %}{{ site.url }}/contact{% endcapture %}
         
-		<!--
         {% capture urlfb %}https://www.facebook.com/dialog/feed?app_id={{ site.fb_app_id }}&link={{ site.url }}{{ page.url }}&name={{ page.title }}&caption={{ site.url-pretty }}&redirect_uri={{ site.url }}{{ page.url }}?message=Thanks for sharing!{% endcapture %}
         {% if page.share-img %}
           {% capture urlfb %}{{ urlfb }}&picture={{ page.share-img }}{% endcapture %}
         {% endif %}
-		-->
 
-		<!--
         {% capture urltwitter %}https://twitter.com/intent/tweet?url={{ site.url }}{{ page.url }}&via=codeaches{% endcapture %}
         {% if page.tags contains 'rstats' %}
           {% assign maxlength = 94 %}
@@ -29,13 +27,10 @@
         <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=FLER29DWAYJ58&currency_code=USD&source=url" data-ga-event=1 data-ga-category="share" data-ga-action="donate" data-ga-label="{{ page.url }}">
           Support me
         </a>
-		-->
       </div>
     {% endif %}
     
     {% if page.show-subscribe %}
-      <!-- MailChimp Signup Form -->
-	  <!--
       <div id="mailchimp-subscribe-section-share" class="mailchimp-subscribe-section">
         <div id="mc_embed_signup-share">
           <form action="//codeaches.us14.list-manage.com/subscribe/post?u=4563563475bv78y0345&amp;id=c180f5773c" method="post" id="mc-embedded-subscribe-form-share" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
@@ -56,8 +51,8 @@
           </form>
         </div>
       </div>
-	  -->
     {% endif %} 
 
   </div>
 {% endif %}
+-->
