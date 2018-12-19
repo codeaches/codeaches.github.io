@@ -7,8 +7,8 @@ meta-title: "Pavan Gurudutt - Java Application Programmer"
 meta-description: "Java Application Programmer and consultant with a Bachelor's degree in Electronics and Communications"
 datacampcourse: true
 bigimg:
-  - "/img/big-imgs/big1.jpeg" : "big img1, somewhere (2018)"
-  - "/img/big-imgs/big2.jpeg" : "big img2, somewhere (2018)"  
+  - "/img/big-imgs/big1.jpeg" : "Somewhere peaceful (2018)"
+  - "/img/big-imgs/big2.jpeg" : "Somewhere beautiful (2018)"  
 ---
 
 <div class="list-filters">
