@@ -5,7 +5,7 @@ tags: [codeaches,java,openjdk,spring,spring boot,spring cloud,oauth2,professiona
 date: 2018-12-19 9:00:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
 share-img: /img/blog/oauth2server/oauth2server.jpg
-permalink: /blog/oauth2server-resourceserver-jdbctokenstore-bcryptpasswordencoder/
+permalink: /oauth2server-resourceserver-jdbctokenstore-bcryptpasswordencoder/
 layout: post
 comments: true
 show-share: true
