@@ -66,7 +66,7 @@ curl https://start.spring.io/starter.zip  \
 
 Extract and import the project in STS as `Existing Maven project`. Build the project once the import is completed successfully.
 
-> Add the below dependancy if the build fails with an error "javax.xml.bind.JAXBException: Implementation of JAXB-API has not been found on module path or classpath"
+**Add the below dependancy if the build fails with an error "javax.xml.bind.JAXBException: Implementation of JAXB-API has not been found on module path or classpath"**
 
 ```xml
 <dependency>
@@ -333,7 +333,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 
 ```
-> I have disabled the useage of authorities table with the help of setEnableAuthorities(false). I have enabled the useage of tables groups, group authorities and group members  with the help of setEnableGroups(true).
+> I have disabled the useage of authorities table with the help of setEnableAuthorities(false). I have enabled the useage of groups, group authorities and group members tables with the help of setEnableGroups(true).
 
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
