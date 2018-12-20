@@ -133,7 +133,7 @@ create table oauth_refresh_token (
 
 ### Create a client `appclient`
 
-Let's add a client named appclient with a password appclient@123 to DB db by providing the DML scripts which runs during server startup.
+Let's add a client named `appclient` with a password `appclient@123` to DB db by providing the DML scripts which runs during server startup.
 
 > The password saved in DB is in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds.
 
@@ -165,7 +165,7 @@ VALUES
 
 ### Create tables for users, groups, group authorities and group members
 
-Let's create a client named appclient with a password appclient@123
+Let's create tables to hold the users and groups details in embedded h2 db by providing the DDL scripts which runs during server startup.
 
 `src/main/resources/sql/groupauthorities_ddl.sql`
 ```sql
