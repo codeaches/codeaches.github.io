@@ -66,10 +66,10 @@ Extract and import the project in STS as `Existing Maven project`. Once import i
 
 > Add the below dependancy if the build fails with an error "javax.xml.bind.JAXBException: Implementation of JAXB-API has not been found on module path or classpath"
 ```xml
-		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
-		</dependency>
+<dependency>
+	<groupId>org.glassfish.jaxb</groupId>
+	<artifactId>jaxb-runtime</artifactId>
+</dependency>
 ```
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
