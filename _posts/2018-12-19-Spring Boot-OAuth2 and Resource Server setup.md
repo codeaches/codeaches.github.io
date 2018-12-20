@@ -58,7 +58,7 @@ curl https://start.spring.io/starter.zip  \
 	   -o oauth2server.zip
 ```
 
-> Testing the tag
+> Testing this tag
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
 	target="_top" style="text-align: center;">
