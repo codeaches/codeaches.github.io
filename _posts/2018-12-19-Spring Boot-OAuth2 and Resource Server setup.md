@@ -36,7 +36,7 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 - [Open JDK 11](https://jdk.java.net/11){:target="_blank"}
 - [Spring Tool Suite IDE](https://spring.io/tools3/sts/all){:target="_blank"}
 
-## Create Authorization Server {#createauthserver}
+## Authorization Server {#createauthserver}
 
 ### Create spring boot application using spring initializr {#enableauthorizationserver}
 
