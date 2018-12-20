@@ -21,14 +21,14 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 
 - [Prerequisites](#prerequisites)
 - [Create Authorization Server](#createauthserver)
-  - [Create spring boot application using spring initializer and annotate the service using `@EnableAuthorizationServer`](#enableauthorizationserver)
+  - [Create spring boot application using spring initializr and annotate the service using `@EnableAuthorizationServer`](#enableauthorizationserver)
   - [Create tables for clients, users and groups in H2 DB](#1.2.0)
 - [Test Authorization Server](#2.0.0)
   - [Test `/oauth/token` URL with grant_type=grant_type](#2.1.0)
   - [Test `/oauth/check_token`](#2.2.0)
   - [Test `/oauth/token` URL with grant_type=refresh_token](#2.3.0)
 - [Create Resource Server](#3.0.0)
-  - [Create spring boot application using spring initializer and annotate the service using `@EnableResourceServer` ](#enableresourceserver)
+  - [Create spring boot application using spring initializr and annotate the service using `@EnableResourceServer` ](#enableresourceserver)
 
 ## Prerequisites {#prerequisites}
 
@@ -37,10 +37,10 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 
 ## Create Authorization Server {#createauthserver}
 
-**Create spring boot application using spring initializer and annotate the service using `@EnableAuthorizationServer`** {#enableauthorizationserver}
+**Create spring boot application using spring initializr and annotate the service using `@EnableAuthorizationServer` {#enableauthorizationserver} **
 
 Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches", Artifact to "oauth2server" and select `Web`,`Security`,`Cloud OAuth2`,`H2` and `JPA` dependencies.
-![Spring Initializer web tool](/img/blog/oauth2server/oauth2server-initializer.gif){:target="_blank"}
+![Spring initializr web tool](/img/blog/oauth2server/oauth2server-initializr.gif){:target="_blank"}
 
 Click on `Generate Project`. You will see that the project will be downloaded as oauth2server.zip file on your hard drive.
 
