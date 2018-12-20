@@ -2,7 +2,7 @@
 layout: post
 title: "Spring Boot Authorization and Resource servers with JdbcTokenStore and BCryptPasswordEncoder"
 tags: [codeaches,java,openjdk,spring,spring boot,spring cloud,oauth2,professional,rstats,r-bloggers,tutorial, popular]
-date: 2018-12-19 9:00:00 -0700
+date: 2018-12-20 9:00:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
 share-img: /img/blog/oauth2server/oauth2server.jpg
 permalink: /oauth2server-resourceserver-jdbctokenstore-bcryptpasswordencoder/
