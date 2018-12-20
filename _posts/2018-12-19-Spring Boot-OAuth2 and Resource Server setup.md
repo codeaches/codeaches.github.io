@@ -202,7 +202,7 @@ create table group_members (
 
 Let's create users named `john` with a password `john@123` and `kelly` with a password `kelly@123`.
 Create a group `USER_AND_ADMIN_GROUP` and assign the roles `ROLE_USER` and `ROLE_ADMIN`. Similarly create a group `USER_ONLY_GROUP` with role `ROLE_USER`.
-Add john to group `USER_AND_ADMIN_GROUP` and `kelly` to group `USER_ONLY_GROUP`.
+Add `john` to group `USER_AND_ADMIN_GROUP` and `kelly` to group `USER_ONLY_GROUP`.
 
 > The password saved in DB is in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds.
 
