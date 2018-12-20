@@ -61,11 +61,10 @@ curl https://start.spring.io/starter.zip  \
 > Testing the tag
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
-	target="_top">
+	target="_top" style="text-align: center;">
 	<input type="hidden" name="cmd" value="_donations" /> <input
 		type="hidden" name="business" value="FLER29DWAYJ58" /> <input
-		type="hidden" name="currency_code" value="USD" /> <input
-		type="image"
+		type="hidden" name="currency_code" value="USD" /> <input type="image"
 		src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"
 		border="0" name="submit"
 		title="PayPal - The safer, easier way to donate"
