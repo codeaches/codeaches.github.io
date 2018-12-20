@@ -335,6 +335,12 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 ```
 > I have disabled the useage of authorities table with the help of setEnableAuthorities(false). I have enabled the useage of groups, group authorities and group members tables with the help of setEnableGroups(true).
 
+**Restart the application for above changes to take effect**
+
+```log
+o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
+c.c.demo.oauth2server.ConfigsvrApplication  : Started ConfigsvrApplication in 12.233 seconds (JVM running for 14.419)
+```
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
 	target="_top" style="text-align: center;">
