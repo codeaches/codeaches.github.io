@@ -41,6 +41,7 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 ### Create spring boot application using spring initializr {#enableauthorizationserver}
 
 Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches", Artifact to "oauth2server" and select `Web`,`Security`,`Cloud OAuth2`,`H2` and `JPA` dependencies.
+
 ![Spring initializr web tool](/img/blog/oauth2server/oauth2server-initializr.gif){:target="_blank"}
 
 Click on `Generate Project`. You will see that the project will be downloaded as oauth2server.zip file on your hard drive.
@@ -49,16 +50,27 @@ Click on `Generate Project`. You will see that the project will be downloaded as
 
 ```sh
 curl https://start.spring.io/starter.zip  \
-	   -d dependencies=web,config server,jpa,actuator \
+	   -d dependencies=web,cloud-security,cloud-oauth2,h2,data-jpa \
 	   -d language=java \
+	   -d javaVersion=11 \
 	   -d type=maven-project \
 	   -d groupId=com.codeaches \
 	   -d artifactId=oauth2server \
-	   -d bootVersion=2.1.0.RELEASE \
+	   -d bootVersion=2.2.0.BUILD-SNAPSHOT \
 	   -o oauth2server.zip
 ```
 
-> Testing this tag
+### Extract, import and build
+
+Extract and import the project in STS as `Existing Maven project`. Once import is completed. Build the project using `Maven`.
+
+> Add the below dependancy if the build fails with an error "javax.xml.bind.JAXBException: Implementation of JAXB-API has not been found on module path or classpath"
+```xml
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+		</dependency>
+```
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
 	target="_top" style="text-align: center;">
