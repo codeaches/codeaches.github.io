@@ -38,7 +38,7 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 
 ## Create Authorization Server {#createauthserver}
 
-**Create spring boot application using spring initializr and annotate the service using `@EnableAuthorizationServer` {#enableauthorizationserver} **
+### Create spring boot application using spring initializr {#enableauthorizationserver}
 
 Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches", Artifact to "oauth2server" and select `Web`,`Security`,`Cloud OAuth2`,`H2` and `JPA` dependencies.
 ![Spring initializr web tool](/img/blog/oauth2server/oauth2server-initializr.gif){:target="_blank"}
