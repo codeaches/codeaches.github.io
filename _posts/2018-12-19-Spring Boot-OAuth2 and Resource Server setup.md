@@ -20,30 +20,31 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 # Table of contents
 
 - [Prerequisites](#prerequisites)
-- [Create Authorization Server](#1.0.0)
-  - [Create spring boot application using spring initializer and annotate the service using `@EnableAuthorizationServer`](#1.1.0)
+- [Create Authorization Server](#createauthserver)
+  - [Create spring boot application using spring initializer and annotate the service using `@EnableAuthorizationServer`](#enableauthorizationserver)
   - [Create tables for clients, users and groups in H2 DB](#1.2.0)
 - [Test Authorization Server](#2.0.0)
   - [Test `/oauth/token` URL with grant_type=grant_type](#2.1.0)
   - [Test `/oauth/check_token`](#2.2.0)
   - [Test `/oauth/token` URL with grant_type=refresh_token](#2.3.0)
 - [Create Resource Server](#3.0.0)
-  - [Create spring boot application using spring initializer and annotate the service using `@EnableResourceServer` ](#1.1.0)
+  - [Create spring boot application using spring initializer and annotate the service using `@EnableResourceServer` ](#enableresourceserver)
 
 ## Prerequisites {#prerequisites}
 
 - [Open JDK 11](https://jdk.java.net/11){:target="_blank"}
 - [Spring Tool Suite IDE](https://spring.io/tools3/sts/all){:target="_blank"}
 
-## Create Authorization Server {#1.0.0}
+## Create Authorization Server {#createauthserver}
 
-### Create spring boot application using spring initializer and annotate the service using `@EnableAuthorizationServer` {#1.1.0}
+**Create spring boot application using spring initializer and annotate the service using `@EnableAuthorizationServer`** {#enableauthorizationserver}
+
 Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches", Artifact to "oauth2server" and select `Web`,`Security`,`Cloud OAuth2`,`H2` and `JPA` dependencies.
 ![Spring Initializer web tool](/img/blog/oauth2server/oauth2server-initializer.gif){:target="_blank"}
 
 Click on `Generate Project`. You will see that the project will be downloaded as oauth2server.zip file on your hard drive.
 
-**Alternatively, you can also generate the project in a shell using cURL
+**Alternatively, you can also generate the project in a shell using cURL**
 
 ```sh
 curl https://start.spring.io/starter.zip  \
@@ -55,3 +56,5 @@ curl https://start.spring.io/starter.zip  \
 	   -d bootVersion=2.1.0.RELEASE \
 	   -o oauth2server.zip
 ```
+
+> Testing the tag
