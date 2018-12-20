@@ -224,6 +224,14 @@ INSERT INTO group_members (username, group_id) VALUES ('john', 1);
 INSERT INTO group_members (username, group_id) VALUES ('kelly', 2);
 ```
 
+### Update the above created DDLs and DML file names in `application.properties`
+
+`src/main/resources/application.properties`
+```properties
+spring.datasource.schema=classpath:sql/oauth2_ddl.sql, classpath:sql/groupauthorities_ddl.sql
+spring.datasource.data=classpath:sql/oauth2_dml.sql, classpath:sql/groupauthorities_dml.sql
+```
+
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
 	target="_top" style="text-align: center;">
 	<input type="hidden" name="cmd" value="_donations" /> <input
