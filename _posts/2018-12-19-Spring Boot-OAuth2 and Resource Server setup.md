@@ -65,6 +65,7 @@ curl https://start.spring.io/starter.zip  \
 Extract and import the project in STS as `Existing Maven project`. Once import is completed. Build the project using `Maven`.
 
 > Add the below dependancy if the build fails with an error "javax.xml.bind.JAXBException: Implementation of JAXB-API has not been found on module path or classpath"
+
 ```xml
 <dependency>
 	<groupId>org.glassfish.jaxb</groupId>
