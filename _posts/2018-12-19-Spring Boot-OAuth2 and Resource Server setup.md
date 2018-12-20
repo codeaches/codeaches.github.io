@@ -23,7 +23,7 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 - [Prerequisites](#prerequisites)
 - [Create Authorization Server](#createauthserver)
   - [Create spring boot application using spring initializr and annotate the service using `@EnableAuthorizationServer`](#enableauthorizationserver)
-  - [Create tables for clients, users and groups in H2 DB](#clientstable)
+  - [Create tables for clients, users and groups](#clientstable)
 - [Test Authorization Server](#2.0.0)
   - [Test `/oauth/token` URL with grant_type=grant_type](#2.1.0)
   - [Test `/oauth/check_token`](#2.2.0)
@@ -91,7 +91,7 @@ o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http
 c.c.demo.oauth2server.ConfigsvrApplication  : Started ConfigsvrApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
-### Create tables for clients, users and groups in H2 DB]{#clientstable}
+### Create tables for clients, users and groups {#clientstable}
 
 Let's create tables to hold the client, user and group details in embedded h2 db by providing the DDL scripts which runs during server startup.
 
