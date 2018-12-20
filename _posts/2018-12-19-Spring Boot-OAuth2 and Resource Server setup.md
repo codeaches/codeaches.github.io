@@ -24,6 +24,8 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 - [Create Authorization Server](#createauthserver)
   - [Create spring boot application using spring initializr and annotate the service using `@EnableAuthorizationServer`](#enableauthorizationserver)
   - [Create tables for clients, users and groups](#clientstable)
+  - [Create a class to handle client authorization](#clientauth)
+  - [Create a class to handle user authentication](#userauth)
 - [Test Authorization Server](#2.0.0)
   - [Test `/oauth/token` URL with grant_type=grant_type](#2.1.0)
   - [Test `/oauth/check_token`](#2.2.0)
@@ -231,6 +233,108 @@ INSERT INTO group_members (username, group_id) VALUES ('kelly', 2);
 spring.datasource.schema=classpath:sql/oauth2_ddl.sql, classpath:sql/groupauthorities_ddl.sql
 spring.datasource.data=classpath:sql/oauth2_dml.sql, classpath:sql/groupauthorities_dml.sql
 ```
+
+### Configure Auth Server {#clientauth}
+
+Create a class `AuthServerConfig` as shown below. I am using JdbcTokenStore and BCryptPasswordEncoder with strength/rounds as 4. Make sure to annotate the class with `@EnableAuthorizationServer`. This class handles client authorization.
+
+`com.codeaches.oauth2server.AuthServerConfig.java`
+```java
+@Configuration
+@EnableAuthorizationServer
+public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
+
+	@Autowired
+	DataSource ds;
+
+	@Autowired
+	AuthenticationManager authMgr;
+
+	@Autowired
+	private UserDetailsService usrSvc;
+
+	@Bean
+	public TokenStore tokenStore() {
+		return new JdbcTokenStore(ds);
+	}
+
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder(4);
+	}
+
+	@Override
+	public void configure(AuthorizationServerSecurityConfigurer cfg) throws Exception {
+		cfg.checkTokenAccess("permitAll()");
+	}
+
+	@Override
+	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		clients.jdbc(ds);
+	}
+
+	@Override
+	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+
+		endpoints.tokenStore(tokenStore());
+		endpoints.authenticationManager(authMgr);
+		endpoints.userDetailsService(usrSvc);
+	}
+}
+```
+
+### Configure User Security {#userauth}
+
+Create a class `UserSecurityConfig` as shown below. This class handles user authentication.
+
+`com.codeaches.oauth2server.UserSecurityConfig.java`
+```java
+
+@Configuration
+public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+	DataSource ds;
+
+	@Override
+	@Bean(BeanIds.USER_DETAILS_SERVICE)
+	public UserDetailsService userDetailsServiceBean() throws Exception {
+		return super.userDetailsServiceBean();
+	}
+
+	@Override
+	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+		JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> cfg = auth.jdbcAuthentication().dataSource(ds);
+
+		cfg.getUserDetailsService().setEnableGroups(true);
+		cfg.getUserDetailsService().setEnableAuthorities(false);
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+
+		http.antMatcher("/**")
+			.authorizeRequests()
+			.antMatchers("/", "/login**")
+			.permitAll()
+			.anyRequest()
+			.authenticated();
+
+		http.csrf().disable();
+		http.headers().frameOptions().disable();
+	}
+}
+
+```
+> I have disabled the useage of authorities table with the help of setEnableAuthorities(false). I have enabled the useage of tables groups, group authorities and group members  with the help of setEnableGroups(true).
+
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
 	target="_top" style="text-align: center;">
