@@ -384,7 +384,7 @@ curl -X POST http://localhost:9050/oauth/token \
 
 Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches", Artifact to "petstore" and select `Web`,`Security` and `Cloud OAuth2` dependencies.
 
-![Spring initializr web tool](/img/blog/petsore/petstore-initializr.gif){:target="_blank"}
+![Spring initializr web tool](/img/blog/petstore/petstore-initializr.gif){:target="_blank"}
 
 Click on `Generate Project`. You will see that the project will be downloaded as petsore.zip file on your hard drive.
 
