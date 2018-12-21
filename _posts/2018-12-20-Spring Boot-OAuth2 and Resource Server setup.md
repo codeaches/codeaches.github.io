@@ -175,9 +175,9 @@ VALUES
     250000
   );
 ```
-> The password saved in DB is in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds  
-> `appclient` has the authority to access the petstore and toystore resources  
-> `scope` is set to both read and write  
+> The password saved in DB is in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds.  
+> `appclient` has the authority to access the petstore and toystore resources.  
+> `scope` is set to both read and write.  
 
 ### Create tables for users, groups, group authorities and group members
 
@@ -347,7 +347,8 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 
 ```
-> I have disabled the useage of authorities table with the help of setEnableAuthorities(false). I have enabled the useage of groups, group authorities and group members tables with the help of setEnableGroups(true).
+> I have disabled the useage of authorities table with the help of setEnableAuthorities(false).  
+> I have enabled the useage of groups, group authorities and group members tables with the help of setEnableGroups(true).
 
 **Restart the application for above changes to take effect**
 
@@ -367,6 +368,9 @@ curl -X POST http://localhost:9050/oauth/token \
 	-d "username=kelly" \
 	-d "password=kelly@123"
 ```
+> `YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=` is the Base 64 authorization version of user id and password.  
+> Base64.encodeBase64(("appclient" + ":" + "appclient@123").getBytes());
+
 
 ```json
 {
