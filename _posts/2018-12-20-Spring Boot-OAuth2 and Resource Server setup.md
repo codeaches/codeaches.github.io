@@ -510,11 +510,9 @@ o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8010 (http
 c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
-## Test Resource Server (petstore application)] {#testresourceserver}
+## Test Resource Server (petstore application) {#testresourceserver}
 
 ### Test `/pet` for a user having access {#testpet}
-
-**Alternatively, you can also test in a shell using cURL**
 
 ```sh
 curl -X GET http://localhost:8010/pet \
