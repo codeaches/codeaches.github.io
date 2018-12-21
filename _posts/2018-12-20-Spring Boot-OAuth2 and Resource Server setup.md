@@ -226,7 +226,7 @@ INSERT INTO group_members (username, group_id) VALUES ('john', 1);
 INSERT INTO group_members (username, group_id) VALUES ('kelly', 2);
 ```
 
-### Update the above created DDLs and DML file names in `application.properties`
+### Update the above created DDL and DML file names in `application.properties`
 
 `src/main/resources/application.properties`
 ```properties
@@ -369,7 +369,7 @@ curl -X POST http://localhost:9050/oauth/check_token \
 	-d "token=515cbaf5-4e21-4b1c-93cd-e0ee1cac0f00"
 ```
 
-### Test `/oauth/refresh_token` URL with `grant_type=password` {#testauthserverrefreshtoken}
+### Test `/oauth/token` URL with `grant_type=refresh_token` {#testauthserverrefreshtoken}
 
 ![POSTMAN Console](/img/blog/oauth2server/oauth2server-token_3.gif){:target="_blank"}
 
