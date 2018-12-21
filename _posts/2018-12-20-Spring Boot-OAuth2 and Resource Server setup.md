@@ -356,7 +356,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
 c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
-
+  
 ## Test Authorization Server {#testauthserver}
 
 ### Test `/oauth/token` URL with `grant_type=password` {#testauthserverpassword}
