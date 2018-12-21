@@ -547,7 +547,7 @@ c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (
 
 ### Test `/pet` for a user having access {#testpet}
 
-Both john and kelly has access to `/pet`
+> Both john and kelly has access to `/pet`
 
 ```sh
 curl -X GET http://localhost:8010/pet \
@@ -560,7 +560,7 @@ Hi kelly. My pet is dog
 
 ### Test `/favouritePet` for a user having access {#testfavouritePetvalid}
 
-Only john has access to `/favouritePet`
+> Only john has access to `/favouritePet`
 
 ```sh
 curl -X GET http://localhost:8010/favouritePet \
@@ -573,7 +573,7 @@ Hi john. My favourite pet is cat
 
 ### Test `/favouritePet` for a user not having access {#testfavouritePetinvalid}
 
-kelly does not have access to `/favouritePet`. Hence we get `access_denied` error.
+> kelly does not have access to `/favouritePet`. Hence we get `access_denied` error.
 
 ```sh
 curl -X GET http://localhost:8010/favouritePet \
