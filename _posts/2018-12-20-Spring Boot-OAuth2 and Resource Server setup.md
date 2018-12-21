@@ -366,11 +366,41 @@ curl -X POST http://localhost:9050/oauth/token \
 	-d "password=kelly@123"
 ```
 
+```json
+{
+  "access_token": "13df4f18-7763-4772-9960-895ca905dd56",
+  "token_type": "bearer",
+  "refresh_token": "6d49fd10-b92e-4bb2-b58d-b83212d70bcb",
+  "expires_in": 24999,
+  "scope": "read write"
+}
+```
+
 ### Test `/oauth/check_token` URL {#testauthserverchecktoken}
 
 ```sh
 curl -X POST http://localhost:9050/oauth/check_token \
-	-d "token=515cbaf5-4e21-4b1c-93cd-e0ee1cac0f00"
+	-d "token=13df4f18-7763-4772-9960-895ca905dd56"
+```
+
+```json
+{
+  "aud": [
+    "petstore",
+    "toystore"
+  ],
+  "user_name": "kelly",
+  "scope": [
+    "read",
+    "write"
+  ],
+  "active": true,
+  "exp": 1545401270,
+  "authorities": [
+    "ROLE_USER"
+  ],
+  "client_id": "appclient"
+}
 ```
 
 ### Test `/oauth/token` URL with `grant_type=refresh_token` {#testauthserverrefreshtoken}
@@ -379,7 +409,17 @@ curl -X POST http://localhost:9050/oauth/check_token \
 curl -X POST http://localhost:9050/oauth/token \
 	--header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
 	-d "grant_type=refresh_token" \
-	-d "refresh_token=912083ad-7aab-4247-b3c6-d4c21eda2aba"
+	-d "refresh_token=6d49fd10-b92e-4bb2-b58d-b83212d70bcb"
+```
+
+```json
+{
+  "access_token": "807d4eda-ed9e-48d7-bc1a-29e78987376a",
+  "token_type": "bearer",
+  "refresh_token": "6d49fd10-b92e-4bb2-b58d-b83212d70bcb",
+  "expires_in": 24999,
+  "scope": "read write"
+}
 ```
 
 ## Resource Server {#createresourceserver}
@@ -509,7 +549,11 @@ c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (
 
 ```sh
 curl -X GET http://localhost:8010/pet \
-	--header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
+	--header "Authorization:Bearer 807d4eda-ed9e-48d7-bc1a-29e78987376a"
+```
+
+```http
+Hi kelly. My pet is dog
 ```
 
 ### Test `/favouritePet` for a user having access {#testfavouritePetvalid}
@@ -519,13 +563,17 @@ curl -X GET http://localhost:8010/pet \
 	--header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
 ```
 
+```http
+Hi john. My favourite pet is cat
+```
+
 ### Test `/favouritePet` for a user not having access {#testfavouritePetinvalid}
 
 ```sh
 curl -X GET http://localhost:8010/favouritePet \
-	--header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
+	--header "Authorization:Bearer 807d4eda-ed9e-48d7-bc1a-29e78987376a"
 ```
-**Response**
+
 ```json
 {
     "error": "access_denied",
