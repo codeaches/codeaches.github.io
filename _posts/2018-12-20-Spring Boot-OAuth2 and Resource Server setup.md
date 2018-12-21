@@ -531,7 +531,7 @@ curl -X GET http://localhost:8010/pet \
 ### Test `/favouritePet` for a user not having access {#testfavouritePetinvalid}
 
 ```sh
-curl -X GET http://localhost:8010/pet \
+curl -X GET http://localhost:8010/favouritePet \
 	--header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
 ```
 
