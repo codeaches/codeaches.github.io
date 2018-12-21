@@ -33,12 +33,13 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 - [Create Resource Server](#createresourceserver)
   - [Create spring boot application using spring initializr and annotate the service using `@EnableResourceServer`](#enableresourceserver)
   - [Create a class `ResourceServerConfig` and configure the `HttpSecurity` details] (#resourceserverconfig)
-  - [Create a class `PetstoreController` and configure two REST methods pet() and favouritePet()] (#petstorecontroller)
-  - [Update `application.properties` with oauth2 client credentials and oauth2 check_token URL] (#resourceserverchecktokenurl)
+  - [Create a class `PetstoreController` and configure two REST methods pet() and favouritePet()](#petstorecontroller)
+  - [Update `application.properties` with oauth2 client credentials and oauth2 check_token URL](#resourceserverchecktokenurl)
 - [Test Resource Server(petstore application)](#testresourceserver)
   - [Test `/pet` for a user having access](#testpet)
   - [Test `/favouritePet` for a user having access](#testfavouritePetvalid)
   - [Test `/favouritePet` for a user not having access](#testfavouritePetinvalid)
+- [Postman test collections](#postman)
 
 ## Prerequisites {#prerequisites}
 
@@ -353,10 +354,6 @@ c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 secon
 
 ### Test `/oauth/token` URL with `grant_type=password` {#testauthserverpassword}
 
-![POSTMAN Console](/img/blog/oauth2server/oauth2server-token_1.gif){:target="_blank"}
-
-**Alternatively, you can also test in a shell using cURL**
-
 ```sh
 curl -X POST http://localhost:9050/oauth/token \
 	--header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
@@ -367,20 +364,12 @@ curl -X POST http://localhost:9050/oauth/token \
 
 ### Test `/oauth/check_token` URL {#testauthserverchecktoken}
 
-![POSTMAN Console](/img/blog/oauth2server/oauth2server-token_2.gif){:target="_blank"}
-
-**Alternatively, you can also test in a shell using cURL**
-
 ```sh
 curl -X POST http://localhost:9050/oauth/check_token \
 	-d "token=515cbaf5-4e21-4b1c-93cd-e0ee1cac0f00"
 ```
 
 ### Test `/oauth/token` URL with `grant_type=refresh_token` {#testauthserverrefreshtoken}
-
-![POSTMAN Console](/img/blog/oauth2server/oauth2server-token_3.gif){:target="_blank"}
-
-**Alternatively, you can also test in a shell using cURL**
 
 ```sh
 curl -X POST http://localhost:9050/oauth/token \
@@ -532,7 +521,6 @@ curl -X GET http://localhost:8010/pet \
 curl -X GET http://localhost:8010/favouritePet \
 	--header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
 ```
-
 **Response**
 ```json
 {
@@ -540,6 +528,10 @@ curl -X GET http://localhost:8010/favouritePet \
     "error_description": "Access is denied"
 }
 ```
+
+## Postman test collections {#postman}
+
+**Postman test script collections JSON is part of the code in github**
 
 ## Summary
 
