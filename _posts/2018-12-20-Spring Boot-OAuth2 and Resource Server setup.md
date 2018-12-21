@@ -543,6 +543,10 @@ curl -X GET http://localhost:8010/pet \
 }
 ```
 
+## Summary
+
+Congratulations! You just created an auth server and a resource server.
+
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
 	target="_top" style="text-align: center;">
 	<input type="hidden" name="cmd" value="_donations" /> <input
