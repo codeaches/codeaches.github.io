@@ -356,11 +356,12 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
 c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
-  
+
 ## Test Authorization Server {#testauthserver}
 
 ### Test `/oauth/token` URL with `grant_type=password` {#testauthserverpassword}
 
+*Request*
 ```sh
 curl -X POST http://localhost:9050/oauth/token \
 	--header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
@@ -372,6 +373,7 @@ curl -X POST http://localhost:9050/oauth/token \
 > Base64.encodeBase64(("appclient" + ":" + "appclient@123").getBytes());
 
 
+*Response*
 ```json
 {
   "access_token": "13df4f18-7763-4772-9960-895ca905dd56",
@@ -384,11 +386,13 @@ curl -X POST http://localhost:9050/oauth/token \
 
 ### Test `/oauth/check_token` URL {#testauthserverchecktoken}
 
+*Request*
 ```sh
 curl -X POST http://localhost:9050/oauth/check_token \
 	-d "token=13df4f18-7763-4772-9960-895ca905dd56"
 ```
 
+*Response*
 ```json
 {
   "aud": [
@@ -409,8 +413,11 @@ curl -X POST http://localhost:9050/oauth/check_token \
 }
 ```
 
-### Test `/oauth/token` URL with `grant_type=refresh_token` {#testauthserverrefreshtoken}
+### Test refresh_token
 
+Test the URL `/oauth/token` with `grant_type=refresh_token` {#testauthserverrefreshtoken}
+
+*Request*
 ```sh
 curl -X POST http://localhost:9050/oauth/token \
 	--header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
@@ -418,6 +425,7 @@ curl -X POST http://localhost:9050/oauth/token \
 	-d "refresh_token=6d49fd10-b92e-4bb2-b58d-b83212d70bcb"
 ```
 
+*Response*
 ```json
 {
   "access_token": "807d4eda-ed9e-48d7-bc1a-29e78987376a",
