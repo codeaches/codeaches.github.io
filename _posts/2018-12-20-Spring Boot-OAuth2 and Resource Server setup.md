@@ -175,8 +175,11 @@ VALUES
     250000
   );
 ```
-> The password saved in DB is in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds.
-> `appclient` has the authority to access the petstore and toystore resources. 
+> The password saved in DB is in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds
+
+> `appclient` has the authority to access the petstore and toystore resources
+
+> `scope` is set to both read and write 
 
 ### Create tables for users, groups, group authorities and group members
 
