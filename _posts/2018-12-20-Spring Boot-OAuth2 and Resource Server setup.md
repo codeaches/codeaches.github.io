@@ -12,7 +12,9 @@ show-share: true
 gh-repo: codeaches/oauth2server
 gh-badge: [star, watch, follow]
 lastupdated: 2018-12-20
-changefreq: daily
+sitemap:
+  changefreq: daily
+  priority: 1
 ---
 
 OAuth 2 is an authorization framework that enables applications to obtain limited access to user accounts. 
