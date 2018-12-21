@@ -144,6 +144,7 @@ create table oauth_refresh_token (
   authentication LONGVARBINARY
 );
 ```
+> oauth_client_details table will be used to store client details. oauth_access_token and oauth_refresh_token will be used internally by spring boot OAuth2 server to save the access and refresh tokens.
 
 ### Create a client `appclient`
 
