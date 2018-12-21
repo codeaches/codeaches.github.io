@@ -547,6 +547,8 @@ c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (
 
 ### Test `/pet` for a user having access {#testpet}
 
+Both john and kelly has access to `/pet`
+
 ```sh
 curl -X GET http://localhost:8010/pet \
 	--header "Authorization:Bearer 807d4eda-ed9e-48d7-bc1a-29e78987376a"
@@ -558,8 +560,10 @@ Hi kelly. My pet is dog
 
 ### Test `/favouritePet` for a user having access {#testfavouritePetvalid}
 
+Only john has access to `/favouritePet`
+
 ```sh
-curl -X GET http://localhost:8010/pet \
+curl -X GET http://localhost:8010/favouritePet \
 	--header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
 ```
 
@@ -568,6 +572,8 @@ Hi john. My favourite pet is cat
 ```
 
 ### Test `/favouritePet` for a user not having access {#testfavouritePetinvalid}
+
+kelly does not have access to `/favouritePet`. Hence we get `access_denied` error.
 
 ```sh
 curl -X GET http://localhost:8010/favouritePet \
