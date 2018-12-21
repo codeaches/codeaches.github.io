@@ -39,6 +39,7 @@ In this tutorial, let's setup a spring boot authorization server and resource se
   - [Test `/pet` for a user having access](#testpet)
   - [Test `/favouritePet` for a user having access](#testfavouritePetvalid)
   - [Test `/favouritePet` for a user not having access](#testfavouritePetinvalid)
+- [Source code](#sourcecode)
 - [Postman test collections](#postman)
 
 ## Prerequisites {#prerequisites}
@@ -92,7 +93,7 @@ We shall run the `oauth2server project` on port 9050 instead of default port 808
 server.port=9050
 ```
 
-### Run the application
+### Run the oauth2server application
 
 Run the `oauth2server project` as `Spring Boot App` and you will notice that the embedded tomcat server has started on port 9050.
 
@@ -424,7 +425,7 @@ We shall run the `petsore project` on port 8010 instead of default port 8080
 server.port=8010
 ```
 
-### Run the application
+### Run the petsore application
 
 Run the `petstore project` as `Spring Boot App` and you will notice that the embedded tomcat server has started on port 8010.
 
@@ -528,6 +529,10 @@ curl -X GET http://localhost:8010/favouritePet \
     "error_description": "Access is denied"
 }
 ```
+
+## Source code {#sourcecode}
+
+**The code used for this tutorial can be found on [github (Authorization Server)](https://github.com/codeaches/oauth2server){:target="_blank"} and [github (Resource Server)](https://github.com/codeaches/petstore){:target="_blank"} **
 
 ## Postman test collections {#postman}
 
