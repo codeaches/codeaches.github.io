@@ -30,8 +30,11 @@ In this tutorial, let's setup a spring boot authorization server and resource se
   - [Test `/oauth/token` URL with grant_type=password](#testauthserverpassword)
   - [Test `/oauth/check_token`](#testauthserverchecktoken)
   - [Test `/oauth/token` URL with grant_type=refresh_token](#testauthserverrefreshtoken)
-- [Create Resource Server](#3.0.0)
-  - [Create spring boot application using spring initializr and annotate the service using `@EnableResourceServer` ](#enableresourceserver)
+- [Create Resource Server](#createresourceserver)
+  - [Create spring boot application using spring initializr and annotate the service using `@EnableResourceServer`](#enableresourceserver)
+  - [Create a class `ResourceServerConfig` and configure the `HttpSecurity` details] (#resourceserverconfig)
+  - [Create a class `PetstoreController` and configure two REST methods pet() and favouritePet()] (#petstorecontroller)
+  - [Update `application.properties` with oauth2 client credentials and oauth2 check_token URL] (#resourceserverchecktokenurl)
 
 ## Prerequisites {#prerequisites}
 
@@ -90,7 +93,7 @@ Run the `oauth2server project` as `Spring Boot App` and you will notice that the
 
 ```log
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
-c.c.demo.oauth2server.ConfigsvrApplication  : Started ConfigsvrApplication in 12.233 seconds (JVM running for 14.419)
+c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
 ### Create tables for clients, users and groups {#clientstable}
@@ -339,7 +342,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
 ```log
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
-c.c.demo.oauth2server.ConfigsvrApplication  : Started ConfigsvrApplication in 12.233 seconds (JVM running for 14.419)
+c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
 ## Test Authorization Server {#testauthserver}
@@ -382,6 +385,126 @@ curl -X POST http://localhost:9050/oauth/token \
 	-d "refresh_token=912083ad-7aab-4247-b3c6-d4c21eda2aba"
 ```
 
+## Resource Server {#createresourceserver}
+
+### Create spring boot application using spring initializr {#enableresourceserver}
+
+Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches", Artifact to "petstore" and select `Web`,`Security` and `Cloud OAuth2` dependencies.
+
+![Spring initializr web tool](/img/blog/petsore/petsore-initializr.gif){:target="_blank"}
+
+Click on `Generate Project`. You will see that the project will be downloaded as petsore.zip file on your hard drive.
+
+**Alternatively, you can also generate the project in a shell using cURL**
+
+```sh
+curl https://start.spring.io/starter.zip  \
+	   -d dependencies=web,cloud-security,cloud-oauth2 \
+	   -d language=java \
+	   -d javaVersion=11 \
+	   -d type=maven-project \
+	   -d groupId=com.codeaches \
+	   -d artifactId=petsore \
+	   -d bootVersion=2.2.0.BUILD-SNAPSHOT \
+	   -o petsore.zip
+```
+
+### Extract, import and build
+
+Extract and import the project in STS as `Existing Maven project`. Build the project once the import is completed successfully.
+
+**Add the jaxb-runtime dependancy if the build fails with an error "javax.xml.bind.JAXBException: Implementation of JAXB-API has not been found on module path or classpath"**
+
+```xml
+<dependency>
+	<groupId>org.glassfish.jaxb</groupId>
+	<artifactId>jaxb-runtime</artifactId>
+</dependency>
+```
+
+### Configure `petsore project` to run on port 8010
+
+We shall run the `petsore project` on port 8010 instead of default port 8080
+
+`src/main/resources/application.properties`
+```properties
+server.port=petsore
+```
+
+### Run the application
+
+Run the `petstore project` as `Spring Boot App` and you will notice that the embedded tomcat server has started on port 8010.
+
+```log
+o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8010 (http) with context path ''
+c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
+```
+
+### Create a class `ResourceServerConfig` and configure the `HttpSecurity` details {#resourceserverconfig}
+
+`com.codeaches.petstore.ResourceServerConfig.java`
+```java
+@Configuration
+@EnableResourceServer
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+
+	@Override
+	public void configure(ResourceServerSecurityConfigurer resource) {
+		resource.resourceId("petstore");
+	}
+	
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+
+		http.csrf().disable();
+
+		http.authorizeRequests()
+			.antMatchers(HttpMethod.POST, "/**")
+			.access("#oauth2.hasScope('write')")
+			.antMatchers("/**")
+			.access("#oauth2.hasScope('read')");
+	}
+}
+```
+
+### Create a class `PetstoreController` and configure two REST methods pet() and favouritePet() {#petstorecontroller}
+
+`com.codeaches.petstore.PetstoreController.java`
+```java
+@RestController
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class PetstoreController {
+
+	@GetMapping("pet")
+	@PreAuthorize("hasAuthority('ROLE_USER')")
+	public String pet(Principal principal) {
+		return "Hi " + principal.getName() + ". My pet is dog";
+	}
+
+	@GetMapping("favouritePet")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	public String favouritePet(Principal principal) {
+		return "Hi " + principal.getName() + ". My favourite pet is dog";
+	}
+}
+
+```
+
+### Update `application.properties` with oauth2 client credentials and oauth2 check_token URL {#resourceserverchecktokenurl}
+
+`src/main/resources/application.properties`
+```properties
+security.oauth2.client.client-id=appclient
+security.oauth2.client.client-secret=appclient@123
+security.oauth2.resource.token-info-uri=http://localhost:9050/oauth/check_token
+```
+
+**Restart the application for above changes to take effect**
+
+```log
+o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8010 (http) with context path ''
+c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
+```
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
 	target="_top" style="text-align: center;">
