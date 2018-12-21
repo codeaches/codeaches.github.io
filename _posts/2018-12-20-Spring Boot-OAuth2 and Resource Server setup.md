@@ -35,6 +35,10 @@ In this tutorial, let's setup a spring boot authorization server and resource se
   - [Create a class `ResourceServerConfig` and configure the `HttpSecurity` details] (#resourceserverconfig)
   - [Create a class `PetstoreController` and configure two REST methods pet() and favouritePet()] (#petstorecontroller)
   - [Update `application.properties` with oauth2 client credentials and oauth2 check_token URL] (#resourceserverchecktokenurl)
+- [Test Resource Server(petstore application)](#testresourceserver)
+  - [Test `/pet` for a user having access](#testpet)
+  - [Test `/favouritePet` for a user having access](#testfavouritePetvalid)
+  - [Test `/favouritePet` for a user not having access](#testfavouritePetinvalid)
 
 ## Prerequisites {#prerequisites}
 
@@ -428,7 +432,7 @@ We shall run the `petsore project` on port 8010 instead of default port 8080
 
 `src/main/resources/application.properties`
 ```properties
-server.port=petsore
+server.port=8010
 ```
 
 ### Run the application
@@ -504,6 +508,39 @@ security.oauth2.resource.token-info-uri=http://localhost:9050/oauth/check_token
 ```log
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8010 (http) with context path ''
 c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
+```
+
+## Test Resource Server (petstore application)] {#testresourceserver}
+
+### Test `/pet` for a user having access {#testpet}
+
+**Alternatively, you can also test in a shell using cURL**
+
+```sh
+curl -X GET http://localhost:8010/pet \
+	--header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
+```
+
+### Test `/favouritePet` for a user having access {#testfavouritePetvalid}
+
+```sh
+curl -X GET http://localhost:8010/pet \
+	--header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
+```
+
+### Test `/favouritePet` for a user not having access {#testfavouritePetinvalid}
+
+```sh
+curl -X GET http://localhost:8010/pet \
+	--header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
+```
+
+**Response**
+```json
+{
+    "error": "access_denied",
+    "error_description": "Access is denied"
+}
 ```
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
