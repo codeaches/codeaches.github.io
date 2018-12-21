@@ -532,7 +532,7 @@ curl -X GET http://localhost:8010/favouritePet \
 
 ## Source code {#sourcecode}
 
-**The code used for this tutorial can be found on [github (Authorization Server)](https://github.com/codeaches/oauth2server){:target="_blank"} and [github (Resource Server)](https://github.com/codeaches/petstore){:target="_blank"} **
+The code used for this tutorial can be found on [github (Authorization Server)](https://github.com/codeaches/oauth2server){:target="_blank"} and [github (Resource Server)](https://github.com/codeaches/petstore){:target="_blank"}
 
 ## Postman test collections {#postman}
 
