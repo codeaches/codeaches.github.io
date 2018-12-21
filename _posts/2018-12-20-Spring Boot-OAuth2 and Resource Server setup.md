@@ -26,10 +26,10 @@ In this tutorial, let's setup a spring boot authorization server and resource se
   - [Create tables for clients, users and groups](#clientstable)
   - [Create a class to handle client authorization](#clientauth)
   - [Create a class to handle user authentication](#userauth)
-- [Test Authorization Server](#2.0.0)
-  - [Test `/oauth/token` URL with grant_type=grant_type](#2.1.0)
-  - [Test `/oauth/check_token`](#2.2.0)
-  - [Test `/oauth/token` URL with grant_type=refresh_token](#2.3.0)
+- [Test Authorization Server](#testauthserver)
+  - [Test `/oauth/token` URL with grant_type=password](#testauthserverpassword)
+  - [Test `/oauth/check_token`](#testauthserverchecktoken)
+  - [Test `/oauth/token` URL with grant_type=refresh_token](#testauthserverrefreshtoken)
 - [Create Resource Server](#3.0.0)
   - [Create spring boot application using spring initializr and annotate the service using `@EnableResourceServer` ](#enableresourceserver)
 
@@ -340,6 +340,46 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 ```log
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
 c.c.demo.oauth2server.ConfigsvrApplication  : Started ConfigsvrApplication in 12.233 seconds (JVM running for 14.419)
+```
+
+## Test Authorization Server {#testauthserver}
+
+### Test `/oauth/token` URL with `grant_type=password` {#testauthserverpassword}
+
+![POSTMAN Console](/img/blog/oauth2server/oauth2server-token_1.gif){:target="_blank"}
+
+**Alternatively, you can also test in a shell using cURL**
+
+```sh
+curl -X POST http://localhost:9050/oauth/token \
+	--header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
+	-d "grant_type=password" \
+	-d "username=kelly" \
+	-d "password=kelly@123"
+```
+
+### Test `/oauth/check_token` URL {#testauthserverchecktoken}
+
+![POSTMAN Console](/img/blog/oauth2server/oauth2server-token_2.gif){:target="_blank"}
+
+**Alternatively, you can also test in a shell using cURL**
+
+```sh
+curl -X POST http://localhost:9050/oauth/check_token \
+	-d "token=515cbaf5-4e21-4b1c-93cd-e0ee1cac0f00"
+```
+
+### Test `/oauth/refresh_token` URL with `grant_type=password` {#testauthserverrefreshtoken}
+
+![POSTMAN Console](/img/blog/oauth2server/oauth2server-token_3.gif){:target="_blank"}
+
+**Alternatively, you can also test in a shell using cURL**
+
+```sh
+curl -X POST http://localhost:9050/oauth/token \
+	--header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
+	-d "grant_type=refresh_token" \
+	-d "refresh_token=912083ad-7aab-4247-b3c6-d4c21eda2aba"
 ```
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
