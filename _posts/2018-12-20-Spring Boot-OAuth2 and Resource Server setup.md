@@ -279,7 +279,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer cfg) throws Exception {
-		cfg.checkTokenAccess("permitAll()");
+		cfg.checkTokenAccess("permitAll");
 	}
 
 	@Override
@@ -303,7 +303,6 @@ Create a class `UserSecurityConfig` as shown below. This class handles user auth
 
 `com.codeaches.oauth2server.UserSecurityConfig.java`
 ```java
-
 @Configuration
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -330,22 +329,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 		cfg.getUserDetailsService().setEnableGroups(true);
 		cfg.getUserDetailsService().setEnableAuthorities(false);
 	}
-
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-
-		http.antMatcher("/**")
-			.authorizeRequests()
-			.antMatchers("/", "/login**")
-			.permitAll()
-			.anyRequest()
-			.authenticated();
-
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
-	}
 }
-
 ```
 > I have disabled the useage of authorities table with the help of setEnableAuthorities(false).  
 > I have enabled the useage of groups, group authorities and group members tables with the help of setEnableGroups(true).
@@ -491,30 +475,18 @@ o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8010 (http
 c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
-### Create a class `ResourceServerConfig` and configure the `HttpSecurity` details {#resourceserverconfig}
+### Annotate `DemoApplication` class with `@EnableResourceServer` {#resourceserverconfig}
 
-`com.codeaches.petstore.ResourceServerConfig.java`
+`com.codeaches.petstore.DemoApplication.java`
 ```java
-@Configuration
+@SpringBootApplication
 @EnableResourceServer
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+public class DemoApplication {
 
-	@Override
-	public void configure(ResourceServerSecurityConfigurer resource) {
-		resource.resourceId("petstore");
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
 	}
-	
-	@Override
-	public void configure(HttpSecurity http) throws Exception {
 
-		http.csrf().disable();
-
-		http.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "/**")
-			.access("#oauth2.hasScope('write')")
-			.antMatchers("/**")
-			.access("#oauth2.hasScope('read')");
-	}
 }
 ```
 
@@ -535,10 +507,9 @@ public class PetstoreController {
 	@GetMapping("favouritePet")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public String favouritePet(Principal principal) {
-		return "Hi " + principal.getName() + ". My favourite pet is dog";
+		return "Hi " + principal.getName() + ". My favourite pet is cat";
 	}
 }
-
 ```
 
 ### Update `application.properties` with oauth2 client credentials and oauth2 check_token URL {#resourceserverchecktokenurl}
@@ -547,8 +518,12 @@ public class PetstoreController {
 ```properties
 security.oauth2.client.client-id=appclient
 security.oauth2.client.client-secret=appclient@123
+
+security.oauth2.resource.id=petstore
+
 security.oauth2.resource.token-info-uri=http://localhost:9050/oauth/check_token
 ```
+> Note that we are setting `security.oauth2.resource.id` to petstore. This value along with client credentials will be validated against the record in `oauth_client_details` table.
 
 **Restart the application for above changes to take effect**
 
