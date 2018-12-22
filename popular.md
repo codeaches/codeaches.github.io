@@ -1,7 +1,7 @@
 ---
 layout: page
-title: "Hi, I'm Pavan"
-subtitle: Java Application Programmer / Spring Boot Programmer / Traveller
+title: "Spring Boot Tutorials"
+subtitle: By Pavan - Java Application Programmer / Traveller
 css: "/css/index.css"
 meta-title: "Pavan Gurudutt - Java Application Programmer"
 meta-description: "Java Application Programmer and consultant with a Bachelor's degree in Electronics and Communications"
