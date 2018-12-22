@@ -30,18 +30,12 @@ In this tutorial, let's setup a spring boot authorization server and resource se
   - [Create a class to handle client authorization](#clientauth)
   - [Create a class to handle user authentication](#userauth)
 - [Test Authorization Server](#testauthserver)
-  - [Test `/oauth/token` URL with grant_type=password](#testauthserverpassword)
-  - [Test `/oauth/check_token`](#testauthserverchecktoken)
-  - [Test `/oauth/token` URL with grant_type=refresh_token](#testauthserverrefreshtoken)
 - [Create Resource Server](#createresourceserver)
   - [Create spring boot application using spring initializr and annotate the service using `@EnableResourceServer`](#enableresourceserver)
   - [Create a class `ResourceServerConfig` and configure the `HttpSecurity` details] (#resourceserverconfig)
   - [Create a class `PetstoreController` and configure two REST methods pet() and favouritePet()](#petstorecontroller)
   - [Update `application.properties` with oauth2 client credentials and oauth2 check_token URL](#resourceserverchecktokenurl)
 - [Test Resource Server(petstore application)](#testresourceserver)
-  - [Test `/pet` for a user having access](#testpet)
-  - [Test `/favouritePet` for a user having access](#testfavouritePetvalid)
-  - [Test `/favouritePet` for a user not having access](#testfavouritePetinvalid)
 - [Source code](#sourcecode)
 - [Postman test collections](#postman)
 
@@ -343,7 +337,7 @@ c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 secon
 
 ## Test Authorization Server {#testauthserver}
 
-### Test `/oauth/token` URL with `grant_type=password` {#testauthserverpassword}
+**Test `/oauth/token` URL with `grant_type=password`**
 
 *Request*
 ```sh
@@ -368,7 +362,7 @@ curl -X POST http://localhost:9050/oauth/token \
 }
 ```
 
-### Test `/oauth/check_token` URL {#testauthserverchecktoken}
+**Test `/oauth/check_token` URL**
 
 *Request*
 ```sh
@@ -397,7 +391,7 @@ curl -X POST http://localhost:9050/oauth/check_token \
 }
 ```
 
-### Test refresh_token
+**Test refresh_token**
 
 Test the URL `/oauth/token` with `grant_type=refresh_token` {#testauthserverrefreshtoken}
 
@@ -533,7 +527,7 @@ c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (
 
 ## Test Resource Server (petstore application) {#testresourceserver}
  
-**Test `/pet` for a user having access to Authority `ROLE_USER`** {#testpet}
+**Test `/pet` for a user having access to Authority `ROLE_USER`**
 
 > Both john and kelly has access to `/pet`
 
@@ -546,7 +540,7 @@ curl -X GET http://localhost:8010/pet \
 Hi kelly. My pet is dog
 ```
 
-### Test `/favouritePet` for a user having access {#testfavouritePetvalid}
+**Test `/favouritePet` for a user having access to Authority `ROLE_ADMIN`**
 
 > Only john has access to `/favouritePet`
 
@@ -559,7 +553,7 @@ curl -X GET http://localhost:8010/favouritePet \
 Hi john. My favourite pet is cat
 ```
 
-### Test `/favouritePet` for a user not having access {#testfavouritePetinvalid}
+**Test `/favouritePet` for a user not having access to Authority `ROLE_ADMIN`**
 
 > kelly does not have access to `/favouritePet`. Hence we get `access_denied` error.
 
