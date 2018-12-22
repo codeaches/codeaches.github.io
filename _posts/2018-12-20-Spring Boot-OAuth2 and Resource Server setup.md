@@ -522,7 +522,7 @@ security.oauth2.resource.id=petstore
 
 security.oauth2.resource.token-info-uri=http://localhost:9050/oauth/check_token
 ```
-> Note that we are setting `security.oauth2.resource.id` to petstore. This value along with client credentials will be validated against the record in `oauth_client_details` table.
+> Note that we are setting the value of `security.oauth2.resource.id` to petstore. This value along with client credentials will be validated against the record in `oauth_client_details` table configured in `authorization server`.
 
 **Restart the application for above changes to take effect**
 
@@ -533,7 +533,7 @@ c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (
 
 ## Test Resource Server (petstore application) {#testresourceserver}
 
-### Test `/pet` for a user having access {#testpet}
+**Test `/pet` for a user having access {#testpet}**
 
 > Both john and kelly has access to `/pet`
 
