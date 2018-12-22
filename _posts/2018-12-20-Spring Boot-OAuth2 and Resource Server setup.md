@@ -32,7 +32,7 @@ In this tutorial, let's setup a spring boot authorization server and resource se
 - [Test Authorization Server](#testauthserver)
 - [Create Resource Server](#createresourceserver)
   - [Create spring boot application using spring initializr and annotate the service using `@EnableResourceServer`](#enableresourceserver)
-  - [Create a class `ResourceServerConfig` and configure the `HttpSecurity` details] (#resourceserverconfig)
+  - [Create a class `ResourceServerConfig` and configure the `HttpSecurity` details](#resourceserverconfig)
   - [Create a class `PetstoreController` and configure two REST methods pet() and favouritePet()](#petstorecontroller)
   - [Update `application.properties` with oauth2 client credentials and oauth2 check_token URL](#resourceserverchecktokenurl)
 - [Test Resource Server(petstore application)](#testresourceserver)
@@ -392,7 +392,7 @@ curl -X POST http://localhost:9050/oauth/check_token \
 
 **Test refresh_token**
 
-Test the URL `/oauth/token` with `grant_type=refresh_token` {#testauthserverrefreshtoken}
+**Test the URL `/oauth/token` with `grant_type=refresh_token`**
 
 *Request*
 ```sh
