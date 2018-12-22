@@ -533,7 +533,8 @@ c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (
 
 ## Test Resource Server (petstore application) {#testresourceserver}
 
-**Test `/pet` for a user having access** {#testpet}
+ {#testpet} 
+**Test `/pet` for a user having access to Authority `ROLE_USER`**
 
 > Both john and kelly has access to `/pet`
 
