@@ -36,8 +36,7 @@ In this tutorial, let's setup a spring boot authorization server and resource se
   - [Create a class `PetstoreController` and configure two REST methods pet() and favouritePet()](#petstorecontroller)
   - [Update `application.properties` with oauth2 client credentials and oauth2 check_token URL](#resourceserverchecktokenurl)
 - [Test Resource Server(petstore application)](#testresourceserver)
-- [Source code](#sourcecode)
-- [Postman test collections](#postman)
+- [Source code and Postman test collections](#sourcecode)
 
 ## Prerequisites {#prerequisites}
 
@@ -569,13 +568,9 @@ curl -X GET http://localhost:8010/favouritePet \
 }
 ```
 
-## Source code {#sourcecode}
+## Source code and Postman test collections {#sourcecode}
 
-The code used for this tutorial can be found on [github (Authorization Server)](https://github.com/codeaches/oauth2server){:target="_blank"} and [github (Resource Server)](https://github.com/codeaches/petstore){:target="_blank"}
-
-## Postman test collections {#postman}
-
-**Postman test script collections JSON is part of the code in github**
+The code along with the Postman test script collections can be found on [github (Authorization Server)](https://github.com/codeaches/oauth2server){:target="_blank"} and [github (Resource Server)](https://github.com/codeaches/petstore){:target="_blank"}
 
 ## Summary
 
