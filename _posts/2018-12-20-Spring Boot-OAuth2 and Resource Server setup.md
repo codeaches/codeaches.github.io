@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Spring Security OAuth2 and Resource server with JdbcTokenStore and BCryptPasswordEncode"
+title: "Spring Security OAuth2 and Resource server with JdbcTokenStore and BCryptPasswordEncoder"
 tags: [codeaches,java,openjdk,spring,spring boot,spring cloud,oauth2,professional,rstats,r-bloggers,tutorial, popular]
 date: 2018-12-20 9:00:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
