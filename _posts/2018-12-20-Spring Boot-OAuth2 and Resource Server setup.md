@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Spring Boot Authorization and Resource servers with JdbcTokenStore and BCryptPasswordEncoder"
+title: "Spring Security OAuth2 and Resource server with JdbcTokenStore and BCryptPasswordEncoder"
 tags: [codeaches,java,openjdk,spring,spring boot,spring cloud,oauth2,professional,rstats,r-bloggers,tutorial, popular]
 date: 2018-12-20 9:00:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
 share-img: /img/blog/oauth2server/oauth2server.jpg
-permalink: /oauth2server-resourceserver-jdbctokenstore-bcryptpasswordencoder/
+permalink: /spring-security-oauth2-and-resource-server/
 layout: post
 comments: true
 show-share: true
@@ -421,7 +421,7 @@ Let's create a Spring Boot REST Service named petstore and expose couple of end 
 
 Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Resource Server. I have updated Group field to "com.codeaches", Artifact to "petstore" and selected `Web`,`Security` and `Cloud OAuth2` dependencies.
 
-![Spring initializr web tool](/img/blog/petstore/petstore-initializr.gif){:target="_blank"}
+![Spring initializr web tool](/img/blog/oauth2server/petstore-initializr.gif){:target="_blank"}
 
 Click on `Generate Project`. You will see that the project will be downloaded as petsore.zip file on your hard drive.
 
