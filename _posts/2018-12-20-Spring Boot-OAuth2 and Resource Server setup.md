@@ -352,8 +352,6 @@ curl -X POST http://localhost:9050/oauth/token \
 	-d "password=kelly@123"
 ```
 > `YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=` is the Base 64 authorization version of user id and password.  
-> Base64.encodeBase64(("appclient" + ":" + "appclient@123").getBytes());
-
 
 *Response*
 ```json
