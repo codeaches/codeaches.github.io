@@ -328,8 +328,8 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 }
 ```
-> I have disabled the useage of authorities table with the help of setEnableAuthorities(false).  
-> I have enabled the useage of groups, group authorities and group members tables with the help of setEnableGroups(true).
+> setEnableAuthorities(false) method disables the useage of authorities table.  
+> setEnableGroups(true) method enables the useage of groups, group authorities and group members tables.
 
 **Restart the application for above changes to take effect**
 
