@@ -8,8 +8,8 @@ url: "https://codeaches.com"
 baseurl: ""
 
 # Brief name and description of the site
-title: Pavan Gurudutt
-description: "Java application programmer..."
+title: Codeaches
+description: "Java application programmer"
 
 # --- Outputting options --- #
 # More information can be found on Jekyll's site
@@ -17,7 +17,7 @@ timezone: "America/Phoenix"
 markdown: kramdown
 highlighter: rouge
 permalink: /blog/:title/
-paginate: 5
+paginate: 25
 paginate_path: "/page:num/"
 
 # --- Navigation bar options --- #
@@ -28,7 +28,6 @@ avatar: "/img/pavan.jpg"
 
 # List of links in the navigation bar
 navbar-links:
-  Blog: ""
   Projects: "projects"
   About Me / Contact: "aboutme"
 nav-search: "search"
