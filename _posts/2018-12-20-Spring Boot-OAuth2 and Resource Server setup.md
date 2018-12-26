@@ -415,9 +415,11 @@ curl -X POST http://localhost:9050/oauth/token \
 
 ## Resource Server {#createresourceserver}
 
+Let's create a Spring Boot REST Service named petstore and expose couple of end points. This will be our resource server.
+
 ### Create spring boot application using spring initializr {#enableresourceserver}
 
-Go to [start.spring.io](https://start.spring.io/){:target="_blank"}, change the Group field to "com.codeaches", Artifact to "petstore" and select `Web`,`Security` and `Cloud OAuth2` dependencies.
+Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Resource Server. I have updated Group field to "com.codeaches", Artifact to "petstore" and selected `Web`,`Security` and `Cloud OAuth2` dependencies.
 
 ![Spring initializr web tool](/img/blog/petstore/petstore-initializr.gif){:target="_blank"}
 
