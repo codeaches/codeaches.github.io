@@ -244,6 +244,9 @@ spring.datasource.data=classpath:sql/oauth2_dml.sql, classpath:sql/groupauthorit
 Create a class `AuthServerConfig.java` annotate the class with `@EnableAuthorizationServer`. This annotation is used to configure the OAuth 2.0 Authorization Server mechanism
 
 > I am using JdbcTokenStore and BCryptPasswordEncoder with strength/rounds as 4.
+> AuthorizationServerEndpointsConfigurer configures the non-security features of the Authorization Server endpoints, like token store, token customizations, user approvals and grant types.
+> AuthorizationServerSecurityConfigurer configures the security of the Authorization Server, which means in practical terms the /oauth/token endpoint.
+> ClientDetailsServiceConfigurer configures the ClientDetailsService, e.g. declaring individual clients and their properties.
 
 `com.codeaches.oauth2server.AuthServerConfig.java`
 ```java
