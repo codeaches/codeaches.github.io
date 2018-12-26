@@ -67,9 +67,9 @@ curl https://start.spring.io/starter.zip  \
 	   -o oauth2server.zip
 ```
 
-### Extract, import and build
+### Import and build
 
-Extract and import the project in STS as `Existing Maven project`. Build the project once the import is completed successfully.
+Import the project in STS as `Existing Maven project` and do Maven build.
 
 > Add the jaxb-runtime dependancy if the build fails with an error "javax.xml.bind.JAXBException: Implementation of JAXB-API has not been found on module path or classpath"
 
@@ -82,16 +82,14 @@ Extract and import the project in STS as `Existing Maven project`. Build the pro
 
 ### Configure `oauth2server project` to run on port 9050
 
-We shall run the `oauth2server project` on port 9050 instead of default port 8080
+Run the `oauth2server project` as `Spring Boot App`.
+
+> We shall run the `oauth2server project` on port 9050 instead of default port 8080
 
 `src/main/resources/application.properties`
 ```properties
 server.port=9050
 ```
-
-### Run the oauth2server application
-
-Run the `oauth2server project` as `Spring Boot App` and you will notice that the embedded tomcat server has started on port 9050.
 
 ```log
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
