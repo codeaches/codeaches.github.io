@@ -26,6 +26,23 @@ paginate_path: "/page:num/"
 # Remove this parameter if you don't want an image in the navbar
 avatar: "/img/pavan.jpg"
 
+#############################################
+## Dark Black
+navbar-col: "#34302d"
+footer-col: "#34302d"
+
+## Light gray
+navbar-text-col: "#eee"
+page-col: "#eee"
+footer-text-col: "#eee"
+
+## parrot green
+navbar-children-col: "#5fa134"
+link-col: "#5fa134"
+hover-col: "#5fa134"
+footer-link-col: "#5fa134"
+############################################
+
 # List of links in the navigation bar
 navbar-links:
   Projects: "projects"
