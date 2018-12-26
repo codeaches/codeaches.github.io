@@ -17,7 +17,7 @@ sitemap:
   priority: 1
 ---
 
-OAuth 2 is an authorization framework that enables applications to obtain limited access to user accounts. 
+The Spring OAuth 2.0 Authorization mechanism manages and verifies the OAuth 2.0 tokens used to access the protected resources. The requests for the tokens are handled by Spring MVC controller endpoints.
 
 In this tutorial, let's setup a spring boot authorization server and resource server
 
@@ -241,7 +241,9 @@ spring.datasource.data=classpath:sql/oauth2_dml.sql, classpath:sql/groupauthorit
 
 ### Configure Auth Server {#clientauth}
 
-Create a class `AuthServerConfig` as shown below. I am using JdbcTokenStore and BCryptPasswordEncoder with strength/rounds as 4. Make sure to annotate the class with `@EnableAuthorizationServer`. This class handles client authorization.
+Create a class `AuthServerConfig.java` annotate the class with `@EnableAuthorizationServer`. This annotation is used to configure the OAuth 2.0 Authorization Server mechanism
+
+> I am using JdbcTokenStore and BCryptPasswordEncoder with strength/rounds as 4.
 
 `com.codeaches.oauth2server.AuthServerConfig.java`
 ```java
