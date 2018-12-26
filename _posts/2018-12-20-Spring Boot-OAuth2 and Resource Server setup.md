@@ -572,7 +572,7 @@ curl -X GET http://localhost:8010/favouritePet \
 
 ## Source code and Postman test collections {#sourcecode}
 
-The code along with the Postman test script collections can be found on [github (Authorization Server)](https://github.com/codeaches/oauth2server){:target="_blank"} and [github (Resource Server)](https://github.com/codeaches/petstore){:target="_blank"}
+The code along with the Postman test script collections can be found on [github](https://github.com/codeaches/oauth2-and-resource-servers){:target="_blank"}
 
 ## Summary
 
