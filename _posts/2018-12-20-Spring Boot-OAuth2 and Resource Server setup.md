@@ -251,6 +251,7 @@ Create a class `AuthServerConfig.java` annotate the class with `@EnableAuthoriza
 > `ClientDetailsServiceConfigurer` configures the ClientDetailsService, e.g. declaring individual clients and their properties.
 
 `com.codeaches.oauth2server.AuthServerConfig.java`
+
 ```java
 @Configuration
 @EnableAuthorizationServer
