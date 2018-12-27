@@ -101,7 +101,7 @@ c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 secon
 
 Let's create tables to hold the client, user and group details in embedded h2 db by providing the DDL scripts which runs during server startup.
 
-`src/main/resources/sql/oauth2_ddl.sql`
+`src/main/resources/sql/schema.sql`
 
 ```sql
 drop table oauth_client_details if exists;
@@ -139,13 +139,15 @@ create table oauth_refresh_token (
 ```
 
 > `oauth_client_details` table is used to store client details.  
-> `oauth_access_token` and `oauth_refresh_token` is used internally by OAuth2 server to save the access and refresh tokens.
+> `oauth_access_token` and `oauth_refresh_token` is used internally by OAuth2 server to store the access and refresh tokens.
 
 ### Create a client `appclient`
 
-Let's insert a record in `oauth_client_details` table for a client named `appclient` with a password `appclient@123`.
+Let's insert a record in `oauth_client_details` table for a client named `appclient` with a password `appclient@123`.  
+Let's configure `appclient` with access to the petstore resource.  
+`scope` of the `appclient` ID is set to both read and write.
 
-`src/main/resources/sql/oauth2_dml.sql`
+`src/main/resources/sql/data.sql`
 
 ```sql
 INSERT INTO
@@ -163,7 +165,7 @@ VALUES
   (
     'appclient',
     '$2a$04$NUE5ncR9072hmTO9GzRNA.FQSsz/P3pPgXRLV0cxq.t3GxPvDy4FG',
-    'petstore,toystore',
+    'petstore',
     'read,write',
     'authorization_code,check_token,refresh_token,password',
     'ROLE_CLIENT',
@@ -173,14 +175,12 @@ VALUES
 ```
 
 > The password needs to be saved to DB in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds.  
-> `appclient` has the authority to access the petstore and toystore resources.  
-> `scope` is set to both read and write.  
 
 ### Create tables for users, groups, group authorities and group members
 
 Let's create tables to hold the users and groups details in embedded h2 db by providing the DDL scripts which runs during server startup.
 
-`src/main/resources/sql/groupauthorities_ddl.sql`
+`src/main/resources/sql/schema.sql`
 
 ```sql
 drop table users if exists;
@@ -220,7 +220,7 @@ Add `john` to group `USER_AND_ADMIN_GROUP` and `kelly` to group `USER_ONLY_GROUP
 
 > The password needs to be saved to DB in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds.  
 
-`src/main/resources/sql/groupauthorities_dml.sql`
+`src/main/resources/sql/data.sql`
 
 ```sql
 INSERT INTO users (username,password,enabled) 
@@ -237,15 +237,6 @@ INSERT INTO group_authorities (group_id, authority) VALUES (2, 'ROLE_USER');
 
 INSERT INTO group_members (username, group_id) VALUES ('john', 1);
 INSERT INTO group_members (username, group_id) VALUES ('kelly', 2);
-```
-
-### Update the above created DDL and DML file names in application properties file.
-
-`src/main/resources/application.properties`
-
-```properties
-spring.datasource.schema=classpath:sql/oauth2_ddl.sql, classpath:sql/groupauthorities_ddl.sql
-spring.datasource.data=classpath:sql/oauth2_dml.sql, classpath:sql/groupauthorities_dml.sql
 ```
 
 ### Configure Auth Server {#clientauth}
