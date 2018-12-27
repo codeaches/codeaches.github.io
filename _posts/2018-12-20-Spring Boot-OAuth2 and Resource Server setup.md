@@ -80,17 +80,15 @@ Import the project in STS as `Existing Maven project` and do Maven build.
 </dependency>
 ```
 
-### Configure *oauth2server project* to run on port 9050
-
-Run the `oauth2server project` as `Spring Boot App`.
-
-> We shall run the `oauth2server project` on port 9050 instead of default port 8080
+**Configure oauth2server project to run on port 9050**
 
 `src/main/resources/application.properties`
 
 ```properties
 server.port=9050
 ```
+
+**Run the `oauth2server project` as `Spring Boot App`**
 
 **log file**
 
