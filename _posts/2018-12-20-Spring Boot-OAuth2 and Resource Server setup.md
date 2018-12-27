@@ -453,9 +453,9 @@ curl https://start.spring.io/starter.zip  \
        -o petsore.zip
 ```
 
-### Extract, import and build
+### Import and build
 
-Extract and import the project in STS as `Existing Maven project`. Build the project once the import is completed successfully.
+Import the project in STS as `Existing Maven project` and do Maven build.
 
 > Add the jaxb-runtime dependancy if the build fails with an error "javax.xml.bind.JAXBException: Implementation of JAXB-API has not been found on module path or classpath"
 
@@ -468,7 +468,9 @@ Extract and import the project in STS as `Existing Maven project`. Build the pro
 
 ### Configure `petsore project` to run on port 8010
 
-We shall run the `petsore project` on port 8010 instead of default port 8080
+Run the `petsore project` as `Spring Boot App`.
+
+> We shall run the `petsore project` on port 8010 instead of default port 8080
 
 `src/main/resources/application.properties`
 
@@ -476,16 +478,14 @@ We shall run the `petsore project` on port 8010 instead of default port 8080
 server.port=8010
 ```
 
-### Run the petsore application
-
-Run the `petstore project` as `Spring Boot App` and you will notice that the embedded tomcat server has started on port 8010.
+**log file**
 
 ```log
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8010 (http) with context path ''
-c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
+c.c.demo.petsore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
-### Annotate `DemoApplication` class with `@EnableResourceServer` {#resourceserverconfig}
+### Annotate `DemoApplication.java` class with `@EnableResourceServer` {#resourceserverconfig}
 
 `com.codeaches.petstore.DemoApplication.java`
 ```java
@@ -499,7 +499,7 @@ public class DemoApplication {
 }
 ```
 
-### Create a class `PetstoreController` and configure two REST methods pet() and favouritePet() {#petstorecontroller}
+### Create a class `PetstoreController.java` and configure two REST methods pet() and favouritePet() {#petstorecontroller}
 
 `com.codeaches.petstore.PetstoreController.java`
 ```java
