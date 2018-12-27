@@ -93,7 +93,7 @@ server.port=9050
 **console log**
 
 ```log
-o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): `9050` (http) with context path ''
+o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
 c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
@@ -346,7 +346,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 **console log**
 
 ```log
-o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): `9050` (http) with context path ''
+o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
 c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
@@ -481,7 +481,7 @@ server.port=8010
 **log file**
 
 ```log
-o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): `8010` (http) with context path ''
+o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8010 (http) with context path ''
 c.c.demo.petsore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
@@ -538,7 +538,7 @@ security.oauth2.resource.token-info-uri=http://localhost:9050/oauth/check_token
 **Restart the application for above changes to take effect**
 
 ```log
-o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): `8010` (http) with context path ''
+o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8010 (http) with context path ''
 c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
