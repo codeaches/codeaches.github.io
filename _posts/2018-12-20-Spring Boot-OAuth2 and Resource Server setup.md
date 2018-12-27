@@ -11,7 +11,7 @@ comments: true
 show-share: true
 gh-repo: codeaches/oauth2server
 gh-badge: [star, watch, follow]
-lastupdated: 2018-12-26
+lastupdated: 2018-12-27
 sitemap:
   changefreq: daily
   priority: 1
