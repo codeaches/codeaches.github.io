@@ -378,8 +378,7 @@ curl -X POST http://localhost:9050/oauth/check_token \
 ```json
 {
   "aud": [
-    "petstore",
-    "toystore"
+    "petstore"
   ],
   "user_name": "kelly",
   "scope": [
