@@ -308,7 +308,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
 ### Configure User Security {#userauth}
 
-Create a class `UserSecurityConfig` as shown below. This class handles user authentication.
+Create a class `UserSecurityConfig.java` as shown below. This class handles user authentication.
 
 `com.codeaches.oauth2server.UserSecurityConfig.java`
 ```java
@@ -548,11 +548,13 @@ c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (
 
 > Both john and kelly has access to `/pet`
 
+*Request*
 ```sh
 curl -X GET http://localhost:8010/pet \
     --header "Authorization:Bearer 807d4eda-ed9e-48d7-bc1a-29e78987376a"
 ```
 
+*Response*
 ```http
 Hi kelly. My pet is dog
 ```
@@ -561,11 +563,13 @@ Hi kelly. My pet is dog
 
 > Only john has access to `/favouritePet`
 
+*Request*
 ```sh
 curl -X GET http://localhost:8010/favouritePet \
     --header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
 ```
 
+*Response*
 ```http
 Hi john. My favourite pet is cat
 ```
@@ -574,11 +578,13 @@ Hi john. My favourite pet is cat
 
 > kelly does not have access to `/favouritePet`. Hence we get `access_denied` error.
 
+*Request*
 ```sh
 curl -X GET http://localhost:8010/favouritePet \
     --header "Authorization:Bearer 807d4eda-ed9e-48d7-bc1a-29e78987376a"
 ```
 
+*Response*
 ```json
 {
     "error": "access_denied",
