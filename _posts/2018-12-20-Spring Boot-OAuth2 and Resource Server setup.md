@@ -143,7 +143,7 @@ create table oauth_refresh_token (
 
 ### Create a client `appclient`
 
-Let's add a client named `appclient` with a password `appclient@123` to DB db by providing the DML scripts which runs during server startup.
+Let's insert a record in `oauth_client_details` table for a client named `appclient` with a password `appclient@123`.
 
 `src/main/resources/sql/oauth2_dml.sql`
 ```sql
@@ -170,7 +170,8 @@ VALUES
     250000
   );
 ```
-> The password saved in DB is in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds.  
+
+> The password needs to be saved to DB in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds.  
 > `appclient` has the authority to access the petstore and toystore resources.  
 > `scope` is set to both read and write.  
 
