@@ -40,6 +40,8 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and Resource Serv
 
 ## Prerequisites {#prerequisites}
 
+- - - -
+
 - [Open JDK 11](https://jdk.java.net/11){:target="_blank"}
 - [Spring Tool Suite IDE](https://spring.io/tools3/sts/all){:target="_blank"}
 
