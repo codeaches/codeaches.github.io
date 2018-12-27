@@ -32,8 +32,7 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and Resource Serv
 - [Test Authorization Server](#testauthserver)
 - [Create Resource Server](#createresourceserver)
   - [Create spring boot application using spring initializr and annotate the service using `@EnableResourceServer`](#enableresourceserver)
-  - [Create a class `ResourceServerConfig`](#resourceserverconfig)
-  - [Create a class `PetstoreController` and configure two REST methods pet() and favouritePet()](#petstorecontroller)
+  - [Configure REST methods pet() and favouritePet()](#petstorecontroller)
   - [Update `application.properties` with oauth2 client credentials and oauth2 check_token URL](#resourceserverchecktokenurl)
 - [Test Resource Server(petstore application)](#testresourceserver)
 - [Source code and Postman test collections](#sourcecode)
@@ -477,9 +476,10 @@ o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8010 (http
 c.c.demo.petsore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
-### Annotate `DemoApplication.java` class with `@EnableResourceServer` {#resourceserverconfig}
+**Annotate `DemoApplication.java` class with `@EnableResourceServer`**
 
 `com.codeaches.petstore.DemoApplication.java`
+
 ```java
 @SpringBootApplication
 @EnableResourceServer
@@ -491,9 +491,10 @@ public class DemoApplication {
 }
 ```
 
-### Create a class `PetstoreController.java` and configure two REST methods pet() and favouritePet() {#petstorecontroller}
+### Create a class `PetstoreController.java` and configure REST methods pet() and favouritePet() {#petstorecontroller}
 
 `com.codeaches.petstore.PetstoreController.java`
+
 ```java
 @RestController
 @EnableGlobalMethodSecurity(prePostEnabled = true)
