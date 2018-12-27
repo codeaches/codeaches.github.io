@@ -9,8 +9,9 @@ permalink: /spring-security-oauth2-and-resource-server/
 layout: post
 comments: true
 show-share: true
-gh-repo: codeaches/oauth2server
+gh-repo: codeaches/oauth2-and-resource-servers
 gh-badge: [star, watch, follow]
+datacampcourse: false
 lastupdated: 2018-12-27
 sitemap:
   changefreq: daily
@@ -29,6 +30,7 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and a petstore se
 4. [Build resource server](#build_resource_server)
 5. [Test resource server](#test_resource_server)
 6. [Summary](#summary)
+7. [Complete code on Github!](#code_github_location)
 
 ### Prerequisites {#prerequisites}
 
@@ -37,7 +39,7 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and a petstore se
 
 ### Build authorization server {#build_auth_server}
 
-**Create the starter project using Spring Initializr**
+**Create a Spring Boot starter project using Spring Initializr**
 
 Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Authorization Server. I have updated Group field to **com.codeaches**, Artifact to **oauth2server** and selected `Web`,`Security`,`Cloud OAuth2`,`H2`,`JPA` dependencies. I have selected Java Version as **11**
 
@@ -410,7 +412,7 @@ curl -X POST http://localhost:9050/oauth/token \
 
 Let's create a Spring Boot REST Service named petstore and expose couple of end points. This will be our resource server.
 
-**Create the starter project using Spring Initializr**
+**Create a Spring Boot starter project using Spring Initializr**
 
 Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for PetStore Resource Server. I have updated Group field to **com.codeaches**, Artifact to **petstore** and selected `Web`,`Security`,`Cloud OAuth2` dependencies. I have selected Java Version as **11**
 
@@ -497,6 +499,7 @@ public class PetstoreController {
     }
 }
 ```
+> Make sure to add `@EnableGlobalMethodSecurity(prePostEnabled = true)` to enable `@PreAuthorize` checks.
 
 **Update petstore application with OAuth2 Server token info URI and Client Credentials**
 
@@ -526,7 +529,7 @@ DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14
 
 ### Test resource server {#test_resource_server}
 
-**Test `/pet` for a user having access to Authority `AUTHORIZED_PETSTORE_USER`**
+**Test `/pet` for a user who belongs to `AUTHORIZED_PETSTORE_USER`**
 
 > Both john and kelly has access to `/pet`
 
@@ -542,7 +545,7 @@ curl -X GET http://localhost:8010/pet \
 Hi kelly. My pet is dog
 ```
 
-**Test `/favouritePet` for a user having access to Authority `AUTHORIZED_PETSTORE_ADMIN`**
+**Test `/favouritePet` for a user user who belongs to `AUTHORIZED_PETSTORE_ADMIN`**
 
 > Only `john` has access to `/favouritePet`
 
@@ -554,13 +557,13 @@ curl -X GET http://localhost:8010/favouritePet \
 > `1160aad4-2ab2-412f-ba85-4e543cbf7b76` is the access_token obtained from OAuth2 Server for the user `john`. 
 
 *Response*
-```http
+```
 Hi john. My favourite pet is cat
 ```
 
-**Test `/favouritePet` for a user not having access to Authority `AUTHORIZED_PETSTORE_ADMIN`**
+**Test `/favouritePet` for a user user who `does NOT` belong to `AUTHORIZED_PETSTORE_ADMIN`**
 
-> kelly does not have access to `/favouritePet`. Hence we get `access_denied` error.
+> kelly does not belong to `AUTHORIZED_PETSTORE_ADMIN` and hence does not have access to `/favouritePet`
 
 *Request*
 ```sh
@@ -579,6 +582,10 @@ curl -X GET http://localhost:8010/favouritePet \
 ### Summary {#summary}
 
 Congratulations! You just created an Spring Boot OAuth2 Authorization and Resource Servers with Jdbc Token Store and BCrypt Password Encoder.
+
+### Complete code on Github! {#code_github_location}
+
+**The complete code for this tutorial can be found [here](https://github.com/codeaches/oauth2-and-resource-servers){:target="_blank"}**
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
     target="_top" style="text-align: center;">
