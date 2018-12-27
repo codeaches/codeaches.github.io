@@ -23,19 +23,19 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and Resource Serv
 
 # Table of contents
 
-- [Prerequisites](#prerequisites)
-- [Create Authorization Server](#createauthserver)
-  - [Create spring boot application using spring initializr and annotate the service using `@EnableAuthorizationServer`](#enableauthorizationserver)
-  - [Create tables for clients, users and groups](#clientstable)
-  - [Create a class to handle client authorization](#clientauth)
-  - [Create a class to handle user authentication](#userauth)
-- [Test Authorization Server](#testauthserver)
-- [Create Resource Server](#createresourceserver)
-  - [Create spring boot application using spring initializr and annotate the service using `@EnableResourceServer`](#enableresourceserver)
-  - [Configure REST methods pet() and favouritePet()](#petstorecontroller)
-  - [Update `application.properties` with oauth2 client credentials and oauth2 check_token URL](#resourceserverchecktokenurl)
-- [Test Resource Server(petstore application)](#testresourceserver)
-- [Source code and Postman test collections](#sourcecode)
+1. [Prerequisites](#prerequisites)
+2. [Create Authorization Server](#createauthserver)
+  1. [Create spring boot application using spring initializr and annotate the service using `@EnableAuthorizationServer`](#enableauthorizationserver)
+  2. [Create tables for clients, users and groups](#clientstable)
+  3. [Create a class to handle client authorization](#clientauth)
+  4. [Create a class to handle user authentication](#userauth)
+3. [Test Authorization Server](#testauthserver)
+4. [Create Resource Server](#createresourceserver)
+  1. [Create spring boot application using spring initializr and annotate the service using `@EnableResourceServer`](#enableresourceserver)
+  2. [Configure REST methods pet() and favouritePet()](#petstorecontroller)
+  3. [Update `application.properties` with oauth2 client credentials and oauth2 check_token URL](#resourceserverchecktokenurl)
+5. [Test Resource Server(petstore application)](#testresourceserver)
+6. [Source code and Postman test collections](#sourcecode)
 
 ## Prerequisites {#prerequisites}
 
