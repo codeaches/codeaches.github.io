@@ -57,14 +57,14 @@ Click on `Generate Project`. You will see that the project will be downloaded as
 
 ```sh
 curl https://start.spring.io/starter.zip  \
-	   -d dependencies=web,cloud-security,cloud-oauth2,h2,data-jpa \
-	   -d language=java \
-	   -d javaVersion=11 \
-	   -d type=maven-project \
-	   -d groupId=com.codeaches \
-	   -d artifactId=oauth2server \
-	   -d bootVersion=2.2.0.BUILD-SNAPSHOT \
-	   -o oauth2server.zip
+       -d dependencies=web,cloud-security,cloud-oauth2,h2,data-jpa \
+       -d language=java \
+       -d javaVersion=11 \
+       -d type=maven-project \
+       -d groupId=com.codeaches \
+       -d artifactId=oauth2server \
+       -d bootVersion=2.2.0.BUILD-SNAPSHOT \
+       -o oauth2server.zip
 ```
 
 ### Import and build
@@ -75,8 +75,8 @@ Import the project in STS as `Existing Maven project` and do Maven build.
 
 ```xml
 <dependency>
-	<groupId>org.glassfish.jaxb</groupId>
-	<artifactId>jaxb-runtime</artifactId>
+    <groupId>org.glassfish.jaxb</groupId>
+    <artifactId>jaxb-runtime</artifactId>
 </dependency>
 ```
 
@@ -226,9 +226,9 @@ Add `john` to group `USER_AND_ADMIN_GROUP` and `kelly` to group `USER_ONLY_GROUP
 
 ```sql
 INSERT INTO users (username,password,enabled) 
-	VALUES ('john', '$2a$04$Ts1ry6sOr1BXXie5Eez.j.bsvqC0u3x7xAwOInn2qrItwsUUIC9li', TRUE);
+    VALUES ('john', '$2a$04$Ts1ry6sOr1BXXie5Eez.j.bsvqC0u3x7xAwOInn2qrItwsUUIC9li', TRUE);
 INSERT INTO users (username,password,enabled) 
-	VALUES ('kelly','$2a$04$qkCGgz.e5dkTiZogvzxla.KXbIvWXrQzyf8wTPJOOJBKjtHAQhoBa', TRUE);
+    VALUES ('kelly','$2a$04$qkCGgz.e5dkTiZogvzxla.KXbIvWXrQzyf8wTPJOOJBKjtHAQhoBa', TRUE);
   
 INSERT INTO groups (id, group_name) VALUES (1, 'USER_AND_ADMIN_GROUP');
 INSERT INTO groups (id, group_name) VALUES (2, 'USER_ONLY_GROUP');
@@ -267,42 +267,42 @@ Create a class `AuthServerConfig.java` annotate the class with `@EnableAuthoriza
 @EnableAuthorizationServer
 public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
-	@Autowired
-	DataSource ds;
+    @Autowired
+    DataSource ds;
 
-	@Autowired
-	AuthenticationManager authMgr;
+    @Autowired
+    AuthenticationManager authMgr;
 
-	@Autowired
-	private UserDetailsService usrSvc;
+    @Autowired
+    private UserDetailsService usrSvc;
 
-	@Bean
-	public TokenStore tokenStore() {
-		return new JdbcTokenStore(ds);
-	}
+    @Bean
+    public TokenStore tokenStore() {
+        return new JdbcTokenStore(ds);
+    }
 
-	@Bean
-	PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(4);
-	}
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(4);
+    }
 
-	@Override
-	public void configure(AuthorizationServerSecurityConfigurer cfg) throws Exception {
-		cfg.checkTokenAccess("permitAll");
-	}
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer cfg) throws Exception {
+        cfg.checkTokenAccess("permitAll");
+    }
 
-	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.jdbc(ds);
-	}
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.jdbc(ds);
+    }
 
-	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 
-		endpoints.tokenStore(tokenStore());
-		endpoints.authenticationManager(authMgr);
-		endpoints.userDetailsService(usrSvc);
-	}
+        endpoints.tokenStore(tokenStore());
+        endpoints.authenticationManager(authMgr);
+        endpoints.userDetailsService(usrSvc);
+    }
 }
 ```
 
@@ -315,29 +315,29 @@ Create a class `UserSecurityConfig` as shown below. This class handles user auth
 @Configuration
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	DataSource ds;
+    @Autowired
+    DataSource ds;
 
-	@Override
-	@Bean(BeanIds.USER_DETAILS_SERVICE)
-	public UserDetailsService userDetailsServiceBean() throws Exception {
-		return super.userDetailsServiceBean();
-	}
+    @Override
+    @Bean(BeanIds.USER_DETAILS_SERVICE)
+    public UserDetailsService userDetailsServiceBean() throws Exception {
+        return super.userDetailsServiceBean();
+    }
 
-	@Override
-	@Bean(name = BeanIds.AUTHENTICATION_MANAGER)
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
+    @Override
+    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> cfg = auth.jdbcAuthentication().dataSource(ds);
+        JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> cfg = auth.jdbcAuthentication().dataSource(ds);
 
-		cfg.getUserDetailsService().setEnableGroups(true);
-		cfg.getUserDetailsService().setEnableAuthorities(false);
-	}
+        cfg.getUserDetailsService().setEnableGroups(true);
+        cfg.getUserDetailsService().setEnableAuthorities(false);
+    }
 }
 ```
 > `setEnableAuthorities(false)` disables the useage of authorities table.  
@@ -357,10 +357,10 @@ c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 secon
 *Request*
 ```sh
 curl -X POST http://localhost:9050/oauth/token \
-	--header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
-	-d "grant_type=password" \
-	-d "username=kelly" \
-	-d "password=kelly@123"
+    --header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
+    -d "grant_type=password" \
+    -d "username=kelly" \
+    -d "password=kelly@123"
 ```
 > `YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=` is the Base 64 authorization version of user id and password.  
 
@@ -380,7 +380,7 @@ curl -X POST http://localhost:9050/oauth/token \
 *Request*
 ```sh
 curl -X POST http://localhost:9050/oauth/check_token \
-	-d "token=13df4f18-7763-4772-9960-895ca905dd56"
+    -d "token=13df4f18-7763-4772-9960-895ca905dd56"
 ```
 
 *Response*
@@ -411,9 +411,9 @@ curl -X POST http://localhost:9050/oauth/check_token \
 *Request*
 ```sh
 curl -X POST http://localhost:9050/oauth/token \
-	--header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
-	-d "grant_type=refresh_token" \
-	-d "refresh_token=6d49fd10-b92e-4bb2-b58d-b83212d70bcb"
+    --header "Authorization:Basic YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=" \
+    -d "grant_type=refresh_token" \
+    -d "refresh_token=6d49fd10-b92e-4bb2-b58d-b83212d70bcb"
 ```
 
 *Response*
@@ -443,14 +443,14 @@ Click on `Generate Project`. You will see that the project will be downloaded as
 
 ```sh
 curl https://start.spring.io/starter.zip  \
-	   -d dependencies=web,cloud-security,cloud-oauth2 \
-	   -d language=java \
-	   -d javaVersion=11 \
-	   -d type=maven-project \
-	   -d groupId=com.codeaches \
-	   -d artifactId=petsore \
-	   -d bootVersion=2.2.0.BUILD-SNAPSHOT \
-	   -o petsore.zip
+       -d dependencies=web,cloud-security,cloud-oauth2 \
+       -d language=java \
+       -d javaVersion=11 \
+       -d type=maven-project \
+       -d groupId=com.codeaches \
+       -d artifactId=petsore \
+       -d bootVersion=2.2.0.BUILD-SNAPSHOT \
+       -o petsore.zip
 ```
 
 ### Extract, import and build
@@ -461,8 +461,8 @@ Extract and import the project in STS as `Existing Maven project`. Build the pro
 
 ```xml
 <dependency>
-	<groupId>org.glassfish.jaxb</groupId>
-	<artifactId>jaxb-runtime</artifactId>
+    <groupId>org.glassfish.jaxb</groupId>
+    <artifactId>jaxb-runtime</artifactId>
 </dependency>
 ```
 
@@ -493,9 +493,9 @@ c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (
 @EnableResourceServer
 public class DemoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 }
 ```
 
@@ -507,17 +507,17 @@ public class DemoApplication {
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class PetstoreController {
 
-	@GetMapping("pet")
-	@PreAuthorize("hasAuthority('ROLE_USER')")
-	public String pet(Principal principal) {
-		return "Hi " + principal.getName() + ". My pet is dog";
-	}
+    @GetMapping("pet")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    public String pet(Principal principal) {
+        return "Hi " + principal.getName() + ". My pet is dog";
+    }
 
-	@GetMapping("favouritePet")
-	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
-	public String favouritePet(Principal principal) {
-		return "Hi " + principal.getName() + ". My favourite pet is cat";
-	}
+    @GetMapping("favouritePet")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public String favouritePet(Principal principal) {
+        return "Hi " + principal.getName() + ". My favourite pet is cat";
+    }
 }
 ```
 
@@ -550,7 +550,7 @@ c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (
 
 ```sh
 curl -X GET http://localhost:8010/pet \
-	--header "Authorization:Bearer 807d4eda-ed9e-48d7-bc1a-29e78987376a"
+    --header "Authorization:Bearer 807d4eda-ed9e-48d7-bc1a-29e78987376a"
 ```
 
 ```http
@@ -563,7 +563,7 @@ Hi kelly. My pet is dog
 
 ```sh
 curl -X GET http://localhost:8010/favouritePet \
-	--header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
+    --header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
 ```
 
 ```http
@@ -576,7 +576,7 @@ Hi john. My favourite pet is cat
 
 ```sh
 curl -X GET http://localhost:8010/favouritePet \
-	--header "Authorization:Bearer 807d4eda-ed9e-48d7-bc1a-29e78987376a"
+    --header "Authorization:Bearer 807d4eda-ed9e-48d7-bc1a-29e78987376a"
 ```
 
 ```json
@@ -595,14 +595,14 @@ The code along with the Postman test script collections can be found on [github]
 Congratulations! You just created an auth server and a resource server.
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
-	target="_top" style="text-align: center;">
-	<input type="hidden" name="cmd" value="_donations" /> <input
-		type="hidden" name="business" value="FLER29DWAYJ58" /> <input
-		type="hidden" name="currency_code" value="USD" /> <input type="image"
-		src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"
-		border="0" name="submit"
-		title="PayPal - The safer, easier way to donate"
-		alt="Donate with PayPal button" /> <img alt="" border="0"
-		src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1"
-		height="1" />
+    target="_top" style="text-align: center;">
+    <input type="hidden" name="cmd" value="_donations" /> <input
+        type="hidden" name="business" value="FLER29DWAYJ58" /> <input
+        type="hidden" name="currency_code" value="USD" /> <input type="image"
+        src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"
+        border="0" name="submit"
+        title="PayPal - The safer, easier way to donate"
+        alt="Donate with PayPal button" /> <img alt="" border="0"
+        src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1"
+        height="1" />
 </form>
