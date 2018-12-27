@@ -91,6 +91,8 @@ Run the `oauth2server project` as `Spring Boot App`.
 server.port=9050
 ```
 
+**log file**
+
 ```log
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
 c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
