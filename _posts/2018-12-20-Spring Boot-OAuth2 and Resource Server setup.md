@@ -303,9 +303,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
 Create a class `UserSecurityConfig.java` to handle user authentication.
 
-> `setEnableAuthorities(false)` disables the useage of authorities table.    
-
-> `setEnableGroups(true)` enables the useage of groups, group authorities and group members tables.
+> `setEnableAuthorities(false)` disables the useage of authorities table and `setEnableGroups(true)` enables the useage of groups, group authorities and group members tables.
 
 `com.codeaches.oauth2server.UserSecurityConfig.java`
 ```java
