@@ -196,9 +196,9 @@ create table group_members (
 **Add users, groups, group authorities and group members**
 
 1. Let's create users named `john` with a password `john@123` and `kelly` with a password `kelly@123`.  
-2. Create a group `USER_AND_ADMIN_GROUP` and assign the roles `ROLE_USER` and `ROLE_ADMIN`.  
-3. Similarly create a group `USER_ONLY_GROUP` with role `ROLE_USER`.  
-4. Add `john` to group `USER_AND_ADMIN_GROUP` and `kelly` to group `USER_ONLY_GROUP`.
+2. Create a group `PETSTORE_USER_AND_ADMIN_GROUP` and assign the roles `AUTHORIZED_PETSTORE_USER` and `AUTHORIZED_PETSTORE_ADMIN`.  
+3. Similarly create a group `PETSTORE_USER_ONLY_GROUP` with role `AUTHORIZED_PETSTORE_USER`.  
+4. Add `john` to group `PETSTORE_USER_AND_ADMIN_GROUP` and `kelly` to group `PETSTORE_USER_ONLY_GROUP`.
 
 > The password needs to be saved to DB in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds.  
 
@@ -210,12 +210,13 @@ INSERT INTO users (username,password,enabled)
 INSERT INTO users (username,password,enabled) 
     VALUES ('kelly','$2a$04$qkCGgz.e5dkTiZogvzxla.KXbIvWXrQzyf8wTPJOOJBKjtHAQhoBa', TRUE);
   
-INSERT INTO groups (id, group_name) VALUES (1, 'USER_AND_ADMIN_GROUP');
-INSERT INTO groups (id, group_name) VALUES (2, 'USER_ONLY_GROUP');
+INSERT INTO groups (id, group_name) VALUES (1, 'PETSTORE_USER_AND_ADMIN_GROUP');
+INSERT INTO groups (id, group_name) VALUES (2, 'PETSTORE_USER_ONLY_GROUP');
 
-INSERT INTO group_authorities (group_id, authority) VALUES (1, 'ROLE_USER');
-INSERT INTO group_authorities (group_id, authority) VALUES (1, 'ROLE_ADMIN');
-INSERT INTO group_authorities (group_id, authority) VALUES (2, 'ROLE_USER');
+INSERT INTO group_authorities (group_id, authority) VALUES (1, 'AUTHORIZED_PETSTORE_USER');
+INSERT INTO group_authorities (group_id, authority) VALUES (1, 'AUTHORIZED_PETSTORE_ADMIN');
+
+INSERT INTO group_authorities (group_id, authority) VALUES (2, 'AUTHORIZED_PETSTORE_USER');
 
 INSERT INTO group_members (username, group_id) VALUES ('john', 1);
 INSERT INTO group_members (username, group_id) VALUES ('kelly', 2);
@@ -376,7 +377,7 @@ curl -X POST http://localhost:9050/oauth/check_token \
   "active": true,
   "exp": 1545401270,
   "authorities": [
-    "ROLE_USER"
+    "AUTHORIZED_PETSTORE_USER"
   ],
   "client_id": "appclient"
 }
@@ -473,8 +474,8 @@ public class DemoApplication {
 
 Let's create a class `PetstoreController.java` and configure REST methods pet() and favouritePet() {#petstorecontroller}
 
-> `/pet` can be acessed by user who has ROLE_USER authority  
-> `/favouritePet` can be acessed by user who has ROLE_ADMIN authority
+> `/pet` can be acessed by user who belongs to `AUTHORIZED_PETSTORE_USER`  
+> `/favouritePet` can be acessed by user who belongs to `AUTHORIZED_PETSTORE_ADMIN`
 
 `com.codeaches.petstore.PetstoreController.java`
 
@@ -484,13 +485,13 @@ Let's create a class `PetstoreController.java` and configure REST methods pet() 
 public class PetstoreController {
 
     @GetMapping("pet")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('AUTHORIZED_PETSTORE_USER')")
     public String pet(Principal principal) {
         return "Hi " + principal.getName() + ". My pet is dog";
     }
 
     @GetMapping("favouritePet")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('AUTHORIZED_PETSTORE_ADMIN')")
     public String favouritePet(Principal principal) {
         return "Hi " + principal.getName() + ". My favourite pet is cat";
     }
@@ -525,7 +526,7 @@ DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14
 
 ### Test resource server {#test_resource_server}
 
-**Test `/pet` for a user having access to Authority `ROLE_USER`**
+**Test `/pet` for a user having access to Authority `AUTHORIZED_PETSTORE_USER`**
 
 > Both john and kelly has access to `/pet`
 
@@ -541,7 +542,7 @@ curl -X GET http://localhost:8010/pet \
 Hi kelly. My pet is dog
 ```
 
-**Test `/favouritePet` for a user having access to Authority `ROLE_ADMIN`**
+**Test `/favouritePet` for a user having access to Authority `AUTHORIZED_PETSTORE_ADMIN`**
 
 > Only `john` has access to `/favouritePet`
 
@@ -557,7 +558,7 @@ curl -X GET http://localhost:8010/favouritePet \
 Hi john. My favourite pet is cat
 ```
 
-**Test `/favouritePet` for a user not having access to Authority `ROLE_ADMIN`**
+**Test `/favouritePet` for a user not having access to Authority `AUTHORIZED_PETSTORE_ADMIN`**
 
 > kelly does not have access to `/favouritePet`. Hence we get `access_denied` error.
 
