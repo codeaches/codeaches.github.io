@@ -243,11 +243,14 @@ INSERT INTO group_members (username, group_id) VALUES ('kelly', 2);
 
 Create a class `AuthServerConfig.java` annotate the class with `@EnableAuthorizationServer`. This annotation is used to configure the OAuth 2.0 Authorization Server mechanism
 
-> `JdbcTokenStore` implements token services that stores tokens in a database.  
+> `JdbcTokenStore` implements token services that stores tokens in a database.    
+
 > `BCryptPasswordEncoder` implements PasswordEncoder that uses the BCrypt strong hashing function. Clients can optionally supply a "strength" (a.k.a. log rounds in BCrypt) and a SecureRandom instance. The larger the strength parameter the more work will have to be done (exponentially) to hash the passwords. The value used in this example is 4.    
 
-> `AuthorizationServerEndpointsConfigurer` configures the non-security features of the Authorization Server endpoints, like token store, token customizations, user approvals and grant types.  
-> `AuthorizationServerSecurityConfigurer` configures the security of the Authorization Server, which means in practical terms the /oauth/token endpoint.  
+> `AuthorizationServerEndpointsConfigurer` configures the non-security features of the Authorization Server endpoints, like token store, token customizations, user approvals and grant types.    
+
+> `AuthorizationServerSecurityConfigurer` configures the security of the Authorization Server, which means in practical terms the /oauth/token endpoint.    
+
 > `ClientDetailsServiceConfigurer` configures the ClientDetailsService, e.g. declaring individual clients and their properties.
 
 `com.codeaches.oauth2server.AuthServerConfig.java`
