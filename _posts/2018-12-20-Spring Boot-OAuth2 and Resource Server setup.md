@@ -40,12 +40,18 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and Resource Serv
 
 ## Prerequisites {#prerequisites}
 
+---
+
 - [Open JDK 11](https://jdk.java.net/11){:target="_blank"}
 - [Spring Tool Suite IDE](https://spring.io/tools3/sts/all){:target="_blank"}
 
 ## Authorization Server {#createauthserver}
 
+***
+
 ### Create spring boot application using spring initializr {#enableauthorizationserver}
+
+--
 
 Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Authorization Server. I have updated Group field to "com.codeaches", Artifact to "oauth2server" and selected `Web`,`Security`,`Cloud OAuth2`,`H2` and `JPA` dependencies.
 
