@@ -19,7 +19,7 @@ sitemap:
 
 The Spring OAuth 2.0 Authorization mechanism manages and verifies the OAuth 2.0 tokens used to access the protected resources. The requests for the tokens are handled by Spring MVC controller endpoints.
 
-In this tutorial, let's setup a spring boot authorization server and resource server
+In this tutorial, let's setup a OAuth 2.0 Authorization server and Resource Server
 
 # Table of contents
 
