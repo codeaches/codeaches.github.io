@@ -87,6 +87,7 @@ Run the `oauth2server project` as `Spring Boot App`.
 > We shall run the `oauth2server project` on port 9050 instead of default port 8080
 
 `src/main/resources/application.properties`
+
 ```properties
 server.port=9050
 ```
@@ -103,6 +104,7 @@ c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 secon
 Let's create tables to hold the client, user and group details in embedded h2 db by providing the DDL scripts which runs during server startup.
 
 `src/main/resources/sql/oauth2_ddl.sql`
+
 ```sql
 drop table oauth_client_details if exists;
 create table oauth_client_details (
@@ -146,6 +148,7 @@ create table oauth_refresh_token (
 Let's insert a record in `oauth_client_details` table for a client named `appclient` with a password `appclient@123`.
 
 `src/main/resources/sql/oauth2_dml.sql`
+
 ```sql
 INSERT INTO
   oauth_client_details (
@@ -180,6 +183,7 @@ VALUES
 Let's create tables to hold the users and groups details in embedded h2 db by providing the DDL scripts which runs during server startup.
 
 `src/main/resources/sql/groupauthorities_ddl.sql`
+
 ```sql
 drop table users if exists;
 create table users(
@@ -219,6 +223,7 @@ Add `john` to group `USER_AND_ADMIN_GROUP` and `kelly` to group `USER_ONLY_GROUP
 > The password needs to be saved to DB in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds.  
 
 `src/main/resources/sql/groupauthorities_dml.sql`
+
 ```sql
 INSERT INTO users (username,password,enabled) 
 	VALUES ('john', '$2a$04$Ts1ry6sOr1BXXie5Eez.j.bsvqC0u3x7xAwOInn2qrItwsUUIC9li', TRUE);
@@ -236,9 +241,10 @@ INSERT INTO group_members (username, group_id) VALUES ('john', 1);
 INSERT INTO group_members (username, group_id) VALUES ('kelly', 2);
 ```
 
-### Update the above created DDL and DML file names in `application.properties`
+### Update the above created DDL and DML file names in application properties file.
 
 `src/main/resources/application.properties`
+
 ```properties
 spring.datasource.schema=classpath:sql/oauth2_ddl.sql, classpath:sql/groupauthorities_ddl.sql
 spring.datasource.data=classpath:sql/oauth2_dml.sql, classpath:sql/groupauthorities_dml.sql
@@ -465,6 +471,7 @@ Extract and import the project in STS as `Existing Maven project`. Build the pro
 We shall run the `petsore project` on port 8010 instead of default port 8080
 
 `src/main/resources/application.properties`
+
 ```properties
 server.port=8010
 ```
@@ -517,6 +524,7 @@ public class PetstoreController {
 ### Update `application.properties` with oauth2 client credentials and oauth2 check_token URL {#resourceserverchecktokenurl}
 
 `src/main/resources/application.properties`
+
 ```properties
 security.oauth2.client.client-id=appclient
 security.oauth2.client.client-secret=appclient@123
