@@ -301,7 +301,11 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
 ### Configure User Security {#userauth}
 
-Create a class `UserSecurityConfig.java` as shown below. This class handles user authentication.
+Create a class `UserSecurityConfig.java` to handle user authentication.
+
+> `setEnableAuthorities(false)` disables the useage of authorities table.    
+
+> `setEnableGroups(true)` enables the useage of groups, group authorities and group members tables.
 
 `com.codeaches.oauth2server.UserSecurityConfig.java`
 ```java
@@ -333,8 +337,6 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 }
 ```
-> `setEnableAuthorities(false)` disables the useage of authorities table.  
-> `setEnableGroups(true)` enables the useage of groups, group authorities and group members tables.
 
 **Restart the application for above changes to take effect**
 
