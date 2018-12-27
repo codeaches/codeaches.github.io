@@ -244,7 +244,7 @@ INSERT INTO group_members (username, group_id) VALUES ('kelly', 2);
 
 ### Configure Auth Server {#clientauth}
 
-Create a class `AuthServerConfig.java` annotate the class with `@EnableAuthorizationServer`. This annotation is used to configure the OAuth 2.0 Authorization Server mechanism
+Create a class `AuthServerConfig.java` and annotate with `@EnableAuthorizationServer`. This annotation is used to configure the OAuth 2.0 Authorization Server mechanism
 
 1. `JdbcTokenStore` implements token services that stores tokens in a database.    
 2. `BCryptPasswordEncoder` implements PasswordEncoder that uses the BCrypt strong hashing function. Clients can optionally supply a "strength" (a.k.a. log rounds in BCrypt) and a SecureRandom instance. The larger the strength parameter the more work will have to be done (exponentially) to hash the passwords. The value used in this example is 4.    
