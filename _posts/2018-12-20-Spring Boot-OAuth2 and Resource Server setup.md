@@ -223,7 +223,7 @@ INSERT INTO group_members (username, group_id) VALUES ('kelly', 2);
 
 **Configure OAuth2 Server**
 
-Let's create a class `AuthServerConfig.java` and annotate with `@EnableAuthorizationServer`. This annotation is used to configure the OAuth 2.0 Authorization Server mechanism
+Let's create a class `AuthServerConfig.java` and annotate with `@EnableAuthorizationServer`. This annotation is used by spring internally to configure the OAuth 2.0 Authorization Server mechanism
 
 1. `JdbcTokenStore` implements token services that stores tokens in a database.    
 2. `BCryptPasswordEncoder` implements PasswordEncoder that uses the BCrypt strong hashing function. Clients can optionally supply a "strength" (a.k.a. log rounds in BCrypt) and a SecureRandom instance. The larger the strength parameter the more work will have to be done (exponentially) to hash the passwords. The value used in this example is 4.    
@@ -454,7 +454,7 @@ server.port=8010
 
 **Enable Resource Server Mechanism on petstore application**
 
-Let's annotate DemoApplication.java with `@EnableResourceServer`. This annotation is used to configure the Resource Server mechanism
+Let's annotate DemoApplication.java with `@EnableResourceServer`. This annotation is used by spring internally to configure the Resource Server mechanism
 
 `com.codeaches.petstore.DemoApplication.java`
 
