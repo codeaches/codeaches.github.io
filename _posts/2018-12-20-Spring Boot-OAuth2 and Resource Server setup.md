@@ -80,7 +80,7 @@ Import the project in STS as `Existing Maven project` and do Maven build.
 </dependency>
 ```
 
-**Configure oauth2server project to run on port 9050**
+**Configure `oauth2server` project to run on port 9050**
 
 `src/main/resources/application.properties`
 
@@ -88,9 +88,9 @@ Import the project in STS as `Existing Maven project` and do Maven build.
 server.port=9050
 ```
 
-**Run the `oauth2server project` as `Spring Boot App`**
+**Run the `oauth2server` project as `Spring Boot App`**
 
-**log file**
+**console log**
 
 ```log
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
@@ -342,6 +342,8 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 > `setEnableGroups(true)` enables the useage of groups, group authorities and group members tables.
 
 **Restart the application for above changes to take effect**
+
+**console log**
 
 ```log
 o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
