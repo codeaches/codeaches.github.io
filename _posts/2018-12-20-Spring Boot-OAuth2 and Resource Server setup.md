@@ -44,7 +44,7 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and Resource Serv
 
 ## 2. Create Authorization Server {#createauthserver}
 
-### 2.1 Create spring boot application using spring initializr {#enableauthorizationserver}
+### Create spring boot application using spring initializr {#enableauthorizationserver}
 
 Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Authorization Server. I have updated Group field to **com.codeaches**, Artifact to **oauth2server** and selected `Web`,`Security`,`Cloud OAuth2`,`H2` and `JPA` dependencies.
 
@@ -341,7 +341,7 @@ o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http
 c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
-## Test Authorization Server {#testauthserver}
+## 3. Test Authorization Server {#testauthserver}
 
 **Test `/oauth/token` URL with `grant_type=password`**
 
@@ -417,7 +417,7 @@ curl -X POST http://localhost:9050/oauth/token \
 }
 ```
 
-## Resource Server {#createresourceserver}
+## 4. Create Resource Server {#createresourceserver}
 
 Let's create a Spring Boot REST Service named petstore and expose couple of end points. This will be our resource server.
 
@@ -534,7 +534,7 @@ o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8010 (http
 c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
-## Test Resource Server (petstore application) {#testresourceserver}
+## 5. Test Resource Server (petstore application) {#testresourceserver}
  
 **Test `/pet` for a user having access to Authority `ROLE_USER`**
 
@@ -584,7 +584,7 @@ curl -X GET http://localhost:8010/favouritePet \
 }
 ```
 
-## Source code and Postman test collections {#sourcecode}
+## 6. Source code and Postman test collections {#sourcecode}
 
 The code along with the Postman test script collections can be found on [github](https://github.com/codeaches/oauth2-and-resource-servers){:target="_blank"}
 
