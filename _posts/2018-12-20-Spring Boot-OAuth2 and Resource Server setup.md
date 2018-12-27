@@ -34,7 +34,7 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and Resource Serv
    1. [Create spring boot application using spring initializr and annotate the service using `@EnableResourceServer`](#enableresourceserver)
    2. [Configure REST methods pet() and favouritePet()](#petstorecontroller)
    3. [Update `application.properties` with oauth2 client credentials and oauth2 check_token URL](#resourceserverchecktokenurl)
-5. [Test Resource Server(petstore application)](#testresourceserver)
+5. [Test Resource Server (petstore application)](#testresourceserver)
 6. [Source code and Postman test collections](#sourcecode)
 
 ## 1. Prerequisites {#prerequisites}
