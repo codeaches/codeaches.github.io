@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Spring Security OAuth2 and Resource server with JdbcTokenStore and BCryptPasswordEncoder"
+title: "Spring Security OAuth2 and Resource server with Jdbc Token Store and BCrypt Password Encoder"
 tags: [codeaches,java,openjdk,spring,spring boot,spring cloud,oauth2,professional,rstats,r-bloggers,tutorial, popular]
 date: 2018-12-20 9:00:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
@@ -17,42 +17,35 @@ sitemap:
   priority: 1
 ---
 
-The Spring OAuth 2.0 Authorization mechanism manages and verifies the OAuth 2.0 tokens used to access the protected resources. The requests for the tokens are handled by Spring MVC controller endpoints.
+The Spring OAuth 2.0 Authorization mechanism manages and verifies the OAuth 2.0 tokens which are used to access the protected resources. The requests for the tokens are handled by Spring MVC controller endpoints.
 
-In this tutorial, let's setup a OAuth 2.0 Authorization server and Resource Server
+In this tutorial, let's setup a OAuth 2.0 Authorization server and a petstore service which is protected Resource Server.
 
-# Table of contents
+### Table of contents {#table_of_contents}
 
 1. [Prerequisites](#prerequisites)
-2. [Create Authorization Server](#createauthserver)
-   1. [Create spring boot application using spring initializr and annotate the service using `@EnableAuthorizationServer`](#enableauthorizationserver)
-   2. [Create tables for clients, users and groups](#clientstable)
-   3. [Create a class to handle client authorization](#clientauth)
-   4. [Create a class to handle user authentication](#userauth)
-3. [Test Authorization Server](#testauthserver)
-4. [Create Resource Server](#createresourceserver)
-   1. [Create spring boot application using spring initializr and annotate the service using `@EnableResourceServer`](#enableresourceserver)
-   2. [Configure REST methods pet() and favouritePet()](#petstorecontroller)
-   3. [Update `application.properties` with oauth2 client credentials and oauth2 check_token URL](#resourceserverchecktokenurl)
-5. [Test Resource Server (petstore application)](#testresourceserver)
-6. [Source code and Postman test collections](#sourcecode)
+2. [Build authorization server](#build_auth_server)
+3. [Test authorization server](#test_auth_server)
+4. [Build resource server](#build_resource_server)
+5. [Test resource server](#test_resource_server)
+6. [Summary](#summary)
 
-## 1. Prerequisites {#prerequisites}
+### Prerequisites {#prerequisites}
 
-- [Open JDK 11](https://jdk.java.net/11){:target="_blank"}
-- [Spring Tool Suite IDE](https://spring.io/tools3/sts/all){:target="_blank"}
+ - [Open Source JDK 11](https://jdk.java.net/11){:target="_blank"}
+ - [Spring Tool Suite IDE](https://spring.io/tools3/sts/all){:target="_blank"}
 
-## 2. Create Authorization Server {#createauthserver}
+### Build authorization server {#build_auth_server}
 
-### Create spring boot application using spring initializr {#enableauthorizationserver}
+**Create the starter project using Spring Initializr**
 
-Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Authorization Server. I have updated Group field to **com.codeaches**, Artifact to **oauth2server** and selected `Web`,`Security`,`Cloud OAuth2`,`H2` and `JPA` dependencies.
+Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Authorization Server. I have updated Group field to **com.codeaches**, Artifact to **oauth2server** and selected `Web`,`Security`,`Cloud OAuth2`,`H2`,`JPA` dependencies. I have selected Java Version as **11**
 
 ![Spring initializr web tool](/img/blog/oauth2server/oauth2server-initializr.gif){:target="_blank"}
 
-Click on `Generate Project`. You will see that the project will be downloaded as oauth2server.zip file on your hard drive.
+Click on `Generate Project`. The project will be downloaded as `oauth2server.zip` file on your hard drive.
 
-**Alternatively, you can also generate the project in a shell using cURL**
+>Alternatively, you can also generate the project in a shell using cURL
 
 ```sh
 curl https://start.spring.io/starter.zip  \
@@ -66,7 +59,7 @@ curl https://start.spring.io/starter.zip  \
        -o oauth2server.zip
 ```
 
-### Import and build
+**Import and build**
 
 Import the project in STS as `Existing Maven project` and do Maven build.
 
@@ -79,7 +72,7 @@ Import the project in STS as `Existing Maven project` and do Maven build.
 </dependency>
 ```
 
-**Configure `oauth2server` project to run on port 9050**
+**Configure oauth2server project to run on port 9050**
 
 `src/main/resources/application.properties`
 
@@ -87,18 +80,9 @@ Import the project in STS as `Existing Maven project` and do Maven build.
 server.port=9050
 ```
 
-**Run the `oauth2server` project as `Spring Boot App`**
+**Create tables for clients, users and groups**
 
-**console log**
-
-```log
-o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
-c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
-```
-
-### Create tables for clients, users and groups {#clientstable}
-
-Let's create tables to hold the client, user and group details in embedded h2 db by providing the DDL scripts which runs during server startup.
+Let's create tables to hold the OAuth2 client, access and refresh token details in embedded h2 db by providing the DDL scripts which runs during server startup.
 
 `src/main/resources/schema.sql`
 
@@ -140,11 +124,11 @@ create table oauth_refresh_token (
 > `oauth_client_details` table is used to store client details.  
 > `oauth_access_token` and `oauth_refresh_token` is used internally by OAuth2 server to store the access and refresh tokens.
 
-### Create a client `appclient`
+**Create a client**
 
 Let's insert a record in `oauth_client_details` table for a client named `appclient` with a password `appclient@123`.  
-Let's configure `appclient` with access to the petstore resource.  
-`scope` of the `appclient` ID is set to both read and write.
+> `appclient` has access to the petstore resource with read and write `scope`
+>> The password needs to be saved to DB in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds 
 
 `src/main/resources/data.sql`
 
@@ -173,9 +157,7 @@ VALUES
   );
 ```
 
-> The password needs to be saved to DB in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds.  
-
-### Create tables for users, groups, group authorities and group members
+**Create tables for users, groups, group authorities and group members**
 
 Let's create tables to hold the users and groups details in embedded h2 db by providing the DDL scripts which runs during server startup.
 
@@ -211,7 +193,7 @@ create table group_members (
 );
 ```
 
-### Add users, groups, group authorities and group members
+**Add users, groups, group authorities and group members**
 
 1. Let's create users named `john` with a password `john@123` and `kelly` with a password `kelly@123`.  
 2. Create a group `USER_AND_ADMIN_GROUP` and assign the roles `ROLE_USER` and `ROLE_ADMIN`.  
@@ -239,9 +221,9 @@ INSERT INTO group_members (username, group_id) VALUES ('john', 1);
 INSERT INTO group_members (username, group_id) VALUES ('kelly', 2);
 ```
 
-### Configure Auth Server {#clientauth}
+**Configure OAuth2 Server**
 
-Create a class `AuthServerConfig.java` and annotate with `@EnableAuthorizationServer`. This annotation is used to configure the OAuth 2.0 Authorization Server mechanism
+Let's create a class `AuthServerConfig.java` and annotate with `@EnableAuthorizationServer`. This annotation is used to configure the OAuth 2.0 Authorization Server mechanism
 
 1. `JdbcTokenStore` implements token services that stores tokens in a database.    
 2. `BCryptPasswordEncoder` implements PasswordEncoder that uses the BCrypt strong hashing function. Clients can optionally supply a "strength" (a.k.a. log rounds in BCrypt) and a SecureRandom instance. The larger the strength parameter the more work will have to be done (exponentially) to hash the passwords. The value used in this example is 4.    
@@ -295,9 +277,9 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 }
 ```
 
-### Configure User Security {#userauth}
+**Configure User Security Authentication**
 
-Create a class `UserSecurityConfig.java` to handle user authentication.
+Let's create a class `UserSecurityConfig.java` to handle user authentication.
 
 > `setEnableAuthorities(false)` disables the usage of authorities table and `setEnableGroups(true)` enables the usage of groups, group authorities and group members tables.
 
@@ -332,18 +314,22 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-**Restart the application for above changes to take effect**
+**Start the OAuth2 Server**
 
-**console log**
+Run the `oauth2server` application as `Spring Boot App` and make sure the server has started successfully on port `9050`
 
-```log
-o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
-c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
+```java
+TomcatWebServer  : Tomcat started on port(s): 9050 (http) with context path ''
+DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
-## 3. Test Authorization Server {#testauthserver}
+### Test authorization server {#test_auth_server}
 
-**Test `/oauth/token` URL with `grant_type=password`**
+Now that we have the `oauth2server` application up and running, let's test the application by submitting few POST calls.
+
+**Get a token**
+
+Let's get a token from OAuth2 Server for `kelly` using the URI `/oauth/token` and `grant_type=password`
 
 *Request*
 ```sh
@@ -353,7 +339,7 @@ curl -X POST http://localhost:9050/oauth/token \
     -d "username=kelly" \
     -d "password=kelly@123"
 ```
-> `YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=` is the Base 64 authorization version of user id and password.  
+> `YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=` is the Base 64 authorization version of client_id and client_secret.  
 
 *Response*
 ```json
@@ -366,7 +352,9 @@ curl -X POST http://localhost:9050/oauth/token \
 }
 ```
 
-**Test `/oauth/check_token` URL**
+**Validate the access_token**
+
+Let's validate the above retrieved **access_token** `13df4f18-7763-4772-9960-895ca905dd56` by making a call to OAuth2 Server using the URI `/oauth/check_token`
 
 *Request*
 ```sh
@@ -394,9 +382,9 @@ curl -X POST http://localhost:9050/oauth/check_token \
 }
 ```
 
-**Test refresh_token**
+**Get a new token by using earlier obtained refresh token**
 
-**Test the URL `/oauth/token` with `grant_type=refresh_token`**
+Let's get a new token from OAuth2 Server by using the earlier obtained **refresh_token** `6d49fd10-b92e-4bb2-b58d-b83212d70bcb` using the URI `/oauth/token` and `grant_type=refresh_token`
 
 *Request*
 ```sh
@@ -405,6 +393,7 @@ curl -X POST http://localhost:9050/oauth/token \
     -d "grant_type=refresh_token" \
     -d "refresh_token=6d49fd10-b92e-4bb2-b58d-b83212d70bcb"
 ```
+> `YXBwY2xpZW50OmFwcGNsaWVudEAxMjM=` is the Base 64 authorization version of client_id and client_secret.  
 
 *Response*
 ```json
@@ -416,20 +405,19 @@ curl -X POST http://localhost:9050/oauth/token \
   "scope": "read write"
 }
 ```
-
-## 4. Create Resource Server {#createresourceserver}
+### Build resource server {#build_resource_server}
 
 Let's create a Spring Boot REST Service named petstore and expose couple of end points. This will be our resource server.
 
-### Create spring boot application using spring initializr {#enableresourceserver}
+**Create the starter project using Spring Initializr**
 
-Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Resource Server. I have updated Group field to **com.codeaches**, Artifact to **petstore** and selected `Web`,`Security` and `Cloud OAuth2` dependencies.
+Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for PetStore Resource Server. I have updated Group field to **com.codeaches**, Artifact to **petstore** and selected `Web`,`Security`,`Cloud OAuth2` dependencies. I have selected Java Version as **11**
 
 ![Spring initializr web tool](/img/blog/oauth2server/petstore-initializr.gif){:target="_blank"}
 
-Click on `Generate Project`. You will see that the project will be downloaded as petsore.zip file on your hard drive.
+Click on `Generate Project`. The project will be downloaded as `petstore.zip` file on your hard drive.
 
-**Alternatively, you can also generate the project in a shell using cURL**
+>Alternatively, you can also generate the project in a shell using cURL
 
 ```sh
 curl https://start.spring.io/starter.zip  \
@@ -443,7 +431,7 @@ curl https://start.spring.io/starter.zip  \
        -o petsore.zip
 ```
 
-### Import and build
+**Import and build**
 
 Import the project in STS as `Existing Maven project` and do Maven build.
 
@@ -456,11 +444,7 @@ Import the project in STS as `Existing Maven project` and do Maven build.
 </dependency>
 ```
 
-### Configure `petsore project` to run on port 8010
-
-Run the `petsore project` as `Spring Boot App`.
-
-> We shall run the `petsore project` on port 8010 instead of default port 8080
+**Configure petstore project to run on port 8010**
 
 `src/main/resources/application.properties`
 
@@ -468,14 +452,9 @@ Run the `petsore project` as `Spring Boot App`.
 server.port=8010
 ```
 
-**log file**
+**Enable Resource Server Mechanism on petstore application**
 
-```log
-o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8010 (http) with context path ''
-c.c.demo.petsore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
-```
-
-**Annotate `DemoApplication.java` class with `@EnableResourceServer`**
+Let's annotate DemoApplication.java with `@EnableResourceServer`. This annotation is used to configure the Resource Server mechanism
 
 `com.codeaches.petstore.DemoApplication.java`
 
@@ -490,7 +469,12 @@ public class DemoApplication {
 }
 ```
 
-### Create a class `PetstoreController.java` and configure REST methods pet() and favouritePet() {#petstorecontroller}
+**Add REST methods to PetStore Applications**
+
+Let's create a class `PetstoreController.java` and configure REST methods pet() and favouritePet() {#petstorecontroller}
+
+> `/pet` can be acessed by user who has ROLE_USER authority  
+> `/favouritePet` can be acessed by user who has ROLE_ADMIN authority
 
 `com.codeaches.petstore.PetstoreController.java`
 
@@ -513,7 +497,11 @@ public class PetstoreController {
 }
 ```
 
-### Update `application.properties` with oauth2 client credentials and oauth2 check_token URL {#resourceserverchecktokenurl}
+**Update petstore application with OAuth2 Server token info URI and Client Credentials**
+
+Let's update petstore application with client credentials for `appclient` and the `/oauth/check_token` URL of OAuth2 Authorization Server.
+> Note that the client `appclient` is authorized to access petstore resource in oauth_client_details table. 
+
 
 `src/main/resources/application.properties`
 
@@ -525,17 +513,18 @@ security.oauth2.resource.id=petstore
 
 security.oauth2.resource.token-info-uri=http://localhost:9050/oauth/check_token
 ```
-> Note that we are setting the value of `security.oauth2.resource.id` to petstore. This value along with client credentials will be validated against the record in `oauth_client_details` table configured in `authorization server`.
 
-**Restart the application for above changes to take effect**
+**Start the petstore Resource Server**
 
-```log
-o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8010 (http) with context path ''
-c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
+Run the `petstore` application as `Spring Boot App` and make sure the server has started successfully on port `8010`
+
+```java
+TomcatWebServer  : Tomcat started on port(s): 8010 (http) with context path ''
+DemoApplication  : Started DemoApplication in 12.233 seconds (JVM running for 14.419)
 ```
 
-## 5. Test Resource Server (petstore application) {#testresourceserver}
- 
+### Test resource server {#test_resource_server}
+
 **Test `/pet` for a user having access to Authority `ROLE_USER`**
 
 > Both john and kelly has access to `/pet`
@@ -545,21 +534,23 @@ c.c.demo.petstore.DemoApplication  : Started DemoApplication in 12.233 seconds (
 curl -X GET http://localhost:8010/pet \
     --header "Authorization:Bearer 807d4eda-ed9e-48d7-bc1a-29e78987376a"
 ```
+> `807d4eda-ed9e-48d7-bc1a-29e78987376a` is the access_token obtained from OAuth2 Server for the user `kelly`.
 
 *Response*
-```http
+```
 Hi kelly. My pet is dog
 ```
 
 **Test `/favouritePet` for a user having access to Authority `ROLE_ADMIN`**
 
-> Only john has access to `/favouritePet`
+> Only `john` has access to `/favouritePet`
 
 *Request*
 ```sh
 curl -X GET http://localhost:8010/favouritePet \
     --header "Authorization:Bearer 1160aad4-2ab2-412f-ba85-4e543cbf7b76"
 ```
+> `1160aad4-2ab2-412f-ba85-4e543cbf7b76` is the access_token obtained from OAuth2 Server for the user `john`. 
 
 *Response*
 ```http
@@ -584,20 +575,16 @@ curl -X GET http://localhost:8010/favouritePet \
 }
 ```
 
-## 6. Source code and Postman test collections {#sourcecode}
+### Summary {#summary}
 
-The code along with the Postman test script collections can be found on [github](https://github.com/codeaches/oauth2-and-resource-servers){:target="_blank"}
-
-## Summary
-
-Congratulations! You just created an auth server and a resource server.
+Congratulations! You just created an Spring Boot OAuth2 Authorization and Resource Servers with Jdbc Token Store and BCrypt Password Encoder.
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post"
     target="_top" style="text-align: center;">
     <input type="hidden" name="cmd" value="_donations" /> <input
         type="hidden" name="business" value="FLER29DWAYJ58" /> <input
         type="hidden" name="currency_code" value="USD" /> <input type="image"
-        src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"
+        src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
         border="0" name="submit"
         title="PayPal - The safer, easier way to donate"
         alt="Donate with PayPal button" /> <img alt="" border="0"
