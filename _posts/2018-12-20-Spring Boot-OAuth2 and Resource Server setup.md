@@ -130,7 +130,7 @@ create table oauth_refresh_token (
 
 Let's insert a record in `oauth_client_details` table for a client named `appclient` with a password `appclient@123`.  
 > `appclient` has access to the petstore resource with read and write `scope`
->> The password needs to be saved to DB in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds 
+>> The password needs to be saved to DB in Bcrypt format. I have used an online tool to Bcrypt the password with 8 rounds 
 
 `src/main/resources/data.sql`
 
@@ -149,7 +149,7 @@ INSERT INTO
 VALUES
   (
     'appclient',
-    '$2a$04$NUE5ncR9072hmTO9GzRNA.FQSsz/P3pPgXRLV0cxq.t3GxPvDy4FG',
+    '$2a$08$ePUWmsLTqNezRk7MCUfg6.HU3RUO3N2M6H.Xj0gMvKiUsGgvg/Fve',
     'petstore',
     'read,write',
     'authorization_code,check_token,refresh_token,password',
@@ -229,7 +229,7 @@ INSERT INTO group_members (username, group_id) VALUES ('kelly', 2);
 Let's create a class `AuthServerConfig.java` and annotate with `@EnableAuthorizationServer`. This annotation is used by spring internally to configure the OAuth 2.0 Authorization Server mechanism
 
 1. `JdbcTokenStore` implements token services that stores tokens in a database.    
-2. `BCryptPasswordEncoder` implements PasswordEncoder that uses the BCrypt strong hashing function. Clients can optionally supply a "strength" (a.k.a. log rounds in BCrypt) and a SecureRandom instance. The larger the strength parameter the more work will have to be done (exponentially) to hash the passwords. The value used in this example is 4.    
+2. `BCryptPasswordEncoder` implements PasswordEncoder that uses the BCrypt strong hashing function. Clients can optionally supply a "strength" (a.k.a. log rounds in BCrypt) and a SecureRandom instance. The larger the strength parameter the more work will have to be done (exponentially) to hash the passwords. The value used in this example is 8 for `client secret`.    
 3. `AuthorizationServerEndpointsConfigurer` configures the non-security features of the Authorization Server endpoints, like token store, token customizations, user approvals and grant types.    
 5. `AuthorizationServerSecurityConfigurer` configures the security of the Authorization Server, which means in practical terms the /oauth/token endpoint.    
 6. `ClientDetailsServiceConfigurer` configures the ClientDetailsService, e.g. declaring individual clients and their properties.
@@ -255,14 +255,19 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         return new JdbcTokenStore(ds);
     }
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(4);
+    @Bean("clientPasswordEncoder")
+    PasswordEncoder clientPasswordEncoder() {
+        return new BCryptPasswordEncoder(8);
     }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer cfg) throws Exception {
+
+        // This will enable /oauth/check_token access
         cfg.checkTokenAccess("permitAll");
+
+        // BCryptPasswordEncoder(8) is used for oauth_client_details.user_secret
+        cfg.passwordEncoder(clientPasswordEncoder());
     }
 
     @Override
@@ -284,7 +289,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
 Let's create a class `UserSecurityConfig.java` to handle user authentication.
 
-> `setEnableAuthorities(false)` disables the usage of authorities table and `setEnableGroups(true)` enables the usage of groups, group authorities and group members tables.
+> `setEnableAuthorities(false)` disables the usage of authorities table and `setEnableGroups(true)` enables the usage of groups, group authorities and group members tables.  
+> `BCryptPasswordEncoder` implements PasswordEncoder that uses the BCrypt strong hashing function. Clients can optionally supply a "strength" (a.k.a. log rounds in BCrypt) and a SecureRandom instance. The larger the strength parameter the more work will have to be done (exponentially) to hash the passwords. The value used in this example is 4 for `user's password`   
 
 `com.codeaches.oauth2server.UserSecurityConfig.java`
 ```java
@@ -306,10 +312,17 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    @Bean("userPasswordEncoder")
+    PasswordEncoder userPasswordEncoder() {
+        return new BCryptPasswordEncoder(4);
+    }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> cfg = auth.jdbcAuthentication().dataSource(ds);
+        // BCryptPasswordEncoder(4) is used for users.password column
+        JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> cfg = auth.jdbcAuthentication()
+                .passwordEncoder(userPasswordEncoder()).dataSource(ds);
 
         cfg.getUserDetailsService().setEnableGroups(true);
         cfg.getUserDetailsService().setEnableAuthorities(false);
