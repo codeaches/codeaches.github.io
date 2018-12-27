@@ -47,7 +47,7 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and Resource Serv
 
 ### Create spring boot application using spring initializr {#enableauthorizationserver}
 
-Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Authorization Server. I have updated Group field to "com.codeaches", Artifact to "oauth2server" and selected `Web`,`Security`,`Cloud OAuth2`,`H2` and `JPA` dependencies.
+Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Authorization Server. I have updated Group field to **com.codeaches**, Artifact to **oauth2server** and selected `Web`,`Security`,`Cloud OAuth2`,`H2` and `JPA` dependencies.
 
 ![Spring initializr web tool](/img/blog/oauth2server/oauth2server-initializr.gif){:target="_blank"}
 
@@ -80,7 +80,7 @@ Import the project in STS as `Existing Maven project` and do Maven build.
 </dependency>
 ```
 
-### Configure `oauth2server project` to run on port 9050
+### Configure *oauth2server project* to run on port 9050
 
 Run the `oauth2server project` as `Spring Boot App`.
 
@@ -433,7 +433,7 @@ Let's create a Spring Boot REST Service named petstore and expose couple of end 
 
 ### Create spring boot application using spring initializr {#enableresourceserver}
 
-Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Resource Server. I have updated Group field to "com.codeaches", Artifact to "petstore" and selected `Web`,`Security` and `Cloud OAuth2` dependencies.
+Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Resource Server. I have updated Group field to **com.codeaches**, Artifact to **petstore** and selected `Web`,`Security` and `Cloud OAuth2` dependencies.
 
 ![Spring initializr web tool](/img/blog/oauth2server/petstore-initializr.gif){:target="_blank"}
 
