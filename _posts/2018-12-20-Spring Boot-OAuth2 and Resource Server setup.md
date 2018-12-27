@@ -100,7 +100,7 @@ c.c.demo.oauth2server.DemoApplication  : Started DemoApplication in 12.233 secon
 
 Let's create tables to hold the client, user and group details in embedded h2 db by providing the DDL scripts which runs during server startup.
 
-`src/main/resources/sql/schema.sql`
+`src/main/resources/schema.sql`
 
 ```sql
 drop table oauth_client_details if exists;
@@ -146,7 +146,7 @@ Let's insert a record in `oauth_client_details` table for a client named `appcli
 Let's configure `appclient` with access to the petstore resource.  
 `scope` of the `appclient` ID is set to both read and write.
 
-`src/main/resources/sql/data.sql`
+`src/main/resources/data.sql`
 
 ```sql
 INSERT INTO
@@ -179,7 +179,7 @@ VALUES
 
 Let's create tables to hold the users and groups details in embedded h2 db by providing the DDL scripts which runs during server startup.
 
-`src/main/resources/sql/schema.sql`
+`src/main/resources/schema.sql`
 
 ```sql
 drop table users if exists;
@@ -220,7 +220,7 @@ create table group_members (
 
 > The password needs to be saved to DB in Bcrypt format. I have used an online tool to Bcrypt the password with 4 rounds.  
 
-`src/main/resources/sql/data.sql`
+`src/main/resources/data.sql`
 
 ```sql
 INSERT INTO users (username,password,enabled) 
