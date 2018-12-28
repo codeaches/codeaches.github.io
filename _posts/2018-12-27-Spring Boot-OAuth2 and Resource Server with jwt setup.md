@@ -141,7 +141,7 @@ VALUES
   (
     'appclient',
     '$2a$08$ePUWmsLTqNezRk7MCUfg6.HU3RUO3N2M6H.Xj0gMvKiUsGgvg/Fve',
-    'jwtpetstore',
+    'petstore',
     'read,write',
     'authorization_code,check_token,refresh_token,password',
     'ROLE_CLIENT',
@@ -524,7 +524,7 @@ Let's update jwtpetstore application with client credentials for `appclient` and
 security.oauth2.client.client-id=appclient
 security.oauth2.client.client-secret=appclient@123
 
-security.oauth2.resource.id=jwtpetstore
+security.oauth2.resource.id=petstore
 
 security.oauth2.resource.jwt.key-value=JWTKey@123
 ```
