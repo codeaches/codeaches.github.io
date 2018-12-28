@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Spring Security OAuth2 and Resource server with JSON Web Token (JWT)"
+title: "Spring Security OAuth2 and Resource Server with JSON Web Token (JWT)"
 tags: [codeaches,java,openjdk,spring,spring boot,spring cloud,oauth2,jwt,professional,rstats,r-bloggers,tutorial, popular]
 date: 2018-12-27 9:00:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
