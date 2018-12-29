@@ -43,8 +43,6 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and a petstore se
 
 Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for Authorization Server. I have updated Group field to **com.codeaches**, Artifact to **oauth2server** and selected `Web`,`Security`,`Cloud OAuth2`,`H2`,`JPA` dependencies. I have selected Java Version as **11**
 
-![Spring initializr web tool](/img/blog/oauth2server/oauth2server-initializr.gif){:target="_blank"}
-
 Click on `Generate Project`. The project will be downloaded as `oauth2server.zip` file on your hard drive.
 
 >Alternatively, you can also generate the project in a shell using cURL
@@ -428,8 +426,6 @@ Let's create a Spring Boot REST Service named petstore and expose couple of end 
 **Create a Spring Boot starter project using Spring Initializr**
 
 Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project for PetStore Resource Server. I have updated Group field to **com.codeaches**, Artifact to **petstore** and selected `Web`,`Security`,`Cloud OAuth2` dependencies. I have selected Java Version as **11**
-
-![Spring initializr web tool](/img/blog/oauth2server/petstore-initializr.gif){:target="_blank"}
 
 Click on `Generate Project`. The project will be downloaded as `petstore.zip` file on your hard drive.
 
