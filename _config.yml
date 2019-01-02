@@ -41,6 +41,7 @@ author:
   email: "pavan@codeaches.com"
   github: codeaches
   linkedin: "in/pavan-gurudutt"
+  stackoverflow: "users/10859002/pavan-gurudutt"
   
 # Select which links to show in the footer  
 footer-links-active:
@@ -50,7 +51,7 @@ footer-links-active:
   twitter: false
   github: true
   linkedin: true
-  stackoverflow: false
+  stackoverflow: true
   calendly: false
   telephone: false
   
