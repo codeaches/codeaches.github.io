@@ -34,6 +34,8 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and a jwtpetstore
 
 ### Prerequisites {#prerequisites}
 
+>I have used Open JDK 11 and Spring Tool Suite 4 IDE for this tutorial. I have not tried with the other versions though.
+
  - [Open Source JDK 11](https://jdk.java.net/11){:target="_blank"}
  - [Spring Tool Suite 4 IDE](https://spring.io/tools){:target="_blank"}
 
@@ -80,14 +82,6 @@ Import the project in STS as `Existing Maven project` and do Maven build.
 	<artifactId>spring-security-jwt</artifactId>
 	<version>1.0.9.RELEASE</version>
 </dependency>
-```
-
-**Configure jwtoauth2server project to run on port 9051**
-
-`src/main/resources/application.properties`
-
-```properties
-server.port=9051
 ```
 
 **Create tables for clients, users and groups**
@@ -322,6 +316,14 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
         cfg.getUserDetailsService().setEnableAuthorities(false);
     }
 }
+```
+
+**Configure jwtoauth2server project to run on port 9051**
+
+`src/main/resources/application.properties`
+
+```properties
+server.port=9051
 ```
 
 **Start the OAuth2 Server**

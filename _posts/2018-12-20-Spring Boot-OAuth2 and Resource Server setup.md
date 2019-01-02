@@ -34,6 +34,8 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and a petstore se
 
 ### Prerequisites {#prerequisites}
 
+>I have used Open JDK 11 and Spring Tool Suite 4 IDE for this tutorial. I have not tried with the other versions though.
+
  - [Open Source JDK 11](https://jdk.java.net/11){:target="_blank"}
  - [Spring Tool Suite 4 IDE](https://spring.io/tools){:target="_blank"}
 
@@ -70,14 +72,6 @@ Import the project in STS as `Existing Maven project` and do Maven build.
     <groupId>org.glassfish.jaxb</groupId>
     <artifactId>jaxb-runtime</artifactId>
 </dependency>
-```
-
-**Configure oauth2server project to run on port 9050**
-
-`src/main/resources/application.properties`
-
-```properties
-server.port=9050
 ```
 
 **Create tables for clients, users and groups**
@@ -326,6 +320,14 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
         cfg.getUserDetailsService().setEnableAuthorities(false);
     }
 }
+
+```
+**Configure oauth2server project to run on port 9050**
+
+`src/main/resources/application.properties`
+
+```properties
+server.port=9050
 ```
 
 **Start the OAuth2 Server**
