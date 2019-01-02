@@ -72,7 +72,7 @@ var main = {
 		// show a message if there is one to show
 		var qs = main.getQueryParams();
 		if (qs.message) {
-			$(".container")[0].innerHTML = '<div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">'
+			$(".container")[0].innerHTML = '<div class="row"><div class="col-lg-16 col-lg-offset-1 col-md-10 col-md-offset-1">'
 					+ '<div class="alert alert-success" role="alert">'
 					+ qs.message
 					+ "</div></div></div>"
