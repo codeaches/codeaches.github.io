@@ -11,12 +11,13 @@ layout: post
 comments: true
 show-share: true
 show-subscribe: true
+social-share: false
 gh-repo: codeaches/oauth2-and-resource-servers
 github-codebase-post-link: true
 gh-badge: [star, watch, follow]
 preview-length: 50
 preview-message: Setup OAuth 2.0 Authorization server and a petstore service which is protected Resource Server using JDBC Token Store and BCrypt Password Encoder mechanism
-lastupdated: 2018-12-28
+lastupdated: 2019-01-03
 paypal-donate-button: true
 sitemap:
   changefreq: daily

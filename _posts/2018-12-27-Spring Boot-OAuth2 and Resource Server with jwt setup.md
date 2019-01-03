@@ -17,7 +17,7 @@ github-codebase-post-link: true
 gh-badge: [star, watch, follow]
 preview-length: 50
 preview-message: Setup OAuth 2.0 Authorization server and a petstore service which is protected Resource Server using JSON Web Token mechanism
-lastupdated: 2018-12-28
+lastupdated: 2019-01-03
 paypal-donate-button: true
 sitemap:
   changefreq: daily
