@@ -90,7 +90,10 @@ defaults:
       show-subscribe: true # add subscribe email to all blog posts
       addthis-plugin: true
       carbonads: true
-      datacampcourse: true
+      preview-length: 30
+      paypal-donate-button: false
+      github-codebase-post-link: false
+      include-tags: false
   -
     scope:
       path: "" # all files

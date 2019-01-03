@@ -12,7 +12,6 @@ show-share: true
 show-subscribe: true
 gh-repo: codeaches/prometheus-micrometer-grafana-example
 gh-badge: [star, watch, follow]
-datacampcourse: false
 lastupdated: 2018-12-29
 sitemap:
   changefreq: daily

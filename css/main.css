@@ -1015,6 +1015,64 @@ pre code {
 	box-sizing: border-box;
 }
 
+/* Start */
+#github-codebase-post-section {
+  text-align: center;
+  padding: 10px;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+#github-codebase-post-section .btn {
+  text-decoration: none;
+  margin-top: 10px;
+}
+@media only screen and (max-width: 767px) {
+  #github-codebase-post-section {
+    font-size: 18px;
+  }
+  #github-codebase-post-section .btn {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  #github-codebase-post-section {
+    font-size: 16px;
+  }
+  #github-codebase-post-section .btn {
+    font-size: 14px;
+  }
+}
+
+#github-codebase-all-section {
+  text-align: center;
+  padding: 5px;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+#github-codebase-all-section .btn {
+  text-decoration: none;
+  margin-top: 10px;
+}
+@media only screen and (max-width: 767px) {
+  #github-codebase-all-section {
+    font-size: 18px;
+  }
+  #github-codebase-all-section .btn {
+    font-size: 16px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  #github-codebase-all-section {
+    font-size: 16px;
+  }
+  #github-codebase-all-section .btn {
+    font-size: 14px;
+  }
+}
+/*End*/
+
 #datacamp-course-section {
   text-align: center;
   background: #fafafa;

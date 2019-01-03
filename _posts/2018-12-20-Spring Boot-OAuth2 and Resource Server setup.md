@@ -2,6 +2,7 @@
 layout: post
 title: "Spring Security OAuth2 and Resource Server with JDBC Token Store and BCrypt Password Encoder"
 tags: [codeaches,java,openjdk,spring,spring boot,spring cloud,oauth2,professional,rstats,r-bloggers,tutorial, popular]
+include-tags: true
 date: 2018-12-20 9:00:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
 share-img: /img/blog/oauth2server/oauth2server.jpg
@@ -11,9 +12,12 @@ comments: true
 show-share: true
 show-subscribe: true
 gh-repo: codeaches/oauth2-and-resource-servers
+github-codebase-post-link: true
 gh-badge: [star, watch, follow]
-datacampcourse: false
+preview-length: 50
+preview-message: Setup OAuth 2.0 Authorization server and a petstore service which is protected Resource Server using JDBC Token Store and BCrypt Password Encoder mechanism
 lastupdated: 2018-12-28
+paypal-donate-button: true
 sitemap:
   changefreq: daily
   priority: 1
@@ -31,7 +35,6 @@ In this tutorial, let's setup a OAuth 2.0 Authorization server and a petstore se
 4. [Build resource server](#build_resource_server)
 5. [Test resource server](#test_resource_server)
 6. [Summary](#summary)
-7. [Complete code on Github!](#code_github_location)
 
 ### Prerequisites {#prerequisites}
 
@@ -594,20 +597,3 @@ curl -X GET http://localhost:8010/favouritePet \
 ### Summary {#summary}
 
 Congratulations! You just created an Spring Boot OAuth2 Authorization and Resource Servers with Jdbc Token Store and BCrypt Password Encoder.
-
-### Complete code on Github! {#code_github_location}
-
-**The complete code for this tutorial can be found [here](https://github.com/codeaches/oauth2-and-resource-servers){:target="_blank"}**
-
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post"
-    target="_top" style="text-align: center;">
-    <input type="hidden" name="cmd" value="_donations" /> <input
-        type="hidden" name="business" value="FLER29DWAYJ58" /> <input
-        type="hidden" name="currency_code" value="USD" /> <input type="image"
-        src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
-        border="0" name="submit"
-        title="PayPal - The safer, easier way to donate"
-        alt="Donate with PayPal button" /> <img alt="" border="0"
-        src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1"
-        height="1" />
-</form>

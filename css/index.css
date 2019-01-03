@@ -100,5 +100,5 @@
 }
 
 .post-preview .post-entry {
-  display: none;
+  display: inline-block;
 }
