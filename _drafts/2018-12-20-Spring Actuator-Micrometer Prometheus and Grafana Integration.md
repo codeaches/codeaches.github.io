@@ -9,6 +9,7 @@ permalink: /spring-actuator-micrometer-prometheus-grafana-integration/
 layout: post
 comments: true
 show-share: true
+show-subscribe: true
 gh-repo: codeaches/prometheus-micrometer-grafana-example
 gh-badge: [star, watch, follow]
 datacampcourse: false

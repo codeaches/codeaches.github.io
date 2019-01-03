@@ -9,6 +9,7 @@ permalink: /spring-security-oauth2-and-resource-server/
 layout: post
 comments: true
 show-share: true
+show-subscribe: true
 gh-repo: codeaches/oauth2-and-resource-servers
 gh-badge: [star, watch, follow]
 datacampcourse: false
