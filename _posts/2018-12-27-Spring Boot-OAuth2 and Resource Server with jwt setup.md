@@ -6,7 +6,7 @@ include-tags: true
 date: 2018-12-27 9:00:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
 share-img: /img/blog/oauth2server/oauth2server.jpg
-permalink: /jwt-spring-security-oauth2-and-resource-server/
+permalink: /blog/jwt-spring-security-oauth2-and-resource-server/
 layout: post
 comments: true
 show-share: true

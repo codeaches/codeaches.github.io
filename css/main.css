@@ -1168,29 +1168,29 @@ article[role=main] {
 }
 
 @media only screen and (max-width: 1149px) {
-  #deancarbonads.sm-horizontal #carbonads{
+  #codeaches-carbonads.sm-horizontal #carbonads{
     max-width: 400px;
     width: inherit; 
     float: none;
     margin: 0 auto 15px;
   }
-  #deancarbonads.sm-horizontal #carbonads span {
+  #codeaches-carbonads.sm-horizontal #carbonads span {
     position: relative;
   }
-  #deancarbonads.sm-horizontal .carbon-img {
+  #codeaches-carbonads.sm-horizontal .carbon-img {
     margin: 0 10px 0 0;
     float: left;
   }
-  #deancarbonads.sm-horizontal .carbon-img img {
+  #codeaches-carbonads.sm-horizontal .carbon-img img {
     margin-bottom: 0;
   }
-  #deancarbonads.sm-horizontal .carbon-text {
+  #codeaches-carbonads.sm-horizontal .carbon-text {
     margin-bottom: 0;
     float: left;
     text-align: left;
     max-width: calc(100% - 130px - 10px);
   }
-  #deancarbonads.sm-horizontal .carbon-poweredby {
+  #codeaches-carbonads.sm-horizontal .carbon-poweredby {
     position: absolute;
     right: 0;
     bottom: 0;
