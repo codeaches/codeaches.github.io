@@ -42,6 +42,7 @@ author:
   github: codeaches
   linkedin: "in/pavan-gurudutt"
   stackoverflow: "users/10859002/pavan-gurudutt"
+  calendly: "codeaches"
   
 # Select which links to show in the footer  
 footer-links-active:
@@ -52,7 +53,7 @@ footer-links-active:
   github: true
   linkedin: true
   stackoverflow: true
-  calendly: false
+  calendly: true
   telephone: false
   
 share-links-active:
