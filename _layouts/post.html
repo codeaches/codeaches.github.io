@@ -2,14 +2,18 @@
 layout: base
 ---
 {% include header.html type="post" %}
+
 <div class="container">
    <div class="row">
       <div class="col-lg-16 col-lg-offset-1 col-md-10 col-md-offset-1">
+
          {% include github-codebase-post-link.html %}
+
          {% if page.gh-repo %}
          {% assign gh_split =  page.gh-repo | split:'/'  %}
          {% assign gh_user =  gh_split[0]  %}
          {% assign gh_repo =  gh_split[1]  %}
+
          <div id="header-gh-btns">
             {% if page.gh-badge.size > 0 %}
             {% for badge in page.gh-badge %}
@@ -27,14 +31,21 @@ layout: base
             {% endif %}
          </div>
          {% endif %}
+
          <article role="main" class="blog-post">
+
             {% include carbonads.html %}
             {{ content }}
+
          </article>
+
          {% include github-codebase-post-link.html %}
+
          {% include paypal-donate-button.html %}
+
          {% if page.include-tags %}
          {% if page.tags %}
+
          <div class="blog-tags">
             Tags:
             {% if site.link-tags %}
@@ -47,12 +58,15 @@ layout: base
          </div>
          {% endif %}
          {% endif %}
-         <!--
-            {% include share-section.html %}
-            -->
+
+         
+         {% include share-section.html %}
+
          {% if page.social-share %}
          {% include social-share.html %}
+
          {% endif %}
+
          <ul class="pager blog-pager">
             {% if page.previous.url %}
             <li class="previous">
