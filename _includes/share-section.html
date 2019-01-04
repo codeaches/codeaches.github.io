@@ -4,22 +4,26 @@
     
     {% if page.show-share %}
       <div class="share-buttons">
-        {% capture urlmessage %}{{ site.url }}/contact{% endcapture %}
+        
+		{% capture urlmessage %}{{ site.url }}/contact{% endcapture %}
         
         {% capture urlfb %}https://www.facebook.com/dialog/feed?app_id={{ site.fb_app_id }}&link={{ site.url }}{{ page.url }}&name={{ page.title }}&caption={{ site.url-pretty }}&redirect_uri={{ site.url }}{{ page.url }}?message=Thanks for sharing!{% endcapture %}
-        {% if page.share-img %}
+        
+		{% if page.share-img %}
           {% capture urlfb %}{{ urlfb }}&picture={{ page.share-img }}{% endcapture %}
         {% endif %}
 
         {% capture urltwitter %}https://twitter.com/intent/tweet?url={{ site.url }}{{ page.url }}&via=codeaches{% endcapture %}
-        {% if page.tags contains 'rstats' %}
+        
+		{% if page.tags contains 'rstats' %}
           {% assign maxlength = 94 %}
           {% capture urltwitter %}{{ urltwitter }}&hashtags=rstats{% endcapture %}
         {% else %}
           {% assign maxlength = 102 %}
         {% endif %}
-        {% capture urltwitter %}{{ urltwitter }}&text={{ page.title | truncate: maxlength }}{% endcapture %}
         
+		{% capture urltwitter %}{{ urltwitter }}&text={{ page.title | truncate: maxlength }}{% endcapture %}
+
         <a href="{{ urlmessage }}" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="{{ page.url }}">
           Contact me
         </a>
