@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Projects
-subtitle: How do I waste my personal time?
+subtitle: Yes to build this page
 comments: false
-carbonads: false
 ---

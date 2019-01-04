@@ -5,11 +5,11 @@ subtitle: Spring Cloud Tutorial
 css: "/css/index.css"
 meta-title: "Pavan Gurudutt - Java Application Programmer"
 meta-description: "Java Application Programmer and consultant with a Bachelor's degree in Electronics and Communications"
-bigimg:
-  - "/img/big-imgs/big2.jpeg" : "Somewhere beautiful (2018)"  
 ---
-
-<!-- site.tags.tutorial -->
+<!--
+bigimg:
+- "/img/big-imgs/big2.jpeg" : "Somewhere beautiful (2018)"  
+-->
 
 <div class="list-filters">
    <a href="/" class="list-filter filter-selected">All posts</a> <a
