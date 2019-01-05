@@ -2,6 +2,7 @@
 layout: default
 title: "Search codeaches.com"
 css: "/css/search.css"
+ads-by-google: true
 ---
 
 ### Search on codeaches website

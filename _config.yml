@@ -95,6 +95,7 @@ defaults:
       paypal-donate-button: false
       github-codebase-post-link: false
       include-tags: false
+      ads-by-google: false
   -
     scope:
       path: "" # all files
