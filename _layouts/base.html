@@ -20,7 +20,7 @@ common-js:
   {% include head.html %}
 
   <body>
-  
+
     {% include nav.html %}
 
     {{ content }}
@@ -28,12 +28,8 @@ common-js:
     {% include footer.html %}
     
     {% include footer-scripts.html %}
-
-    {% if page.addthis-plugin %} 
-	  <!-- Go to www.addthis.com/dashboard to customize your tools --> 
-	  <!-- https://www.addthis.com/dashboard#account-settings -->
-	  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c2f5a74f5bb3192"></script>
-    {% endif %}
+    
+    {% include addthis-plugin-link.html %}
 
   </body>
 </html>
