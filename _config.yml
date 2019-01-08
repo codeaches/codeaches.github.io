@@ -102,6 +102,7 @@ defaults:
     values:
       layout: "page"
       show-avatar: true
+      popular-tutorials: false
 
 # Use tags index page and make tags on each post clickable
 link-tags: true

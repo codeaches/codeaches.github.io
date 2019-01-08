@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Spring Security OAuth2 and Resource Server with JSON Web Token (JWT)"
+tiny_title: "Oauth2+JWT"
 tags: [auth server,resource server,json web token,jwt,rstats,r-bloggers,tutorial,popular]
 include-tags: true
 date: 2018-12-27 9:00:00 -0700
