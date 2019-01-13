@@ -61,7 +61,7 @@ cf login -a api.run.pivotal.io -u "<email>" -p "<password>"  -o "<org>" -s "<spa
 
 **Add the required services from marketplace for SCDF Server**
 
-Open the command line terminal and execute the below command to create a rabbitmq, redis and mysql service from marketplace.
+Open the command prompt and execute the below commands to create a rabbitmq, redis and mysql service from marketplace. These are used by SCDF servers and stream applications.
 
 ```sh
 cf create-service cloudamqp lemur rabbit
@@ -158,7 +158,7 @@ Connect to SCDF Server from the SCDF shell prompt
 server-unknown:>dataflow config server https://data-flow-server-fantastic-pangolin.cfapps.io
 ```
 
->`https://data-flow-server-fantastic-pangolin.cfapps.io` is a random route assigned by PCF to SCDF server. Yours will be different.
+>`https://data-flow-server-fantastic-pangolin.cfapps.io` is a random route assigned by PCF to SCDF server. Check yours by executing the command `cf apps`.
 
 
 Deploy out-of-the-box http source and log sink applications.
