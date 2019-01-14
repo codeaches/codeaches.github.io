@@ -43,14 +43,12 @@ In this tutorial, let's deploy SCDF server to PCF and use this server to create 
 ### 1. Prerequisites {#prerequisites}
 
  - JDK 8
- - [An account on Pivotal Cloud Foundry](https://console.run.pivotal.io/){:target="_blank"}
- - PCF CLI installed on your computer
- 
-> PCF CLI can be found in `tools` section of your [PCF account](https://console.run.pivotal.io/tools){:target="_blank"}
+ - An account on Pivotal Cloud Foundry (PCF). You can create one [here](https://console.run.pivotal.io/){:target="_blank"}
+ - PCF Command Line Interface (CLI) installed on your computer. PCF CLI can be found in `tools` section of your [PCF account](https://console.run.pivotal.io/tools){:target="_blank"}
 
 ### 2. Add Services from PCF Marketplace {#add_services_marketplace}
 
->SCDF Server needs redis, rabbitmq and mysql services. Hence, create redis, rabbitmq and mysql services before the SCDF Server installation. 
+SCDF Server needs redis, rabbitmq and mysql services. Hence, create redis, rabbitmq and mysql services before the SCDF Server installation. 
 
 **Log into your PCF account using `cf` command**
 
@@ -78,7 +76,7 @@ mysql    cleardb      spark                create succeeded
 rabbit   cloudamqp    lemur                create succeeded
 redis    rediscloud   30mb                 create succeeded
 ```
-### 3. Download and Deploy SCDF to PCF {#download_deploy_scdf_to_pcf}
+### 3. Download SCDF Server and deploy it to PCF {#download_deploy_scdf_to_pcf}
 
 Let's download the SCDF Server jar file for pivotal using wget command.
 
@@ -87,7 +85,7 @@ wget http://repo.spring.io/release/org/springframework/cloud/spring-cloud-datafl
 ```
 >The latest version of SCDF Server for PCF can be found [here](http://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-server-cloudfoundry/){:target="_blank"}
 
-Lets create a `manifest.yml` file.
+Lets create a deployment `manifest.yml` file for SCDF Server.
 
 ```yml
 ---
@@ -140,7 +138,6 @@ Let's download the SCDF shell jar file using wget command.
 ```sh
 wget http://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-shell/1.7.3.RELEASE/spring-cloud-dataflow-shell-1.7.3.RELEASE.jar
 ```
->The latest version of SCDF shell for PCF can be found [here](http://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-shell/){:target="_blank"}
 
 ### 5. Create a `http|log` Stream {#create_htp_log_stream}
 
@@ -149,7 +146,7 @@ wget http://repo.spring.io/release/org/springframework/cloud/spring-cloud-datafl
 Trigger the below command to bring up the scdf shell.
 
 ```sh
-java.exe -jar spring-cloud-dataflow-shell-1.7.3.RELEASE.jar
+java -jar spring-cloud-dataflow-shell-1.7.3.RELEASE.jar
 ```
 
 Connect to SCDF Server from the SCDF shell prompt
@@ -173,7 +170,7 @@ Create a simple ``http|log`` stream which takes a HTTP POST request and prints t
 ```sh
 dataflow:>stream create --name httptest --definition "http|log" --deploy
 ```
->Once the stream creation and deployment is successful, PCF creates randon routes for both log and sink applications as shown below.
+>Once the stream creation and deployment is successful, PCF creates random routes (urls) for both log and sink applications as shown below.
 
 `cf apps`
 ```logs
@@ -184,10 +181,10 @@ data-flow-server-J6KspTQ-httptest-log    started           1/1         1G       
 
 ### 6. Test the Stream {#test_stream}
 
-Post a sample `hello world` message to `httptest` stream application as shown below.
+Post a sample `hello world` message to `http` application as shown below. The message will be picked up by `http` app and passed to `log` application. 
 
 ```sh
-http post --target https://data-flow-server-j6ksptq-httptest-http.cfapps.io --data "hello world"
+dataflow:>http post --target https://data-flow-server-j6ksptq-httptest-http.cfapps.io --data "hello world"
 ```
 
 ### 7. Summary {#summary}
