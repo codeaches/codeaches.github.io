@@ -48,7 +48,7 @@ In this tutorial, let's deploy SCDF Server to PCF and deploy a simple ``http|log
 
 ### 2. Add Services from PCF Marketplace {#add_services_marketplace}
 
-SCDF Server needs redis, rabbitmq and mysql services. Hence, create redis, rabbitmq and mysql services before the SCDF Server installation. 
+SCDF Server needs redis, rabbitmq and mysql services. Let's create them before we install SCDF Server.
 
 **Log into your PCF account using `cf` command**
 
@@ -59,7 +59,7 @@ $ cf login -a api.run.pivotal.io -u "<email>" -p "<password>"  -o "<org>" -s "<s
 
 **Add the required services from marketplace for SCDF Server**
 
-Open the command prompt and execute the below commands to create a rabbitmq, redis and mysql service from marketplace. These are used by SCDF servers and stream applications.
+Execute the below commands to create a rabbitmq, redis and mysql service from marketplace. These are used by SCDF servers and stream applications.
 
 ```sh
 $ cf create-service cloudamqp lemur rabbit
@@ -68,7 +68,7 @@ $ cf create-service cleardb spark mysql
 ```
 >Complete list of `cf` commands can be found [here](http://cli.cloudfoundry.org/en-US/cf/){:target="_blank"}
 
-**Validate that all the 3 services are in good state by executing the command `cf services`**
+**Validate that all the 3 services are in good state by executing the command `$ cf services`**
 
 ```log
 name     service      plan    bound apps   last operation
