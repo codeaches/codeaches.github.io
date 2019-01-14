@@ -17,7 +17,7 @@ gh-repo: codeaches/scdf-pcf-stream
 github-codebase-post-link: true
 gh-badge: [star, watch, follow]
 preview-length: 50
-preview-message: Download and deploy Spring Cloud Data Flow Server to PCF and Create a sample http|log Stream
+preview-message: Download and deploy Spring Cloud Data Flow Server to Pivotal Cloud Foundry (PCF) and create a simple http|log Stream
 lastupdated: 2019-01-14
 paypal-donate-button: true
 ads-by-google: true
