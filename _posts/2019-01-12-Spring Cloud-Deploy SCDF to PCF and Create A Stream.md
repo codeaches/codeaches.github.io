@@ -28,7 +28,7 @@ sitemap:
 
 Spring Cloud Data Flow (SCDF) is a toolkit for building data integration and real-time data processing pipelines. The SCDF server uses Spring Cloud Deployer, to deploy data pipelines onto modern runtimes such as Cloud Foundry (PCF).
 
-In this tutorial, let's deploy SCDF Server to PCF and deploy a simple ``http|log`` stream using the Data Flow Server.
+In this tutorial, let's create a simple ``http|log`` stream which consumes payload over HTTP and prints it. We shall use an out-of-the-box `http` application which is a REST service which consumes the data and pushes it to the queue. We shall use out-of-the-box `log` application which consumes the data from queue and prints it to the log file. We need Spring Cloud Data Flow Server (SCDF) for creating and deploying the stream to cloudfoundry which we shall download and install as well, as part of this tutorial.
 
 ### Table of contents {#table_of_contents}
 
@@ -66,7 +66,6 @@ $ cf create-service cloudamqp lemur rabbit
 $ cf create-service rediscloud 30mb redis
 $ cf create-service cleardb spark mysql
 ```
->Complete list of `cf` commands can be found [here](http://cli.cloudfoundry.org/en-US/cf/){:target="_blank"}
 
 **Validate that all the 3 services are in good state by executing the command `$ cf services`**
 
@@ -189,4 +188,4 @@ dataflow:>http post --target https://data-flow-server-j6ksptq-httptest-http.cfap
 
 ### 7. Summary {#summary}
 
-Congratulations! You just deployed a stream on PCF using SCDF Server. You can refer to official SCDF documentation [here](https://docs.spring.io/spring-cloud-dataflow-server-cloudfoundry/docs/current/reference/htmlsingle/){:target="_blank"}
+Congratulations! You just deployed a stream on PCF using SCDF Server.
