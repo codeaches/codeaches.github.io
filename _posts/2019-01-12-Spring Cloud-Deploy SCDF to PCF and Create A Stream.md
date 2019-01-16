@@ -52,37 +52,69 @@ SCDF Server needs redis, rabbitmq and mysql services. Let's create them before w
 
 **Log into your PCF account using `cf` command**
 
+>Replace `<email>`, `<password>`, `<org>` and `<space>` with values specific to your cloudfoundry account.
+
 ```sh
 $ cf login -a api.run.pivotal.io -u "<email>" -p "<password>"  -o "<org>" -s "<space>"
+
+API endpoint: api.run.pivotal.io
+Authenticating...
+OK
+Targeted org <org>
+Targeted space <space>
+
+API endpoint:   https://api.run.pivotal.io (API version: 2.128.0)
+User:           <email>
+Org:            <org>
+Space:          <space>
 ```
->Replace `<email>`, `<password>`, `<org>` and `<space>` with values specific to your account.
 
 **Add the required services from marketplace for SCDF Server**
 
-Execute the below commands to create a rabbitmq, redis and mysql service from marketplace. These are used by SCDF servers and stream applications.
+ - SCDF server needs a valid Redis store for its analytic repository. 
+ - It also needs an RDBMS for storing stream/task definitions, application registration, and for job repositories. 
+ - RabbitMQ is used as a messaging middleware between streaming apps and is bound to each deployed streaming app. Kafka is other option. Let's stick with rabbit for this tutorial purposes.
+
+For the above mentioned purposes, let's create rabbitmq, redis and mysql services from marketplace, using the below `cf` commands.
 
 ```sh
-$ cf create-service cloudamqp lemur rabbit
-$ cf create-service rediscloud 30mb redis
-$ cf create-service cleardb spark mysql
+$ cf create-service cloudamqp lemur my_rabbit
+Creating service instance my_rabbit in org <org> / space <space> as <email>...
+OK
+
+$ cf create-service rediscloud 30mb my_redis
+Creating service instance my_redis in org <org> / space <space> as <email>...
+OK
+
+$ cf create-service cleardb spark my_mysql
+Creating service instance my_mysql in org <org> / space <space> as <email>...
+OK
+
 ```
 
-**Validate that all the 3 services are in good state by executing the command `$ cf services`**
+**Validate that all the 3 services are created successfully**
 
-```log
-name     service      plan    bound apps   last operation
-mysql    cleardb      spark                create succeeded
-rabbit   cloudamqp    lemur                create succeeded
-redis    rediscloud   30mb                 create succeeded
+```sh
+$ cf services
+Getting services in org <org> / space <space> as <email>....
+
+name        service      plan    bound apps   last operation
+my_mysql    cleardb      spark                create succeeded
+my_rabbit   cloudamqp    lemur                create succeeded
+my_redis    rediscloud   30mb                 create succeeded
 ```
-### 3. Download SCDF Server and deploy it to PCF {#download_deploy_scdf_to_pcf}
 
-Let's download the SCDF Server jar file for pivotal using wget command.
+### 3. Download SCDF Server and deploy it to cloudfoundry {#download_deploy_scdf_to_pcf}
+
+**Download SCDF server jar file**
+
+Let's download `spring-cloud-dataflow-server-cloudfoundry-1.7.3.RELEASE.jar` jar file from Spring repo using `wget` command.
 
 ```sh
 $ wget http://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-server-cloudfoundry/1.7.3.RELEASE/spring-cloud-dataflow-server-cloudfoundry-1.7.3.RELEASE.jar
 ```
->The latest version of SCDF Server for PCF can be found [here](http://repo.spring.io/release/org/springframework/cloud/spring-cloud-dataflow-server-cloudfoundry/){:target="_blank"}
+
+>Version 1.7.3.RELEASE was the latest one during this tutorial creation. 
 
 Let's provide configuration details like credentials to the Cloud Foundry instance so that the SCDF Server can itself spawn applications. Let's specify these configuration details in `manifest.yml` file.
 
@@ -103,34 +135,43 @@ applications:
     SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_USERNAME: {email}
     SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_PASSWORD: {password}
     SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_DOMAIN: cfapps.io
-    SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_STREAM_SERVICES: rabbit
-    SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_TASK_SERVICES: mysql
+    SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_STREAM_SERVICES: my_rabbit
+    SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_TASK_SERVICES: my_mysql
     SPRING_CLOUD_DEPLOYER_CLOUDFOUNDRY_SKIP_SSL_VALIDATION: true
     SPRING_APPLICATION_JSON: '{"maven": { "remote-repositories": { "repo1": { "url": "https://repo.spring.io/libs-release"} } } }'
   services:
-    - mysql
-    - redis
+    - my_mysql
+    - my_redis
 ```
 
->You need to replace {org}, {space}, {email} and {password} with values specific to your account.
+>You need to replace {org}, {space}, {email} and {password} with values specific to your cloudfoundry account.
 
-**Deploy Spring Cloud Data Flow jar specific to cloudfoundry to Pivotal**
+**Deploy SCDF server jar file to cloudfoundry**
 
-Deploy `spring-cloud-dataflow-server-cloudfoundry-1.7.3.RELEASE.jar` to PCF using the `cf push` command
+Deploy `spring-cloud-dataflow-server-cloudfoundry-1.7.3.RELEASE.jar` to PCF using the `cf push` command.
 
 ```sh
 $ cf push -f manifest.yml
 ```
 
-**Validate the deployment**
+**Validate the SCDF server deployment**
 
-Execute the `$ cf apps` command to verify the SCDF Server status on PCF> It should be up and running.
+Verify the SCDF Server deployment status on cloudfoundry.
 
-```log
-name              requested state   instances   memory   disk   urls
-dataflow-server   stopped           0/1         768M     2G     dataflow-server-wacky-bear.cfapps.io
+```sh
+$ cf apps
+Getting apps in org <org> / space <space> as as <email>...
+OK
+
+name               requested state   instances   memory   disk   urls
+data-flow-server   started           1/1         2G       2G     data-flow-server-smart-meerkat.cfapps.io
 ```
+
+> `data-flow-server-smart-meerkat.cfapps.io` is a random route generated by cloudfoundry for the deployed SCDF server.
+
 ### 4. Download Spring Cloud Dataflow Shell {#download_scdf_shell}
+
+`Spring Cloud Dataflow Shell` is a command line interface (CLI) which can be used to connect to SCDF Server. We shall use this CLI to deploy streams. 
 
 Let's download the SCDF shell jar file using wget command.
 
@@ -146,44 +187,78 @@ The below command brings up the scdf shell application.
 
 ```sh
 $ java -jar spring-cloud-dataflow-shell-1.7.3.RELEASE.jar
+  ____                              ____ _                __
+ / ___| _ __  _ __(_)_ __   __ _   / ___| | ___  _   _  __| |
+ \___ \| '_ \| '__| | '_ \ / _` | | |   | |/ _ \| | | |/ _` |
+  ___) | |_) | |  | | | | | (_| | | |___| | (_) | |_| | (_| |
+ |____/| .__/|_|  |_|_| |_|\__, |  \____|_|\___/ \__,_|\__,_|
+  ____ |_|    _          __|___/                 __________
+ |  _ \  __ _| |_ __ _  |  ___| | _____      __  \ \ \ \ \ \
+ | | | |/ _` | __/ _` | | |_  | |/ _ \ \ /\ / /   \ \ \ \ \ \
+ | |_| | (_| | || (_| | |  _| | | (_) \ V  V /    / / / / / /
+ |____/ \__,_|\__\__,_| |_|   |_|\___/ \_/\_/    /_/_/_/_/_/
+
+1.7.3.RELEASE
+
+Welcome to the Spring Cloud Data Flow shell. For assistance hit TAB or type "help".
+server-unknown:>
 ```
 
-Connect to SCDF Server from the SCDF shell prompt
+Connect to SCDF Server using the route generated by cloudfoundry for the SCDF server.
 
 ```sh
-server-unknown:>dataflow config server https://data-flow-server-fantastic-pangolin.cfapps.io
+server-unknown:>dataflow config server https://data-flow-server-smart-meerkat.cfapps.io
+Shell mode: classic, Server mode: classic
+dataflow:>
 ```
 
->`https://data-flow-server-fantastic-pangolin.cfapps.io` is a random route assigned by PCF to SCDF server. Check yours by executing the command `cf apps`.
+>`https://data-flow-server-smart-meerkat.cfapps.io` is a random route assigned by PCF to SCDF server.
 
 
-Deploy out-of-the-box http source and log sink applications.
+Cloudfoundry provides with few out-of-the-box source and sink spring boot applications which can be used for stream creation. Lets register the out-of-the-box `http` and `log` spring boot apps, specific to `rabbit` messaging broker, in SCDF server.
 
 ```sh
 dataflow:>app register --name http --type source --uri maven://org.springframework.cloud.stream.app:http-source-rabbit:2.0.3.RELEASE
+Successfully registered application 'source:http'
+
 dataflow:>app register --name log --type sink --uri maven://org.springframework.cloud.stream.app:log-sink-rabbit:2.0.2.RELEASE
+Successfully registered application 'sink:log'
 ```
 
-Create a simple ``http|log`` stream which takes a HTTP POST request and prints the body in log file.
+Let's utilize the above registered apps `http` and `log` to create ``http|log`` stream. This stream, `httptest`, will take HTTP POST request and prints the body in log file.
 
 ```sh
 dataflow:>stream create --name httptest --definition "http|log" --deploy
+Created new stream 'httptest'
+Deployment request has been sent
 ```
->Once the stream creation and deployment is successful, PCF creates random routes (urls) for both log and sink applications as shown below.
+>Here, `http` is the source app and `log` is the sink app.
+>>Once the stream creation and deployment is successful, PCF creates random routes (urls) for both log and sink applications which can be validated using `cf apps` command.
 
-`$ cf apps`
-```logs
+```sh
+$ cf apps
+Getting apps in org codeaches_info002 / space development as info002@codeaches.com...
+OK
+
 name                                     requested state   instances   memory   disk   urls
-data-flow-server-J6KspTQ-httptest-http   started           1/1         1G       1G     data-flow-server-J6KspTQ-httptest-http.cfapps.io
-data-flow-server-J6KspTQ-httptest-log    started           1/1         1G       1G     data-flow-server-J6KspTQ-httptest-log.cfapps.io
+data-flow-server-vRKePCJ-httptest-http   started           0/1         1G       1G     data-flow-server-vRKePCJ-httptest-http.cfapps.io
+data-flow-server-vRKePCJ-httptest-log    started           1/1         1G       1G     data-flow-server-vRKePCJ-httptest-log.cfapps.io
 ```
 
 ### 6. Test the Stream {#test_stream}
 
-Post a sample `hello world` message to `http` application as shown below. The message will be picked up by `http` app and passed to `log` application. 
+Post a sample `hello world` message to `http` application using the route `data-flow-server-vRKePCJ-httptest-http.cfapps.io` as shown below. The message will be picked up by `http` app and passed to `log` application.
 
 ```sh
-dataflow:>http post --target https://data-flow-server-j6ksptq-httptest-http.cfapps.io --data "hello world"
+$ curl -i -H "Content-Type:application/text" -X POST -d 'hello world' https://data-flow-server-vRKePCJ-httptest-http.cfapps.io
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    15    0     0  100    15      0     21 --:--:-- --:--:-- --:--:--    21HTTP/1.1 202 Accepted
+Date: Wed, 16 Jan 2019 04:43:55 GMT
+X-Vcap-Request-Id: f0282b62-c09f-4c23-4e90-0f374ba2cca9
+Content-Length: 0
+Connection: keep-alive
 ```
 
 ### 7. Summary {#summary}
