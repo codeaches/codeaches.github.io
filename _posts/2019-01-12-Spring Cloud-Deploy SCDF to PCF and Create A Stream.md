@@ -18,7 +18,7 @@ github-codebase-post-link: true
 gh-badge: [star, watch, follow]
 preview-length: 50
 preview-message: Download and deploy Spring Cloud Data Flow Server to Pivotal Cloud Foundry (PCF) and create a simple http|log Stream
-lastupdated: 2019-01-15
+lastupdated: 2019-01-16
 paypal-donate-button: true
 ads-by-google: true
 sitemap:
@@ -228,11 +228,11 @@ Successfully registered application 'sink:log'
 Let's utilize the above registered apps `http` and `log` to create ``http|log`` stream. This stream, `httptest`, will take HTTP POST request and prints the body in log file.
 
 ```sh
-dataflow:>stream create --name httptest --definition "http|log" --deploy
+dataflow:>stream create --name httptest --definition "myHttpSourceApp: http | myLogSinkApp: log" --deploy
 Created new stream 'httptest'
 Deployment request has been sent
 ```
->Here, `http` is the source app and `log` is the sink app.
+>Here, `myHttpSourceApp` is a spring boot application of type `http` and `myLogSinkApp` is a spring boot application of type `log`.
 >>Once the stream creation and deployment is successful, PCF creates random routes (urls) for both log and sink applications which can be validated using `cf apps` command.
 
 ```sh
@@ -240,17 +240,24 @@ $ cf apps
 Getting apps in org codeaches_info002 / space development as info002@codeaches.com...
 OK
 
-name                                     requested state   instances   memory   disk   urls
-data-flow-server-vRKePCJ-httptest-http   started           0/1         1G       1G     data-flow-server-vRKePCJ-httptest-http.cfapps.io
-data-flow-server-vRKePCJ-httptest-log    started           1/1         1G       1G     data-flow-server-vRKePCJ-httptest-log.cfapps.io
+name                                                requested state   instances   memory   disk   urls
+data-flow-server-w5ihf2T-httptest-myHttpSourceApp   stopped           0/1         1G       1G     data-flow-server-w5ihf2T-httptest-myHttpSourceApp.cfapps.io
+data-flow-server-w5ihf2T-httptest-myLogSinkApp      started           0/1         1G       1G     data-flow-server-w5ihf2T-httptest-myLogSinkApp.cfapps.io
 ```
 
 ### 6. Test the Stream {#test_stream}
 
-Post a sample `hello world` message to `http` application using the route `data-flow-server-vRKePCJ-httptest-http.cfapps.io` as shown below. The message will be picked up by `http` app and passed to `log` application.
+Once the `log` application is up and running, you can verify the logs using `cf` command.
 
 ```sh
-$ curl -i -H "Content-Type:application/text" -X POST -d 'hello world' https://data-flow-server-vRKePCJ-httptest-http.cfapps.io
+cf logs data-flow-server-w5ihf2T-httptest-myLogSinkApp
+Retrieving logs for app data-flow-server-w5ihf2T-httptest-myLogSinkApp in org <org> / space <space> as <email>...
+```
+
+Post a sample `hello world` message to `http` application using the route `data-flow-server-w5ihf2T-httptest-myHttpSourceApp.cfapps.io` as shown below. The message will be picked up by `http` app and passed to `log` application.
+
+```sh
+$ curl -i -H "Content-Type:application/text" -X POST -d 'hello world' https://data-flow-server-w5ihf2T-httptest-myHttpSourceApp.cfapps.io
 
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -259,6 +266,14 @@ Date: Wed, 16 Jan 2019 04:43:55 GMT
 X-Vcap-Request-Id: f0282b62-c09f-4c23-4e90-0f374ba2cca9
 Content-Length: 0
 Connection: keep-alive
+```
+
+**Check the logs of `log` application in cloudfoundry using the `cf` command**
+
+Once the message is posted successfully, you can verify the logs of `log` application, as the following example shows:
+
+```sh
+2019-01-16T06:39:43.77-0700 [APP/PROC/WEB/0] OUT 2019-01-16 13:39:43.758  INFO 13 --- [eApp.httptest-1] low-server-w5ihf2T-httptest-myLogSinkApp : hello world
 ```
 
 ### 7. Summary {#summary}
