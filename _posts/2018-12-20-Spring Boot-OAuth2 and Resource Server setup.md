@@ -2,7 +2,7 @@
 layout: post
 title: "Spring Security OAuth2 and Resource Server with JDBC Token Store and BCrypt Password Encoder"
 tiny_title: "Oauth2+JDBC Token Store"
-tags: [auth server,resource server,jdbc token store,bcrypt password encoder,rstats,r-bloggers,tutorial,popular]
+tags: [java,spring boot,spring cloud,oauth2,auth server,resource server,jdbc token store,bcrypt password encoder,rstats,r-bloggers,tutorial,popular]
 include-tags: true
 date: 2018-12-20 9:00:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
