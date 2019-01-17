@@ -10,8 +10,8 @@ share-img: /img/blog/oauth2server/oauth2server.jpg
 permalink: /blog/deploy-scdf-to-pcf-and-create-a-stream/
 layout: post
 comments: true
-show-share: true
-show-subscribe: true
+show-share: false
+show-subscribe: false
 social-share: false
 gh-repo: codeaches/scdf-pcf-stream
 github-codebase-post-link: true
@@ -241,7 +241,7 @@ Getting apps in org codeaches_info002 / space development as info002@codeaches.c
 OK
 
 name                                                requested state   instances   memory   disk   urls
-data-flow-server-w5ihf2T-httptest-myHttpSourceApp   stopped           0/1         1G       1G     data-flow-server-w5ihf2T-httptest-myHttpSourceApp.cfapps.io
+data-flow-server-w5ihf2T-httptest-myHttpSourceApp   started           0/1         1G       1G     data-flow-server-w5ihf2T-httptest-myHttpSourceApp.cfapps.io
 data-flow-server-w5ihf2T-httptest-myLogSinkApp      started           0/1         1G       1G     data-flow-server-w5ihf2T-httptest-myLogSinkApp.cfapps.io
 ```
 

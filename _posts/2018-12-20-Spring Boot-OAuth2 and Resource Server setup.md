@@ -10,8 +10,8 @@ share-img: /img/blog/oauth2server/oauth2server.jpg
 permalink: /blog/spring-security-oauth2-and-resource-server/
 layout: post
 comments: true
-show-share: true
-show-subscribe: true
+show-share: false
+show-subscribe: false
 social-share: false
 gh-repo: codeaches/oauth2-and-resource-servers
 github-codebase-post-link: true
