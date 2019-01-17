@@ -26,7 +26,7 @@ sitemap:
   priority: 1
 ---
 
-Spring Cloud Data Flow (SCDF) is a toolkit for building data integration and real-time data processing pipelines. The SCDF server uses Spring Cloud Deployer, to deploy data pipelines onto modern runtimes such as Cloud Foundry (PCF).
+Spring Cloud Data Flow (SCDF) is a toolkit for building data integration and real-time data processing pipelines. The SCDF server uses Spring Cloud Deployer, to deploy data pipelines onto modern runtimes such as Cloud Foundry (PCF). 
 
 In this tutorial, let's create a simple ``http|log`` stream which consumes payload over HTTP and prints it. We shall use an out-of-the-box `http` application which is a REST service which consumes the data and pushes it to the queue. We shall use out-of-the-box `log` application which consumes the data from queue and prints it to the log file. We need Spring Cloud Data Flow Server (SCDF) for creating and deploying the stream to cloudfoundry which we shall download and install as well, as part of this tutorial.
 
