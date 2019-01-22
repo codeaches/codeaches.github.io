@@ -20,7 +20,7 @@ preview-length: 50
 preview-message: Setup OAuth 2.0 Authorization server and a petstore service which is protected Resource Server using JSON Web Token mechanism
 lastupdated: 2019-01-03
 paypal-donate-button: true
-ads-by-google: true
+ads-by-google: false
 sitemap:
   changefreq: daily
   priority: 1
