@@ -28,7 +28,7 @@ avatar: "/img/codeaches.png"
 
 # List of links in the navigation bar
 navbar-links:
-  Projects: "projects"
+##Projects: "projects"
   About Me / Contact: "aboutme"
 nav-search: "search"
 
