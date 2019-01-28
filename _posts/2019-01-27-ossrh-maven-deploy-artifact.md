@@ -3,12 +3,12 @@ layout: post
 title: "Maven Central: Deploy artifacts to Open Source Software Repository Hosting Service (OSSRH) with Apache Maven"
 tiny_title: "OSSRH+Maven"
 tags: [java,maven,maven repository,ossrh,ossrh account,deploy to repository,mvnrepository,sonatype,rstats,r-bloggers,tutorial,popular]
+meta-keywords: "java,maven,maven repository,ossrh,ossrh account,deploy to repository,mvnrepository,sonatype"
 include-tags: true
 date: 2019-01-25 7:10:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
 share-img: /img/blog/oauth2server/oauth2server.jpg
 permalink: /blog/deploy-jar-to-ossrh-apache-maven
-layout: post
 comments: true
 show-share: false
 show-subscribe: false
@@ -44,8 +44,8 @@ In this tutorial, let's create an account in OSSRH and deploy a jar file to OSSR
 
 ### 1. Prerequisites {#prerequisites}
 
- - JDK 8
- - Maven
+ - [Open Source JDK 11](https://jdk.java.net/11){:target="_blank"}
+ - [Apache Maven](https://maven.apache.org/download.cgi){:target="_blank"}
 
 ### 2. Create a ticket with Sonatype for requesting new Repository {#new_repo_request}
 
@@ -329,7 +329,7 @@ mvn clean deploy
 >The above command will build the code, create artifacts and deploy the artifact to [Sonatype snapshots](https://oss.sonatype.org/content/repositories/snapshots/){:target="_blank"} if our project has `-SNAPSHOT` in version attribute of `pom.xml` (<version>0.0.2-SNAPSHOT</version>)
 
 >The above command will build the code, create artifacts and deploy the artifact to [Sonatype releases](https://oss.sonatype.org/content/repositories/releases/){:target="_blank"} if our project does not have `-SNAPSHOT` in version attribute of `pom.xml` (<version>0.0.2</version>). This is basically used as a release version and ideally cannot be deleted.
->>Eventually, the release artifacts will show up on Central [OSSRH](https://mvnrepository.com/search?q=codeaches){:target="_blank"}. An email will be sent once this is completed.
+>>Eventually, the release artifacts will show up on Central [OSSRH](https://mvnrepository.com/search?q=codeaches){:target="_blank"}. It might take as long as 2 hours to update.
 
 ### 9. Summary {#summary}
 

@@ -11,10 +11,10 @@ meta-description: "Java Application Programmer and consultant with a Bachelor's 
    - "/img/big-imgs/big2.jpeg" : "Somewhere beautiful (2018)"  
    -->
 <div class="list-filters">
-   <a href="/" class="list-filter filter-selected">All posts</a> <a
+   <a href="/" class="list-filter">All posts</a> <a
       href="/popular" class="list-filter">Most Popular</a> <a
-      href="/tutorials" class="list-filter">Tutorials</a> <a href="/tags"
-      class="list-filter">Index</a>
+      href="/tutorials" class="list-filter filter-selected">Tutorials</a> <a 
+	  href="/tags" class="list-filter">Index</a>
 </div>
 <div class="posts-list">
    {% for post in site.tags.tutorial %}

@@ -3,12 +3,12 @@ layout: post
 title: "Spring Cloud: Deploy Spring Cloud Data Flow (SCDF) Server to Pivotal Cloud Foundry (PCF) and Create A Stream"
 tiny_title: "SCDF+PCF+Strem"
 tags: [java,spring boot,spring cloud,pcf,pivotal,cloudfoundry,scdf,spring cloud data flow server,Spring Cloud Dataflow Shell,stream,rstats,r-bloggers,tutorial,popular]
+meta-keywords: "java,spring boot,spring cloud,pcf,pivotal,cloudfoundry,scdf,spring cloud data flow server,Spring Cloud Dataflow Shell,stream"
 include-tags: true
 date: 2019-01-12 7:10:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
 share-img: /img/blog/oauth2server/oauth2server.jpg
 permalink: /blog/deploy-scdf-to-pcf-and-create-a-stream/
-layout: post
 comments: true
 show-share: false
 show-subscribe: false
