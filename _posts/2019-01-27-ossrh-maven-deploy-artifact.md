@@ -329,7 +329,7 @@ mvn clean deploy
 >The above command will build the code, create artifacts and deploy the artifact to [Sonatype snapshots](https://oss.sonatype.org/content/repositories/snapshots/){:target="_blank"} if our project has `-SNAPSHOT` in version attribute of `pom.xml` (<version>0.0.2-SNAPSHOT</version>)
 
 >The above command will build the code, create artifacts and deploy the artifact to [Sonatype releases](https://oss.sonatype.org/content/repositories/releases/){:target="_blank"} if our project does not have `-SNAPSHOT` in version attribute of `pom.xml` (<version>0.0.2</version>). This is basically used as a release version and ideally cannot be deleted.
->>Eventually, the release artifacts show up on Central [OSSRH](https://mvnrepository.com/search?q=codeaches){:target="_blank"}. An email will be sent once this is completed.
+>>Eventually, the release artifacts will show up on Central [OSSRH](https://mvnrepository.com/search?q=codeaches){:target="_blank"}. An email will be sent once this is completed.
 
 ### 9. Summary {#summary}
 
