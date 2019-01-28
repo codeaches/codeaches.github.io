@@ -2,7 +2,7 @@
 layout: post
 title: "Maven Central: Deploy artifacts to Open Source Software Repository Hosting Service (OSSRH) with Apache Maven"
 tiny_title: "OSSRH+Maven"
-tags: [java,maven,maven repository,ossrh,ossrh account,deploy to repository,rstats,r-bloggers,tutorial,popular]
+tags: [java,maven,maven repository,ossrh,ossrh account,deploy to repository,mvnrepository,sonatype,rstats,r-bloggers,tutorial,popular]
 include-tags: true
 date: 2019-01-25 7:10:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
@@ -17,7 +17,7 @@ gh-repo: codeaches/sample-ossrh-deploy-codebase
 github-codebase-post-link: true
 gh-badge: [star, watch, follow]
 preview-length: 50
-preview-message: Create an account in OSSRH and deploy a jar file using maven to snapshot and release folders in Central Repository
+preview-message: Create an account in OSSRH and deployed the artifacts to both snapshot and release folders in Central Repository
 lastupdated: 2019-01-28
 paypal-donate-button: true
 ads-by-google: false
