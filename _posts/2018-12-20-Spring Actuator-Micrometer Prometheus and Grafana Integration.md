@@ -2,7 +2,7 @@
 layout: post
 title: "Spring Boot Actuator: Micrometer, Prometheus and Grafana Integration"
 tags: [codeaches,java,openjdk,spring,spring boot,spring cloud,micrometer,prometheus,grafana,professional,rstats,r-bloggers,tutorial, popular]
-date: 2018-12-28 9:00:00 -0700
+date: 2022-12-31 23:59:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
 share-img: /img/blog/oauth2server/oauth2server.jpg
 permalink: /spring-actuator-micrometer-prometheus-grafana-integration/
