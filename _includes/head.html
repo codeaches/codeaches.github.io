@@ -78,10 +78,8 @@
   
   {% if page.id %}
   <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
-  <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
   {% else %}
   <meta property="og:url" content="{{ site.url }}{{ page.url | remove: '/index.html' | remove: '.html' }}" />
-  <link rel="canonical" href="{{ site.url }}{{ page.url | remove: '/index.html' | remove: '.html' }}" />
   {% endif %}
   
   {% if page.share-img %}
@@ -91,6 +89,7 @@
   {% endif %}
 
   <!-- Twitter summary cards -->
+  <!--
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@{{ site.author.twitter }}" />
   <meta name="twitter:creator" content="@{{ site.author.twitter }}" />
@@ -101,7 +100,7 @@
   {% elsif site.avatar %}
   <meta name="twitter:image" content="{{ site.url }}{{ site.avatar }}" />
   {% endif %}  
-  
+  -->
   
   {% if page.ads-by-google %}
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
