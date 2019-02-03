@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Spring Cloud: Install PCF Dev on Windows, deploy Spring Cloud Data Flow (SCDF) Server to PCF Dev and Create A Stream"
-tiny_title: "SCDF+PCF+Strem"
 tags: [java,spring boot,spring cloud,pcf,cfcli,pivotal,pcfdev,cloudfoundry,scdf,spring cloud data flow server,Spring Cloud Dataflow Shell,stream,rstats,r-bloggers,tutorial,popular]
 include-tags: true
 date: 2022-12-31 23:59:00 -0700

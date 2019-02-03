@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Maven Central: Deploy artifacts to Open Source Software Repository Hosting Service (OSSRH) with Apache Maven"
-tiny_title: "OSSRH+Maven"
 tags: [java,maven,maven repository,ossrh,ossrh account,deploy to repository,mvnrepository,sonatype,rstats,r-bloggers,tutorial,popular]
 meta-keywords: "java,maven,maven repository,ossrh,ossrh account,deploy to repository,mvnrepository,sonatype"
 include-tags: true
