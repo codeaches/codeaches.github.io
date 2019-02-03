@@ -7,7 +7,7 @@ include-tags: true
 date: 2019-01-25 7:10:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
 share-img: /img/blog/oauth2server/oauth2server.jpg
-permalink: /blog/deploy-jar-to-ossrh-apache-maven
+permalink: /blog/apache-maven-deploy-jar-to-ossrh-central-repository
 comments: true
 show-share: false
 show-subscribe: false
