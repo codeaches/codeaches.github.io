@@ -7,7 +7,7 @@ include-tags: true
 date: 2019-01-12 7:10:00 -0700
 image: /img/blog/oauth2server/oauth2server.jpg
 share-img: /img/blog/oauth2server/oauth2server.jpg
-permalink: /blog/deploy-scdf-to-pcf-and-create-a-stream/
+permalink: /blog/spring-cloud-pcf-deploy-scdf-create-stream/
 comments: true
 show-share: false
 show-subscribe: false

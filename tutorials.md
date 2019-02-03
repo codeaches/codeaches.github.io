@@ -1,15 +1,11 @@
 ---
 layout: page
 title: "Pavan's Blog"
-subtitle: Spring Cloud Tutorial
+subtitle: Spring Boot, Spring Cloud and Web Development tutorials
 css: "/css/index.css"
-meta-title: "Pavan Gurudutt - Java Application Programmer"
-meta-description: "Java Application Programmer and consultant with a Bachelor's degree in Electronics and Communications"
+meta-title: "Spring Boot, Spring Cloud and Web Development tutorials"
+meta-description: "Tutorial on Spring Boot and Spring Cloud Technology"
 ---
-<!--
-   bigimg:
-   - "/img/big-imgs/big2.jpeg" : "Somewhere beautiful (2018)"  
-   -->
 <div class="list-filters">
    <a href="/" class="list-filter">All posts</a> <a
       href="/popular" class="list-filter">Most Popular</a> <a
