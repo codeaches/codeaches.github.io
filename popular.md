@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Pavan's Blog"
+title: "Microservices with Spring"
 subtitle: Spring Boot, Spring Cloud and Web Development tutorials
 css: "/css/index.css"
 meta-title: "Spring Boot, Spring Cloud and Web Development tutorials"
