@@ -15,9 +15,10 @@ social-share: false
 gh-repo: codeaches/config-client-pcf-app
 github-codebase-post-link: true
 gh-badge: [star, watch, follow]
+references_file: references.md
 preview-length: 50
 preview-message: Register a Spring Cloud Config Server on PCF and create a sample spring cloud config client application which consumes the properties from config server by binding to it 
-lastupdated: 2019-02-03
+lastupdated: 2019-02-04
 paypal-donate-button: true
 ads-by-google: false
 sitemap:
@@ -85,7 +86,7 @@ $ cf create-service -c cfg.json p-config-server trial my-config-server
 
 ***Create a Spring Boot starter project using Spring Initializr***
 
-Let's utilize [spring initializr web tool]{:target="_blank"} and create a skeleton spring boot project for Spring Cloudfoundry config client application. I have updated Group field to **com.codeaches**, Artifact to **cfgclientpetstore** and selected `Web`,`Security` and `Config Client (PCF)    ` dependencies. I have selected Java Version as **11**
+Let's utilize [spring initializr web tool]{:target="_blank"} and create a skeleton spring boot project for Spring Cloudfoundry config client application. I have updated Group field to **com.codeaches**, Artifact to **cfgclientpetstore** and selected `Web`,`Security` and `Config Client (PCF)` dependencies. I have selected Java Version as **11**
 
 Click on `Generate Project`. The project will be downloaded as `config-client-pcf-app.zip` file on your hard drive.
 
@@ -229,17 +230,11 @@ My pet is dog
 ```sh
 $ curl -i -X GET https://cfg-client-pet-store-insightful-sitatunga.cfapps.io/petDetails
 
-My pet is dog
+Dog people know dog language
 ```
 
 ### 7. Summary {#summary}
 
 Congratulations! You just created a new spring boot rest application which gets the configuration data from spring cloud config server.
 
-[Open Source JDK 11]: https://jdk.java.net/11
-[Apache Maven 3.6.0]: https://maven.apache.org/download.cgi
-[Configuration GIT repository]: https://github.com/codeaches/config-files-example
-[Spring Tool Suite 4 IDE]: https://spring.io/tools
-[An account on Pivotal Cloud Foundry (PCF)]: https://console.run.pivotal.io/
-[PCF CLI account]: https://console.run.pivotal.io/tools
-[spring initializr web tool]: https://start.spring.io/
+{% include_relative {{ page.references_file }} %}

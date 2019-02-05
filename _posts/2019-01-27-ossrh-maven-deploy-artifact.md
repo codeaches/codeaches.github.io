@@ -15,9 +15,10 @@ social-share: false
 gh-repo: codeaches/sample-ossrh-deploy-codebase
 github-codebase-post-link: true
 gh-badge: [star, watch, follow]
+references_file: references.md
 preview-length: 50
 preview-message: Create an account in OSSRH and deployed the artifacts to both snapshot and release folders in Central Repository
-lastupdated: 2019-01-28
+lastupdated: 2019-02-04
 paypal-donate-button: true
 ads-by-google: false
 sitemap:
@@ -43,15 +44,15 @@ In this tutorial, let's create an account in OSSRH and deploy a jar file to OSSR
 
 ### 1. Prerequisites {#prerequisites}
 
- - [Open Source JDK 11](https://jdk.java.net/11){:target="_blank"}
- - [Apache Maven](https://maven.apache.org/download.cgi){:target="_blank"}
+ - [Open Source JDK 11]{:target="_blank"}
+ - [Apache Maven 3.6.0]{:target="_blank"}
 
 ### 2. Create a ticket with Sonatype for requesting new Repository {#new_repo_request}
 
 Sonatype uses JIRA to manage requests.
 
- - [Create your JIRA account](https://issues.sonatype.org/secure/Signup!default.jspa){:target="_blank"}
- - [Create a New Project ticket](https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&pid=10134){:target="_blank"}
+ - [Create your JIRA account]{:target="_blank"}
+ - [Create a New Project ticket]{:target="_blank"}
 
 This triggers creation of your repositories. Normally, the process takes few hours.
 
@@ -81,7 +82,7 @@ let's install GPG client software on our machine, create a key pair and distribu
 
 **install GPG tool**
 
-GPG client for Windows can be downloaded [here](https://www.gnupg.org/ftp/gcrypt/binary/gnupg-w32-2.2.12_20181214.exe){:target="_blank"}. Once the download is complete, install the software and validate using `command prompt`.
+GPG client for Windows can be downloaded at [gnupg website]{:target="_blank"}. Once the download is complete, install the software and validate using `command prompt`.
 
 ```sh
 $ gpg --version
@@ -119,10 +120,10 @@ Note: Use "gpg --full-generate-key" for a full featured key generation dialog.
 
 GnuPG needs to construct a user ID to identify your key.
 
-Real name: codeaches
+Real name: my-name
 Email address: myemail@mydomain.com
 You selected this USER-ID:
-    "codeaches <myemail@mydomain.com>"
+    "my-name <myemail@mydomain.com>"
 
 Change (N)ame, (E)mail, or (O)kay/(Q)uit? O
 We need to generate a lot of random bytes. It is a good idea to perform
@@ -141,7 +142,7 @@ public and secret key created and signed.
 
 pub   rsa2048 2019-01-27 [SC] [expires: 2021-01-26]
       A222222220DDBBBB0EAAAA991234567680CCCCCC
-uid                      codeaches <myemail@mydomain.com>
+uid                      my-name <myemail@mydomain.com>
 sub   rsa2048 2019-01-27 [E] [expires: 2021-01-26]
 ```
 
@@ -183,7 +184,7 @@ Configure `gpg.exe` location and passphase in maven `settings.xml`.
 
 ### 6. Create a maven project {#create_maven_project}
 
-For me, the easiest way to create a maven project is through [spring initializr web tool](https://start.spring.io/){:target="_blank"}. Let's utilize [spring initializr web tool](https://start.spring.io/){:target="_blank"} and create a skeleton spring boot project. I have updated Group field to **com.codeaches**, Artifact to **ossrhexample**. I have selected Java Version as **11**.
+For me, the easiest way to create a maven project is through [spring initializr web tool]{:target="_blank"}. Let's utilize [spring initializr web tool]{:target="_blank"} and create a skeleton spring boot project. I have updated Group field to **com.codeaches**, Artifact to **ossrhexample**. I have selected Java Version as **11**.
 
 Click on `Generate Project`. The project will be downloaded as `sample-ossrh-deploy-codebase.zip` file on your hard drive.
 
@@ -325,10 +326,10 @@ It's time to compile and deploy the code OSSRH. Let's trigger the maven build.
 mvn clean deploy
 ```
 
->The above command will build the code, create artifacts and deploy the artifact to [Sonatype snapshots](https://oss.sonatype.org/content/repositories/snapshots/){:target="_blank"} if our project has `-SNAPSHOT` in version attribute of `pom.xml` (<version>0.0.2-SNAPSHOT</version>)
+>The above command will build the code, create artifacts and deploy the artifact to [Sonatype snapshots]{:target="_blank"} if our project has `-SNAPSHOT` in version attribute of `pom.xml` (<version>0.0.2-SNAPSHOT</version>)
 
->The above command will build the code, create artifacts and deploy the artifact to [Sonatype releases](https://oss.sonatype.org/content/repositories/releases/){:target="_blank"} if our project does not have `-SNAPSHOT` in version attribute of `pom.xml` (<version>0.0.2</version>). This is basically used as a release version and ideally cannot be deleted.
->>Eventually, the release artifacts will show up on Central [OSSRH](https://mvnrepository.com/search?q=codeaches){:target="_blank"}. It might take as long as 2 hours to update.
+>The above command will build the code, create artifacts and deploy the artifact to [Sonatype releases]{:target="_blank"} if our project does not have `-SNAPSHOT` in version attribute of `pom.xml` (<version>0.0.2</version>). This is basically used as a release version and ideally cannot be deleted.
+>>Eventually, the release artifacts will show up on Central [OSSRH]{:target="_blank"}. It might take as long as 2 hours to update.
 
 ### 9. Summary {#summary}
 
@@ -336,5 +337,8 @@ Congratulations! You just created an account in OSSRH and deployed the artifacts
 
 ### 10. References
 
- - [PGP](https://central.sonatype.org/pages/working-with-pgp-signatures.html){:target="_blank"}
- - [OSSRH Guide](https://central.sonatype.org/pages/ossrh-guide.html#create-a-ticket-with-sonatype){:target="_blank"}
+ - [PGP]{:target="_blank"}
+ - [OSSRH Guide]{:target="_blank"}
+
+
+{% include_relative {{ page.references_file }} %}
