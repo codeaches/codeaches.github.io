@@ -74,9 +74,19 @@ Org:            <org>
 Space:          <space>
 ```
 
-***Add/Register ``Config Server Service``` from PCF Marketplace***
+***Create a  configuration file ``cfg.json``***
 
-Before registering the service, lets create a file `cfg.json` 
+```json
+{  
+  "git":{  
+    "uri":"https://github.com/codeaches/config-files-example.git",
+    "label":"master",
+    "searchPaths":"dev"
+  }
+}
+```
+
+***Register the ``config-server``***
 
 ```sh
 $ cf create-service -c cfg.json p-config-server trial my-config-server
