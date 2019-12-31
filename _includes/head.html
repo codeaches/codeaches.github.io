@@ -19,4 +19,8 @@
   {%- if site.environment == "production" and site.codeaches.google_adsense and page.google_adsense_disabled != true -%}
   {%- include google-adsense.html -%}
   {%- endif -%}
+
+  {%- if site.environment == "production" and page.mailchimp_connection_disabled != true -%}
+  {%- include mailchimp_connection.html -%}
+  {%- endif -%}
 </head>

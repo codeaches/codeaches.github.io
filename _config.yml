@@ -123,6 +123,7 @@ defaults:
       image: /assets/images/codeaches.png
       google_analytics_disabled: false
       google_adsense_disabled: true
+      mailchimp_connection_disabled: false
 
 # Exclude these files from production site
 exclude:
