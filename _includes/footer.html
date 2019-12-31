@@ -1,0 +1,25 @@
+<footer class="site-footer h-card">
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+
+      {%- if page.mailchimp == "enabled" -%}
+        {%- include mailchimp.html -%}
+      {%- endif -%}
+
+      <div class="footer-col">
+        {%- include social.html -%}
+      </div>
+      <div class="footer-col">
+        <ul class="contact-list">
+          <li class="p-name">
+            {%- if site.author and social.linkedin -%}
+            <a href="https://www.linkedin.com/in/{{ social.linkedin | cgi_escape | escape }}" title="{{ social.linkedin | escape }}" target="_blank">
+            By {{ site.author | escape }}
+            </a>
+            {%- endif -%}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

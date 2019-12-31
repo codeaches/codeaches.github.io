@@ -1,0 +1,22 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% if page.robots %}
+  <meta name="robots" content="{{page.robots}}" />
+  {% endif %}
+
+  {%- seo -%}
+
+  <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+  {%- feed_meta -%}
+
+  {%- if site.environment == "production" and site.codeaches.google_analytics and page.google_analytics_disabled != true -%}
+  {%- include google-analytics.html -%}
+  {%- endif -%}
+
+  {%- if site.environment == "production" and site.codeaches.google_adsense and page.google_adsense_disabled != true -%}
+  {%- include google-adsense.html -%}
+  {%- endif -%}
+</head>

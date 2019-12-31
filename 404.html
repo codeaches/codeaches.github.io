@@ -1,0 +1,30 @@
+---
+layout: default
+---
+
+<style type="text/css" media="screen">
+  .container {
+    margin: 10px auto;
+    max-width: 600px;
+    text-align: center;
+  }
+  h1 {
+    margin: 30px 0;
+    font-size: 4em;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+</style>
+
+<div class="container">
+  <p><strong>The requested page could not be found.</strong></p>
+</div>
+
+{% for category in site.categories %}
+<h3>{{ category[0] }}</h3>
+<ul>
+  {% for post in category[1] %}
+  <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endfor %}

@@ -1,0 +1,81 @@
+/* Begin Formspree */
+
+#fs-frm input,
+#fs-frm select,
+#fs-frm button,
+#fs-frm textarea,
+#fs-frm fieldset,
+#fs-frm optgroup,
+#fs-frm label {
+  font-family: inherit;
+  @include relative-font-size(0.8000);
+  color: inherit;
+  border: none;
+  border-radius: 0;
+  display: block;
+  width: 75%;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+#fs-frm label,
+#fs-frm legend {
+  font-size: .825em;
+  margin-bottom: .5em;
+}
+
+
+/* border, padding, margin, width */
+
+#fs-frm input,
+#fs-frm select,
+#fs-frm button,
+#fs-frm textarea {
+  border: 1px solid $grey-color;
+  background-color: $white-color;
+  padding: .75em 1em;
+  margin-bottom: 1.5em;
+}
+
+#fs-frm input:focus,
+#fs-frm select:focus,
+#fs-frm textarea:focus {
+  background-color: $white-color;
+  outline-style: solid;
+  outline-width: thin;
+  outline-color: $grey-color;
+  outline-offset: -1px;
+}
+
+#fs-frm button,
+#fs-frm [type="button"],
+#fs-frm [type="submit"],
+#fs-frm [type="reset"] {
+  width: auto;
+  cursor: pointer;
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+}
+
+#fs-frm button:focus,
+#fs-frm [type="button"]:focus,
+#fs-frm [type="submit"]:focus,
+#fs-frm [type="reset"]:focus {
+  outline: none;
+}
+
+#fs-frm [type="submit"],
+#fs-frm [type="reset"] {
+  margin-bottom: 0;
+}
+
+#fs-frm button,
+#fs-frm select {
+  text-transform: none;
+}
+
+
+/* End Formspree */

@@ -1,0 +1,47 @@
+{%- if page.github -%}
+<ul class="social-media-list">
+  {% for badge in page.github.badges %}
+  {%- if badge == 'download' -%}
+  <li>
+    <a href="{{page.github.repository_url}}/archive/master.zip" title="Download code from GitHub">
+      
+	  <svg class="svg-icon">
+        <use xlink:href="{{ '/assets/svg-icons.svg#icon-cloud-download' | relative_url }}"></use>
+      </svg>{%- if page.github.download_comments -%}{{page.github.download_comments}}{%- else -%}Download the code from GitHub{%- endif -%}
+    </a>
+  </li>
+  {%- endif -%}
+  {%- if badge == 'star' -%}
+  <li>
+    <a href="{{page.github.repository_url}}" title="Star">
+	  <svg class="svg-icon">
+        <use xlink:href="{{ '/assets/svg-icons.svg#icon-star-full' | relative_url }}"></use>
+      </svg>Star
+    </a>
+  </li>
+  {%- endif -%}
+  {%- if badge == 'follow' -%}
+  <li>
+    <a href="https://github.com/codeaches" title="Follow @Codeaches">
+      
+	  <svg class="svg-icon">
+        <use xlink:href="{{ '/assets/svg-icons.svg#icon-github' | relative_url }}"></use>
+      </svg>Follow @Codeaches
+    </a>
+  </li>
+  {%- endif -%}
+  {% endfor %}
+  
+  {%- if page.postman.collections_url -%}
+  <li>
+    <a href="{{page.postman.collections_url}}" title="Postman Collection" target="blank">
+      
+	  <svg class="svg-icon">
+        <use xlink:href="{{ '/assets/svg-icons.svg#icon-postman' | relative_url }}"></use>
+      </svg>{%- if page.postman.download_comments -%}{{page.postman.download_comments}}{%- else -%}Postman API Requests{%- endif -%}
+    </a>
+  </li>
+{%- endif -%}
+
+</ul>
+{%- endif -%}

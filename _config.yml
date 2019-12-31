@@ -1,0 +1,131 @@
+######################################################################################################
+## Codeaches website Config
+######################################################################################################
+
+environment: "development"
+#environment: "production"
+
+# Posts with future date will be published as well
+future: true
+
+# https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: "America/Phoenix"
+
+url: "https://codeaches.com"
+baseurl: ""
+
+title: Codeaches
+author: Pavan Gurudutt
+email: pavan@codeaches.com
+
+description: > # this means to ignore newlines until "show_excerpts:"
+  Spring Boot, Spring Cloud and Web Development tutorials
+
+# set to true to show excerpts on the homepage
+show_excerpts: true
+excerpt_separator: <!-- excerpt end -->
+
+paginate: 10
+paginate_path: "/page:num/"
+
+codeaches:
+  date_format: "%b %-d, %Y"
+
+  # generate social links in footer
+  social_links:
+    twitter: PavanGurudutt
+    github:  codeaches
+    rss: rss
+    # feedburner: codeaches ## NOT USING THIS ONE
+    # dribbble: jekyll
+    # facebook: jekyll
+    # flickr:   jekyll
+    # instagram: jekyll
+    linkedin: pavan-gurudutt
+    # pinterest: jekyll
+    # youtube: jekyll
+    # youtube_channel: UC8CXR0-3I70i1tfPg1PAE1g
+    # youtube_channel_name: CloudCannon
+    # telegram: jekyll
+    # googleplus: +jekyll
+    # microdotblog: jekyll
+    # keybase: jekyll
+    stackoverflow: users/10859002/pavan-gurudutt
+    # calendly: codeaches
+
+    # Mastodon instances
+    # mastodon:
+    # - username: jekyll
+    #   instance: example.com
+    # - username: jekyll2
+    #   instance: example.com
+
+  google_analytics: "UA-131170501-1"
+  google_adsense: "pub-5921006602625711"
+  disqus_shortname: "https-codeaches-com"
+
+# If you want to link only specific pages in your header, uncomment
+# this and add the path to the pages in order as they should show up
+header_pages:
+ - categories.html
+ - about.html
+
+plugins:
+ - jekyll-feed
+ - jekyll-seo-tag
+ - jekyll-paginate
+ - jekyll-sitemap
+ - jekyll-last-modified-at
+
+##########################################################
+# SEO tags used by jekyll-seo-tag plugin (START)
+##########################################################
+twitter:
+  username: PavanGurudutt
+  card: summary
+
+#facebook:
+#  app_id: 1234
+#  publisher: 1234
+#  admins: 1234
+
+social:
+  name: Pavan Gurudutt
+  links:
+    - https://twitter.com/PavanGurudutt
+    - https://www.facebook.com/pavan.apsc
+    - https://www.linkedin.com/in/pavan-gurudutt
+    - https://github.com/codeaches
+
+#####################################################################################
+# Site verification across search engines
+# https://www.bing.com/webmaster/home/mysites
+# https://search.google.com/search-console?resource_id=https://codeaches.com/
+# https://webmaster.yandex.com/site/https:codeaches.com:443/settings/access/
+#####################################################################################
+webmaster_verifications:
+  google: "Ep-zKdK3sqnVxi6jIMkdiIWmzSXZKTJk814uGV7SqsI"
+  bing: "E4CFD9A9DB95D262A6674D2009288D6D"
+  #alexa: 1234
+  yandex: "afd6fdcfc096b4f4"
+  #baidu: 1234
+
+##########################################################
+# SEO tags used by jekyll-seo-tag plugin (End)
+##########################################################
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      author: "Pavan Gurudutt"
+      mailchimp: "enabled"
+      image: /assets/images/codeaches.png
+      google_analytics_disabled: false
+      google_adsense_disabled: false
+
+# Exclude these files from production site
+exclude:
+  - CNAME
+  - LICENSE
+  - README.md

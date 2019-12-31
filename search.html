@@ -1,0 +1,30 @@
+---
+layout: page
+title: Search
+permalink: /search/
+sitemap: false
+---
+
+<!-- Html Elements for Search -->
+<!-- https://blog.webjeda.com/instant-jekyll-search/ -->
+<!-- https://github.com/christian-fei/Simple-Jekyll-Search -->
+
+<div id="search-container">
+<input type="text" id="search-input" placeholder="Search on Codeaches..">
+<ul id="results-container"></ul>
+</div>
+
+<!-- Script pointing to search-script.js -->
+<script src="/assets/js/simple-jekyll-search.min.js" type="text/javascript"></script>
+
+<!-- Configuration -->
+<script>
+SimpleJekyllSearch({
+  searchInput: document.getElementById('search-input'),
+  resultsContainer: document.getElementById('results-container'),
+  searchResultTemplate: '<li><a href="{{ site.url }}{url}">{title}</a></li>',
+  noResultsText: 'No results found!',
+  json: '/search.json',
+  limit : 10
+})
+</script>

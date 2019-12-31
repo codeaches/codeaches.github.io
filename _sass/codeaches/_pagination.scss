@@ -1,0 +1,30 @@
+/* Begin Pagination css: https://blog.webjeda.com/jekyll-pagination/ */
+
+.pagination a,
+.pagination span {
+  padding: 7px 18px;
+  border: 1px solid $grey-color-light;
+  margin-left: -2px;
+  margin-right: -2px;
+  background-color: $white-color;
+  display: inline-block;
+}
+
+.pagination a {
+  &:hover {
+    background-color: $grey-color-light;
+    color: $grey-color-dark;
+  }
+}
+
+.pagination a.active {
+  background-color: $grey-color;
+  color: $white-color;
+}
+
+.pagination {
+  text-align: center;
+}
+
+
+/* End Pagination */

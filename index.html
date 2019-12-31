@@ -1,0 +1,64 @@
+---
+layout: default
+---
+<div class="home">
+  {%- if page.title -%}
+  <h1 class="page-heading">{{ page.title }}</h1>
+  {%- endif -%}
+  {%- if site.posts.size > 0 -%}
+  <h2 class="post-list-heading">{{ page.list_title }}</h2>
+  <ul class="post-list">
+	{%- for post in paginator.posts -%}
+    <li>
+      {%- assign date_format = site.codeaches.date_format | default: "%b %-d, %Y" -%}
+      <span class="post-meta">  
+	  {%- if post.last_modified_at -%}
+	  Updated {{ post.last_modified_at | date: date_format }}
+	  {%- else -%}
+	  Updated {{ post.date | date: date_format }}
+	  {%- endif -%}
+	  </span>
+      <h3>
+        <a class="post-link" href="{{ post.url | relative_url }}">
+        {{ post.title | escape }}
+        </a>
+      </h3>
+      {%- if site.show_excerpts -%}
+	  {{ post.excerpt | remove: '<p>'| remove: '</p>' }}
+      {%- endif -%}
+	  <a href="{{ post.url | relative_url }}"><b>[ Read more ]</b></a>
+    </li>
+    {%- endfor -%}
+
+  </ul>
+  {%- endif -%}
+
+
+{% if paginator.total_pages > 1 %}
+<div class="pagination">
+  {% if paginator.previous_page %}
+	<a href="{{ paginator.previous_page_path | relative_url }}">&laquo;</a>
+  {% else %}
+    <a>&laquo;</a>
+  {% endif %}
+
+  {% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+      	  <a class="active" href="{{ paginator.previous_page_path | relative_url }}">{{ page }}</a>
+    {% elsif page == 1 %}
+      <a href="{{ paginator.previous_page_path | relative_url }}">{{ page }}</a>
+    {% else %}
+      <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}">&raquo;</a>
+  {% else %}
+      <a>&raquo;</a>
+  {% endif %}
+</div>
+{% endif %}
+</div>
+
+
