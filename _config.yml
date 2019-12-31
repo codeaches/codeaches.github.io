@@ -122,7 +122,7 @@ defaults:
       mailchimp: "enabled"
       image: /assets/images/codeaches.png
       google_analytics_disabled: false
-      google_adsense_disabled: false
+      google_adsense_disabled: true
 
 # Exclude these files from production site
 exclude:
