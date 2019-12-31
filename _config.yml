@@ -2,8 +2,8 @@
 ## Codeaches website Config
 ######################################################################################################
 
-environment: "development"
-#environment: "production"
+#environment: "development"
+environment: "production"
 
 # Posts with future date will be published as well
 future: true
