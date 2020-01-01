@@ -49,9 +49,7 @@ layout: default
     {{ content }}
   </div>
 
-  <div>
   {%- include github-postman-links.html -%}
-  </div>
 
   {%- if site.environment == "production" and site.codeaches.disqus_shortname -%}
   {%- include disqus_comments.html -%}
