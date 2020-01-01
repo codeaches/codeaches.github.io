@@ -1,8 +1,8 @@
 ---
 layout: post
 
-title:  "Spring Cloud Security - OAuth2 Authorization using JWT (JSON Web Token)"
-description:  "Spring Cloud Security - OAuth2 Authorization using JWT (JSON Web Token)"
+title: "Spring Cloud Security - OAuth2 Authorization using JWT (JSON Web Token)"
+description: "Spring Cloud Security - OAuth2 Authorization using JWT (JSON Web Token)"
 
 permalink: "/spring-cloud-security/oauth2-authorization-jwt"
 
