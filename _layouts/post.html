@@ -50,11 +50,11 @@ layout: default
 
   {%- include github-postman-links.html -%}
 
+  {%- include related_posts.html -%}
+
   {%- if site.environment == "production" and site.codeaches.disqus_shortname -%}
   {%- include disqus_comments.html -%}
   {%- endif -%}
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
-
-{%- include related_posts.html -%}
