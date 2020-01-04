@@ -9,7 +9,7 @@ permalink: "/softwares/load-balancing-tomcat-instances-using-nginx"
 date: "2020-01-01"
 last_modified_at: "2020-01-01"
 
-categories: [Softwares, Apache Tomcat, NGINX]
+categories: [Apache Tomcat, NGINX]
 
 github:
   repository_url: https://github.com/codeaches/nginx-tomcat-load-balancer-setup

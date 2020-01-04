@@ -9,7 +9,7 @@ permalink: "/softwares/setup-apache-kafka-on-windows"
 date: "2020-01-01"
 last_modified_at: "2020-01-01"
 
-categories: [Softwares, Apache Kafka]
+categories: [Apache Kafka]
 
 github:
   repository_url: https://github.com/codeaches/kafka-zookeeper-setup

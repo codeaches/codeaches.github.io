@@ -9,7 +9,7 @@ permalink: "/softwares/setup-multiple-tomcat-instances"
 date: "2020-01-01"
 last_modified_at: "2020-01-01"
 
-categories: [Softwares, Apache Tomcat]
+categories: [Apache Tomcat]
 
 github:
   repository_url: https://github.com/codeaches/tomcat-multiple-instances
