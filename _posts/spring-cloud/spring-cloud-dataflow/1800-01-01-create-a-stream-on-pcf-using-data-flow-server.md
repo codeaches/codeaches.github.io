@@ -1,8 +1,8 @@
 ---
 layout: post
 
-title: "Create a stream on PCF using Spring Cloud Data Flow (SCDF) server"
-description: "Create a stream on PCF using Spring Cloud Data Flow (SCDF) server"
+title: "Create a stream on Pivotal Cloud Foundry (PCF) using Spring Cloud Data Flow (SCDF) server"
+description: "Create a stream on Pivotal Cloud Foundry (PCF) using Spring Cloud Data Flow (SCDF) server"
 
 permalink: "/spring-cloud/create-a-stream-on-pcf-using-spring-cloud-data-flow-server"
 

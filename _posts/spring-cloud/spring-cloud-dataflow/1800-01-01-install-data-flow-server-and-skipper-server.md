@@ -31,6 +31,24 @@ In this tutorial, let's configure and deploy spring cloud data flow server to pi
 
 ### **Provision services needed for Skipper server**
 
+**Log into your PCF account using `cf` command**
+
+```sh
+$ cf login -a api.run.pivotal.io -u "you@some-domain.com" -p "yourpassword" -o "your-org" -s "util"
+```
+```
+API endpoint: api.run.pivotal.io
+Authenticating...
+OK
+Targeted org your-org
+Targeted space util
+
+API endpoint:   https://api.run.pivotal.io (API version: 2.128.0)
+User:           you@some-domain.com
+Org:            your-org
+Space:          util
+```
+
 **Provision Postgresql**
 
 Skipper server uses an RDBMS to store state. For our example, we shall use Postgresql. Schemas on Postgresql DB will be created on Skipper server startup.
