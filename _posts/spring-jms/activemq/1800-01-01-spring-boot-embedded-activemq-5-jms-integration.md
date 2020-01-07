@@ -6,8 +6,8 @@ description: "Integrate embedded Apache ActiveMQ 5 (Classic) JMS Broker with Spr
 
 permalink: "/spring-boot/embedded-activemq-5-jms-broker"
 
-date: "2020-01-01"
-last_modified_at: "2020-01-01"
+date: "2020-01-06"
+last_modified_at: "2020-01-06"
 
 categories: [Apache ActiveMQ]
 
