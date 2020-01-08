@@ -36,13 +36,16 @@
 
       {% unless post.url == page.url %}
       <ul><li>
+	  <!--
 	  <span>
 	  {%- if post.last_modified_at -%}
 	  {{ post.last_modified_at | date: date_format }}
 	  {%- else -%}
 	  {{ post.date | date: date_format }}
 	  {%- endif -%}
-	  </span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a>
+	  </span>
+	  -->
+	  <a href="{{ post.url }}">{{ post.title }}</a>
 	  </li></ul>
       {% endunless %}
 
