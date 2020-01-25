@@ -32,7 +32,7 @@ Building the bare bone Spring Boot Service is simple when `Spring Initializr` is
 
 **Create a Spring Boot starter project using Spring Initializr**
 
-Let's utilize the pre-configured `Spring Initializr` which is available **[here](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.2.RELEASE&packaging=jar&jvmVersion=13&groupId=com.codeaches&artifactId=spring-boot-swagger-integration&name=spring-boot-swagger-integration&description=demo%20project%20for%20spring%20boot&packageName=com.codeaches.carinventoryservice&dependencies=web){:target="_blank"}** to create **spring-boot-swagger-integration** starter project.
+Let's utilize the pre-configured `Spring Initializr` which is available **[here](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.4.RELEASE&packaging=jar&jvmVersion=13&groupId=com.codeaches&artifactId=spring-boot-swagger-integration&name=spring-boot-swagger-integration&description=demo%20project%20for%20spring%20boot&packageName=com.codeaches.carinventoryservice&dependencies=web){:target="_blank"}** to create **spring-boot-swagger-integration** starter project.
 
 Click on Generate Project. This downloads a zip file containing `spring-boot-swagger-integration` project. Import the project to your IDE.
 

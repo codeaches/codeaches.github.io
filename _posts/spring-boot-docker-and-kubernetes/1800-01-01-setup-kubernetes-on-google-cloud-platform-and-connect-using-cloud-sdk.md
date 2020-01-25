@@ -75,10 +75,10 @@ Once the installation is complete, open the command prompt and vefiry that the C
 *Output*
 
 ```
-Google Cloud SDK 252.0.0
-bq 2.0.43
-core 2019.06.21
-gsutil 4.39
+Google Cloud SDK 275.0.0
+bq 2.0.51
+core 2020.01.03
+gsutil 4.46
 ```
 
 ### **Connect to GCP Kubernetes cluster using Google Cloud SDK** {#connect_to_kubernetes_cluster}
@@ -114,15 +114,15 @@ Your browser has been opened to visit:
 You are logged in as: [mail@somedomain.com].
 
 Pick cloud project to use:
- [1] secret-argon-245214
+ [1] secret-argon-123456
  [2] Create a new project
 Please enter numeric choice or text value (must exactly match list
 item):  1
 
-Your current project has been set to: [secret-argon-245214].
+Your current project has been set to: [secret-argon-123456].
 ```
 
-**Note that the project ID `secret-argon-245214` corresponds to the earlier created project with name `codeaches-project`. `secret-argon-245214` is a random ID assigned by Google Cloud Platform.**
+**Note that the project ID `secret-argon-123456` corresponds to the earlier created project with name `codeaches-project`. `secret-argon-123456` is a random ID assigned by Google Cloud Platform.**
 
 ```sh
 > gcloud projects list
@@ -132,7 +132,7 @@ Your current project has been set to: [secret-argon-245214].
 
 ```
 PROJECT_ID           NAME               PROJECT_NUMBER
-secret-argon-245214  codeaches-project  354866596381
+secret-argon-123456  codeaches-project  654321123456
 ```
 
 ### **Kubernetes commandline setup**
@@ -149,7 +149,7 @@ Once, kubectl is installed successfully, configure the local `kubectl` to point 
 
 
 ```sh
-> gcloud container clusters get-credentials codeaches-cluster-1 --zone us-central1-a --project secret-argon-245214
+> gcloud container clusters get-credentials codeaches-cluster-1 --zone us-central1-a --project secret-argon-123456
 ```
 
 *Output*

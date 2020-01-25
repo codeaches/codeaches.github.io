@@ -30,7 +30,7 @@ Let's create a very basic spring boot application using `Spring Initializr` for 
 
 **Create a Spring Boot starter project using Spring Initializr**
 
-Let's utilize the pre-configured `Spring Initializr` which is available **[here](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.2.RELEASE&packaging=jar&jvmVersion=13&groupId=com.codeaches&artifactId=actuator-custom-endpoint-basics&name=actuator-custom-endpoint-basics&description=demo%20project%20for%20spring%20boot&packageName=com.codeaches.actuator&dependencies=web,actuator){:target="_blank"}** to create **actuator-custom-endpoint-basics** starter project.
+Let's utilize the pre-configured `Spring Initializr` which is available **[here](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.4.RELEASE&packaging=jar&jvmVersion=13&groupId=com.codeaches&artifactId=actuator-custom-endpoint-basics&name=actuator-custom-endpoint-basics&description=demo%20project%20for%20spring%20boot&packageName=com.codeaches.actuator&dependencies=web,actuator){:target="_blank"}** to create **actuator-custom-endpoint-basics** starter project.
 
 Click on Generate Project. This downloads a zip file containing `actuator-custom-endpoint-basics` project. Import the project to your IDE.
 

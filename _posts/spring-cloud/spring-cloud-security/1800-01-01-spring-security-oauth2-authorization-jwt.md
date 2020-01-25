@@ -47,7 +47,7 @@ Building the bare bone Spring Boot Service is simple when `Spring Initializr` is
 
 **Create a Spring Boot starter project using Spring Initializr**
 
-Let's utilize the pre-configured `Spring Initializr` which is available **[here](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.2.RELEASE&packaging=jar&jvmVersion=13&groupId=com.codeaches&artifactId=jwt-oauth2-authorization-server&name=jwt-oauth2-authorization-server&description=demo%20project%20for%20spring%20boot&packageName=com.codeaches.oauth2.jwt.authorization.server&dependencies=web,cloud-security,cloud-oauth2,h2,data-jpa){:target="_blank"}** to create **jwt-oauth2-authorization-server** starter project.
+Let's utilize the pre-configured `Spring Initializr` which is available **[here](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.4.RELEASE&packaging=jar&jvmVersion=13&groupId=com.codeaches&artifactId=jwt-oauth2-authorization-server&name=jwt-oauth2-authorization-server&description=demo%20project%20for%20spring%20boot&packageName=com.codeaches.oauth2.jwt.authorization.server&dependencies=web,cloud-security,cloud-oauth2,h2,data-jpa){:target="_blank"}** to create **jwt-oauth2-authorization-server** starter project.
 
 Click on Generate Project. This downloads a zip file containing `jwt-oauth2-authorization-server` project. Import the project to your IDE.
 
@@ -428,7 +428,7 @@ This completes the building of our Spring Boot OAuth2 Authorization service. Let
 
 ### **Build Car Inventory Service**
 
-Let's utilize the pre-configured `Spring Initializr` which is available **[here](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.2.RELEASE&packaging=jar&jvmVersion=13&groupId=com.codeaches&artifactId=jwt-car-inventory-service&name=jwt-car-inventory-service&description=demo%20project%20for%20spring%20boot&packageName=com.codeaches.carinventoryservice&dependencies=web,cloud-security,cloud-oauth2){:target="_blank"}** to create **jwt-car-inventory-service** starter project.
+Let's utilize the pre-configured `Spring Initializr` which is available **[here](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.4.RELEASE&packaging=jar&jvmVersion=13&groupId=com.codeaches&artifactId=jwt-car-inventory-service&name=jwt-car-inventory-service&description=demo%20project%20for%20spring%20boot&packageName=com.codeaches.carinventoryservice&dependencies=web,cloud-security,cloud-oauth2){:target="_blank"}** to create **jwt-car-inventory-service** starter project.
 
 Click on Generate Project. This downloads a zip file containing `jwt-car-inventory-service` project. Import the project to your IDE.
 

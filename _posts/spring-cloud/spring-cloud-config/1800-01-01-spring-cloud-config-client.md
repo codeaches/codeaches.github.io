@@ -41,7 +41,7 @@ Building the bare bone Spring Boot Service is simple when `Spring Initializr` is
 
 **Create a Spring Boot starter project using Spring Initializr**
 
-Let's utilize the pre-configured `Spring Initializr` which is available **[here](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.2.RELEASE&packaging=jar&jvmVersion=13&groupId=com.codeaches&artifactId=pcf-config-client-pet-service&name=pcf-config-client-pet-service&description=demo%20project%20for%20spring%20boot&packageName=com.codeaches.pet&dependencies=web,scs-config-client){:target="_blank"}** to create **pcf-config-client-pet-service** starter project.
+Let's utilize the pre-configured `Spring Initializr` which is available **[here](https://start.spring.io/#!type=maven-project&language=java&platformVersion=2.2.4.RELEASE&packaging=jar&jvmVersion=13&groupId=com.codeaches&artifactId=pcf-config-client-pet-service&name=pcf-config-client-pet-service&description=demo%20project%20for%20spring%20boot&packageName=com.codeaches.pet&dependencies=web,scs-config-client){:target="_blank"}** to create **pcf-config-client-pet-service** starter project.
 
 Click on Generate Project. This downloads a zip file containing `pcf-config-client-pet-service` project. Import the project to your IDE.
 
