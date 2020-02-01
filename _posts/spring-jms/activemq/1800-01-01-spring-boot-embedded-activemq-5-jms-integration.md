@@ -7,7 +7,7 @@ description: "Integrate embedded Apache ActiveMQ 5 (Classic) JMS Broker with Spr
 permalink: "/spring-boot/embedded-activemq-5-jms-broker"
 
 date: "2020-01-06"
-last_modified_at: "2020-01-06"
+last_modified_at: "2020-02-01"
 
 categories: [Apache ActiveMQ]
 
@@ -63,13 +63,13 @@ We also need a queue to send/recieve messages. We shall configure this queue nam
 `src/main/resources/application.properties`
 
 ```properties
-activemq.broker-url=tcp://0.0.0.0:61616
-spring.jms.template.default-destination=my-queue-x
+activemq.broker.url=tcp://0.0.0.0:61616
+activemq.queue.name=my-queue-1
 ```
 
 ### **Configure Embedded ActiveMQ Broker**
 
-Create an embedded broker as shown below. This broker will be started when the application starts up.
+Create an Active MQ embedded broker as shown below. This broker will be started when the application starts up.
 
 `com.codeaches.activmq.embedded.JmsConfig.java`
 
@@ -77,13 +77,11 @@ Create an embedded broker as shown below. This broker will be started when the a
 @Configuration
 public class JmsConfig {
 
-  Logger log = LoggerFactory.getLogger(JmsConfig.class);
-
-  @Value("${activemq.broker-url}")
+  @Value("${activemq.broker.url}")
   String brokerUrl;
 
   @Bean
-  BrokerService broker() throws Exception {
+  public BrokerService broker() throws Exception {
 
     BrokerService broker = new BrokerService();
     broker.setPersistent(false);
@@ -92,7 +90,6 @@ public class JmsConfig {
     return broker;
   }
 }
-
 ```
 
 ### **Configure JMS Producer**
@@ -105,12 +102,12 @@ Update `JmsConfig.java` with `JmsTemplate` bean.
 
 ```java
   @Bean
-  JmsTemplate jmsTemplate() {
+  public JmsTemplate jmsTemplate() {
     return new JmsTemplate(new PooledConnectionFactory(brokerUrl));
   }
 ```
 
-Create a producer service class which uses `JmsTemplate` send the data to JMS.
+Create a producer class which uses the above created `JmsTemplate`  to send the data to embedded Active MQ server.
 
 `com.codeaches.activmq.embedded.JmsProducer.java`
 
@@ -118,18 +115,18 @@ Create a producer service class which uses `JmsTemplate` send the data to JMS.
 @Service
 public class JmsProducer {
 
-    Logger log = LoggerFactory.getLogger(JmsProducer.class);
+  Logger log = LoggerFactory.getLogger(JmsProducer.class);
 
-    @Autowired
-    private JmsTemplate jmsTemplate;
+  @Autowired
+  private JmsTemplate jmsTemplate;
 
-    @Value("${spring.jms.template.default-destination}")
-    String destination;
+  @Value("${activemq.queue.name}")
+  String destination;
 
-    public void send(String message) {
-	jmsTemplate.convertAndSend(destination, message);
-	log.info("Sent message='{}'", message);
-    }
+  public void send(String message) {
+    jmsTemplate.convertAndSend(destination, message);
+    log.info("Sent message='{}'", message);
+  }
 }
 ```
 
@@ -151,7 +148,7 @@ Update `JmsConfig.java` with `DefaultJmsListenerContainerFactory` bean.
   }
 ```
 
-Create a consumer service class which uses Spring's JmsListener to recieve the data from JMS.
+Create a consumer class which uses Spring's `JmsListener` to recieve the data from embedded Active MQ server.
 
 `com.codeaches.activmq.embedded.JmsConsumer.java`
 
@@ -159,16 +156,16 @@ Create a consumer service class which uses Spring's JmsListener to recieve the d
 @Service
 public class JmsConsumer {
 
-    Logger log = LoggerFactory.getLogger(JmsConsumer.class);
+  Logger log = LoggerFactory.getLogger(JmsConsumer.class);
 
-    @JmsListener(destination = "${spring.jms.template.default-destination}")
-    public void receive(String message) {
-	log.info("Received message='{}'", message);
-    }
+  @JmsListener(destination = "${activemq.queue.name}")
+  public void receive(String message) {
+    log.info("Received message='{}'", message);
+  }
 }
 ```
 
-Now that we have both producer and consumer, let's build a simple webservice method which uses earlier created JMS producer to send data to the queue `my-queue-x` as shown below. 
+Now that we have both producer and consumer, let's build a simple webservice method which uses earlier created JMS producer to send data to the queue `my-queue-1` as shown below. 
 
 Here, the `sendDataToJms(message)` webservice method forwards the message sent by the caller to JMS queue. 
 
@@ -178,34 +175,34 @@ Here, the `sendDataToJms(message)` webservice method forwards the message sent b
 @RestController
 public class MyRestController {
 
-    @Autowired
-    JmsProducer jmsProducer;
+  @Autowired
+  JmsProducer jmsProducer;
 
-    @PostMapping("/send")
-    public void sendDataToJms(@RequestParam String message) {
-	jmsProducer.send(message);
-    }
+  @PostMapping("/send")
+  public void sendDataToJms(@RequestParam String message) {
+    jmsProducer.send(message);
+  }
 }
 ```
 
 **Start the application**
 
-*Tomcat console log*
+*Tomcat console log:*
 
 ```
-INFO : JMX consoles can connect to service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi
-INFO : Using Persistence Adapter: MemoryPersistenceAdapter
-INFO : Apache ActiveMQ 5.15.10 (localhost, ID:DESKTOP-MYPCNAME-53882-1325267078594-0:1) is starting
-INFO : Listening for connections at: tcp://DESKTOP-MYPCNAME:61616
-INFO : Connector tcp://DESKTOP-MYPCNAME:61616 started
-INFO : Apache ActiveMQ 5.15.10 (localhost, ID:DESKTOP-MYPCNAME-53882-1325267078594-0:1) started
-INFO : For help or more information please see: http://activemq.apache.org
-INFO : Initializing ExecutorService 'applicationTaskExecutor'
-INFO : Tomcat started on port(s): 8080 (http) with context path ''
-INFO : Started EmbeddedJmsBrokerApplication in 2.17 seconds (JVM running for 3.17)
+JMX consoles can connect to service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi
+Using Persistence Adapter: MemoryPersistenceAdapter
+Apache ActiveMQ 5.15.10 (localhost, ID:DESKTOP-MYPCNAME-53882-1325267078594-0:1) is starting
+Listening for connections at: tcp://DESKTOP-MYPCNAME:61616
+Connector tcp://DESKTOP-MYPCNAME:61616 started
+Apache ActiveMQ 5.15.10 (localhost, ID:DESKTOP-MYPCNAME-53882-1325267078594-0:1) started
+For help or more information please see: http://activemq.apache.org
+Initializing ExecutorService 'applicationTaskExecutor'
+Tomcat started on port(s): 8080 (http) with context path ''
+Started EmbeddedJmsBrokerApplication in 2.17 seconds (JVM running for 3.17)
 ```
 
-### **Test**
+### **Test JMS producer and consumer**
 
 Let's invoke the webservice by sending a hello message. `JmsProducer` would send the message and `JmsConsumer` will consume the hello message.
 
