@@ -7,7 +7,7 @@ description: "Integrate embedded Apache ActiveMQ Artemis JMS Broker with Spring 
 permalink: "/spring-boot/embedded-activemq-artemis-jms-broker"
 
 date: "2020-01-01"
-last_modified_at: "2020-01-01"
+last_modified_at: "2020-02-01"
 
 categories: [Apache ActiveMQ]
 
@@ -38,14 +38,14 @@ Click on Generate Project. This downloads a zip file containing `embedded-active
 
 ### **Configure additional project dependencies in pom.xml**
 
-We need an additional `artemis-jms-server` dependency which will give all the classed needed for setting up an embedded ActiveMQ Artemis Server.
+We need an additional `artemis-jms-server` dependency which will give all the classed needed for setting up an embedded ActiveMQ Artemis Server/Broker.
 
 `pom.xml`
 
 ```xml
 <dependency>
-	<groupId>org.apache.activemq</groupId>
-	<artifactId>artemis-jms-server</artifactId>
+  <groupId>org.apache.activemq</groupId>
+  <artifactId>artemis-jms-server</artifactId>
 </dependency>
 ```
 
@@ -71,11 +71,9 @@ logging.level.org.apache.activemq.audit.base=WARN
 logging.level.org.apache.activemq.audit.message=WARN
 ```
 
-
-
 ### **Configure JMS Producer**
 
-Let's use Spring's JmsTemplate to send messages to the embedded broker. Create a producer service class which uses `JmsTemplate` send the data to JMS.
+Create a producer class which uses Spring's `JmsTemplate` to send the data to embedded Active MQ server.
 
 `com.codeaches.activmq.embedded.JmsProducer.java`
 
@@ -97,7 +95,7 @@ public class JmsProducer {
 
 ### **Configure JMS Consumer**
 
-Let's use Spring's `JmsListener` to read the messages from the JMS. Create a consumer service class which uses Spring's JmsListener to recieve the data from JMS.
+Create a consumer class which uses Spring's `JmsListener` to recieve the data from embedded Active MQ server.
 
 `com.codeaches.activmq.embedded.JmsConsumer.java`
 
@@ -114,7 +112,7 @@ public class JmsConsumer {
 }
 ```
 
-Now that we have both producer and consumer, let's build a simple webservice method which uses earlier created JMS producer to send data to the queue `my-queue-x` as shown below. 
+Now that we have both producer and consumer, let's build a simple webservice method which uses earlier created JMS producer to send data to the queue `my-queue-1` as shown below. 
 
 Here, the `sendDataToJms(message)` webservice method forwards the message sent by the caller to JMS queue. 
 
@@ -136,31 +134,30 @@ public class MyRestController {
 
 **Start the application**
 
-*Tomcat console log*
+*Tomcat console log:*
 
 ```
-INFO org.apache.activemq.artemis.core.server  : AMQ224092: Despite disabled persistence, page files will be persisted.
-INFO org.apache.activemq.artemis.core.server  : AMQ221080: Deploying address DLQ supporting [ANYCAST]
-INFO org.apache.activemq.artemis.core.server  : AMQ221003: Deploying ANYCAST queue DLQ on address DLQ
-INFO org.apache.activemq.artemis.core.server  : AMQ221080: Deploying address ExpiryQueue supporting [ANYCAST]
-INFO org.apache.activemq.artemis.core.server  : AMQ221003: Deploying ANYCAST queue ExpiryQueue on address ExpiryQueue
-INFO org.apache.activemq.artemis.core.server  : AMQ221007: Server is now live
-INFO org.apache.activemq.artemis.core.server  : AMQ221001: Apache ActiveMQ Artemis Message Broker version 2.10.1 [localhost, nodeID=d525f1f6-2806-11ea-8222-00155d490355] 
-INFO o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-INFO o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-INFO eddedActivemqArtemisJmsBrokerApplication : Started EmbeddedActivemqArtemisJmsBrokerApplication in 2.612 seconds (JVM running for 3.637)
-
+AMQ224092: Despite disabled persistence, page files will be persisted.
+AMQ221080: Deploying address DLQ supporting [ANYCAST]
+AMQ221003: Deploying ANYCAST queue DLQ on address DLQ
+AMQ221080: Deploying address ExpiryQueue supporting [ANYCAST]
+AMQ221003: Deploying ANYCAST queue ExpiryQueue on address ExpiryQueue
+AMQ221007: Server is now live
+AMQ221001: Apache ActiveMQ Artemis Message Broker version 2.10.1 [localhost, nodeID=d525f1f6-2806-11ea-8222-00155d490355] 
+Initializing ExecutorService 'applicationTaskExecutor'
+Tomcat started on port(s): 8080 (http) with context path ''
+Started EmbeddedActivemqArtemisJmsBrokerApplication in 2.612 seconds (JVM running for 3.637)
 ```
 
-### **Test**
+### **Test JMS producer and consumer**
 
-Let's invoke the webservice by sending a hello message. `JmsProducer` would send the message and `JmsConsumer` will consume the hello message.
+Invoke the webservice by sending a hello message. `JmsProducer` would send the message and `JmsConsumer` will consume the hello message.
 
 ```
 curl -i -X POST http://localhost:8080/send?message=hello
 ```
 
-*Tomcat Log*
+*Tomcat Log:*
 
 ```log
 INFO com.codeaches.activmq.embedded.JmsProducer   : Sent message='hello'
