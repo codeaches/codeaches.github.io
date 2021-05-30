@@ -7,7 +7,7 @@ description: "Setup Multiple Instances of Tomcat"
 permalink: "/softwares/setup-multiple-tomcat-instances"
 
 date: "2020-01-01"
-last_modified_at: "2020-01-01"
+last_modified_at: "2021-05-29"
 
 categories: [Apache Tomcat]
 
@@ -27,37 +27,37 @@ In this post, let's download tomcat software and setup two instances of tomcat. 
 
 ### **Download Apache Tomcat**
 
-The quckiest and easiest way to install tomcat is to download the binary distribution of tomcat software **[here](https://tomcat.apache.org/download-90.cgi){:target="_blank"}.**  
+The quckiest and easiest way to install tomcat is to download the binary distribution of tomcat software **[here](https://tomcat.apache.org/download-10.cgi){:target="_blank"}.**  
 
-For this tutorial, let's use **tomcat version 9.0.29** which was downloaded **[here](https://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.29/bin/apache-tomcat-9.0.29-windows-x64.zip){:target="_blank"}** file which is **tomcat version 9.0.29**. 
+For this tutorial, let's use **tomcat version 10.0.6** which was downloaded **[here](https://www-us.apache.org/dist/tomcat/tomcat-10/v10.0.6/bin/apache-tomcat-10.0.6-windows-x64.zip){:target="_blank"}** file which is **tomcat version 10.0.6**. 
 
-Unzip the contents of apache-tomcat-9.0.29-windows-x64.zip to your local machine. I have unzipped the contents to `M:\tomcat-multiple-instances\` folder. `M:\tomcat-multiple-instances\` folder will be my base folder for this tutorial.
+Unzip the contents of apache-tomcat-10.0.6-windows-x64.zip to your local machine. I have unzipped the contents to `M:\tomcat-multiple-instances\` folder. `M:\tomcat-multiple-instances\` folder will be my base folder for this tutorial.
 
 Post this step, you will have the folder structure similar to the one shown below.
 
 ```sh
-> dir M:\tomcat-multiple-instances\apache-tomcat-9.0.29
+> dir M:\tomcat-multiple-instances\apache-tomcat-10.0.6
 ```
 
 **output**
 
 ```
-Directory of M:\tomcat-multiple-instances\apache-tomcat-9.0.29
+Directory of M:\tomcat-multiple-instances\apache-tomcat-10.0.6
 
-12/11/2019  09:33 PM    <DIR>          .
-12/11/2019  09:33 PM    <DIR>          ..
-12/11/2019  09:33 PM    <DIR>          bin
-12/11/2019  09:33 PM            19,540 BUILDING.txt
-12/11/2019  09:33 PM    <DIR>          conf
-12/11/2019  09:33 PM             5,544 CONTRIBUTING.md
-12/11/2019  09:33 PM    <DIR>          lib
-12/11/2019  09:33 PM            58,153 LICENSE
-12/11/2019  09:33 PM             2,401 NOTICE
-12/11/2019  09:33 PM             3,334 README.md
-12/11/2019  09:33 PM             7,022 RELEASE-NOTES
-12/11/2019  09:33 PM            16,738 RUNNING.txt
-12/11/2019  09:33 PM    <DIR>          temp
-12/11/2019  09:33 PM    <DIR>          webapps
+05/29/2021  09:33 PM    <DIR>          .
+05/29/2021  09:33 PM    <DIR>          ..
+05/29/2021  09:33 PM    <DIR>          bin
+05/29/2021  09:33 PM            19,540 BUILDING.txt
+05/29/2021  09:33 PM    <DIR>          conf
+05/29/2021  09:33 PM             5,544 CONTRIBUTING.md
+05/29/2021  09:33 PM    <DIR>          lib
+05/29/2021  09:33 PM            58,153 LICENSE
+05/29/2021  09:33 PM             2,401 NOTICE
+05/29/2021  09:33 PM             3,334 README.md
+05/29/2021  09:33 PM             7,022 RELEASE-NOTES
+05/29/2021  09:33 PM            16,738 RUNNING.txt
+05/29/2021  09:33 PM    <DIR>          temp
+05/29/2021  09:33 PM    <DIR>          webapps
 ```
 
 ### **Setup Instances**
@@ -67,7 +67,7 @@ Directory of M:\tomcat-multiple-instances\apache-tomcat-9.0.29
 **Create folder structure for instance 1**
 
 - Create a new folder `M:\tomcat-multiple-instances\instance-1`
-- Copy `M:\tomcat-multiple-instances\apache-tomcat-9.0.29\conf` folder to `M:\tomcat-multiple-instances\instance-1` folder.
+- Copy `M:\tomcat-multiple-instances\apache-tomcat-10.0.6\conf` folder to `M:\tomcat-multiple-instances\instance-1` folder.
 
 **Configure Instance 1 Server**
 
@@ -110,7 +110,7 @@ Let's create `instance-1-startup.bat` file as shown below which will be used to 
 ```cmd
 @echo off
 
-set CATALINA_HOME=M:\tomcat-multiple-instances\apache-tomcat-9.0.29
+set CATALINA_HOME=M:\tomcat-multiple-instances\apache-tomcat-10.0.6
 set CATALINA_BASE=M:\tomcat-multiple-instances\instance-1
 
 set TITLE=Codeaches Tomcat Instance 1
@@ -127,7 +127,7 @@ Let's create `instance-1-shutdown.bat` file as shown below which will be used to
 ```cmd
 @echo off
 
-set CATALINA_HOME=M:\tomcat-multiple-instances\apache-tomcat-9.0.29
+set CATALINA_HOME=M:\tomcat-multiple-instances\apache-tomcat-10.0.6
 set CATALINA_BASE=M:\tomcat-multiple-instances\instance-1
 
 call %CATALINA_HOME%\bin\shutdown.bat
@@ -155,7 +155,7 @@ instance-1-startup.bat
 
 ```log
 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
-INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.29]
+INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/10.0.6]
 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [M:\tomcat-multiple-instances\instance-1\webapps\sample.war]
 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [M:\tomcat-multiple-instances\instance-1\webapps\sample.war] has finished in [574] ms
 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-7070"]
@@ -174,7 +174,7 @@ Test the deployed sample application in the browser using the URL [http://localh
 **Create folder structure for instance 2**
 
 - Create a new folder `M:\tomcat-multiple-instances\instance-2`
-- Copy `M:\tomcat-multiple-instances\apache-tomcat-9.0.29\conf` folder to `M:\tomcat-multiple-instances\instance-2` folder.
+- Copy `M:\tomcat-multiple-instances\apache-tomcat-10.0.6\conf` folder to `M:\tomcat-multiple-instances\instance-2` folder.
 
 **Configure Instance 2 Server**
 
@@ -217,7 +217,7 @@ Let's create `instance-2-startup.bat` file as shown below which will be used to 
 ```cmd
 @echo off
 
-set CATALINA_HOME=M:\tomcat-multiple-instances\apache-tomcat-9.0.29
+set CATALINA_HOME=M:\tomcat-multiple-instances\apache-tomcat-10.0.6
 set CATALINA_BASE=M:\tomcat-multiple-instances\instance-2
 
 set TITLE=Codeaches Tomcat Instance 2
@@ -234,7 +234,7 @@ Let's create `instance-2-shutdown.bat` file as shown below which will be used to
 ```cmd
 @echo off
 
-set CATALINA_HOME=M:\tomcat-multiple-instances\apache-tomcat-9.0.29
+set CATALINA_HOME=M:\tomcat-multiple-instances\apache-tomcat-10.0.6
 set CATALINA_BASE=M:\tomcat-multiple-instances\instance-2
 
 call %CATALINA_HOME%\bin\shutdown.bat
@@ -263,7 +263,7 @@ instance-2-startup.bat
 
 ```log
 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
-INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.29]
+INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/10.0.6]
 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [M:\tomcat-multiple-instances\instance-2\webapps\sample.war]
 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [M:\tomcat-multiple-instances\instance-2\webapps\sample.war] has finished in [574] ms
 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-9090"]
